@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/SuryaRaj",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -25,7 +25,8 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/sitemap.xml"
             ],
             "styles": [
               "src/styles.scss"
@@ -66,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "SuryaRaj:build"
+            "browserTarget": "suryakantamangaraj.github.io:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "SuryaRaj:build:production"
+              "browserTarget": "suryakantamangaraj.github.io:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "SuryaRaj:build"
+            "browserTarget": "suryakantamangaraj.github.io:build"
           }
         },
         "test": {
@@ -89,7 +90,8 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/sitemap.xml"
             ],
             "styles": [
               "src/styles.scss"
@@ -114,18 +116,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "SuryaRaj:serve"
+            "devServerTarget": "suryakantamangaraj.github.io:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "SuryaRaj:serve:production"
+              "devServerTarget": "suryakantamangaraj.github.io:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "SuryaRaj",
+  "defaultProject": "suryakantamangaraj.github.io",
   "cli": {
     "analytics": false
   }
