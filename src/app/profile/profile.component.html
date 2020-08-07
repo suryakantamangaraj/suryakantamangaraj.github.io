@@ -1,0 +1,4 @@
+<div @animate>
+  <app-navigator *ngIf="showNavigationMenu" (cancellation)="showNavigationMenu = false"></app-navigator>
+</div>
+<app-landing-page (ExploreMe)="showNavigationMenu = true"></app-landing-page>

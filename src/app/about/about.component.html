@@ -1,0 +1,39 @@
+<div (click)="onBackClick()" class="back-icon">
+  <app-back-icon></app-back-icon>
+</div>
+<span class="overlay"></span>
+<div class="container">
+  <div class="side1">
+    <h1 class="skill-header">ABOUT</h1>
+    <app-dp-logo height="13rem" width="13rem" class="dp-logo"></app-dp-logo>
+    <div class="text-container">
+      <p>
+        I am Surya Raj. You can also call me a product designer,  UX or by any other market defined function-title.
+        I prefer to keep learning, continue challenging myself, and do interesting things that matter. 
+        My abundant energy fuels me in the pursuit of many interests, hobbies, areas of study and artistic endeavors.
+        I’m a fast learner, able to pick up new skills and juggle different projects and roles with relative ease.
+      </p>
+      <br>
+      <p>
+        I like to develop expertise in a number of areas over the course of my life and career. I like to develop expertise in a number of areas over the course of my life and career. 
+        I currently work remotely and have a full-time commitment at InVision. Outside of my commitments I work with a select freelance client base. 
+      </p>
+      <br>
+      <p>
+        I genuinely care about people, and love helping fellow designers work on their craft.
+        Feel free to get in touch by any means of communication.
+      </p>
+    </div>
+  </div>
+  <div class="side2">
+    <div class="skill-container">
+      <h1 class="skill-header">
+        Skills
+      </h1>
+      <div *ngFor="let skill of skills">
+        <h4 class="skill-type">{{skill.type}}</h4>
+        <h4 class="skill-names">{{skill.names.join(', ')}}</h4>
+      </div>
+    </div>
+  </div>
+</div>
