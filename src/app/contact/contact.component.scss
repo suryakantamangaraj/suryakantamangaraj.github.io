@@ -1,0 +1,140 @@
+@import '../var';
+a {
+  text-decoration: none;
+  color: #f2f2f2;
+}
+
+.root {
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  &>:nth-child(1) {
+    flex: 6;
+    display: flex;
+    align-items: center;
+  }
+  &>:nth-child(2) {
+    flex: 8;
+  }
+}
+
+.page-header {
+  color: $off-white;
+  position: relative;
+  font-size: 3rem;
+  letter-spacing: 1px;
+  word-spacing: 1.5px;
+  margin: 2rem 0;
+  user-select: none;
+  font-family: 'Cormorant Garamond', serif; // font-weight: normal;
+  &:after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    height: 2px;
+    top: 100%;
+    left: 0;
+    background: $off-white;
+  }
+}
+
+.icon {
+  $max-width-height: 5rem;
+  height: $max-width-height;
+  width: $max-width-height;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+  animation: fade 1.4s ease-in-out 0.4s 1 both ;
+  &:hover {
+    transform: scale(1.1);
+  }
+  @media (max-width: 690px) {
+    $max-width-height: 3rem;
+    height: $max-width-height;
+    width: $max-width-height;
+  }
+  @media (max-width: 350px) {
+    $max-width-height: 2rem;
+    height: $max-width-height;
+    width: $max-width-height;
+  }
+}
+
+.img {
+  &>img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.container {
+  width: 95%;
+  max-width: 75rem;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.icons {
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+.section {
+  background: $color2;
+  display: flex;
+  margin: 2px;
+  justify-content: space-around ;
+  align-items: center;
+  padding-top: 2.4rem;
+  padding-bottom: 2.4rem;
+
+
+  &.min-section {
+    width: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: $off-white;
+    font-size: 1.6rem;
+    @media (max-width: 690px) {
+      font-size: 1.2rem;
+    }
+    @media (max-width: 350px) {
+      font-size: 0.8rem;
+    }
+    &>p {
+      margin: 0px 1rem;
+      width: 90%;
+      text-align: center;
+      word-break: break-word;
+      padding-top: 0.8rem;
+      margin-bottom: -0.8rem;
+    }
+  }
+}
+
+.part {
+  display: flex;
+  width: 100%;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

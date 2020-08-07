@@ -1,0 +1,122 @@
+@import '../var';
+$text-card-shift:45%;
+$row-coloum-brk-point: 'max-width: 1040px';
+.overlay {
+  display: inline-block;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: -100%;
+  position: fixed;
+  background: $color2;
+  transform: scale(2) skew(-10deg);
+  z-index: -1;
+  transition: 0.3s all ease-in-out;
+  @media ($row-coloum-brk-point) {
+    transform: scale(2) skew(-55deg);
+  }
+}
+
+.container {
+  font-size: 1.4rem;
+  //height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  color: $off-white;
+  align-items: center;
+  padding: 5rem;
+  @media ($row-coloum-brk-point) {
+    flex-direction: column;
+  }
+  .side1 {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media ($row-coloum-brk-point) {
+      flex: none;
+      height: auto;
+    }
+    &>h1 {
+      margin-bottom: 0;
+      padding: 3rem 0.8rem 0.2rem;
+    }
+  }
+  .side2 {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.text-container {
+  height: auto;
+  max-width: 32rem;
+  background: #e74c3c;
+  padding: 3rem 1.8rem;
+  padding-top: 5.8rem;
+  border-radius: 2rem;
+  min-width: 34rem;
+}
+
+.dp-logo {
+  font-size: 1.6rem;
+  transform: translate(0, 45%);
+}
+
+.skill-container {
+  padding: 3rem 1.8rem;
+  margin-left: 5rem;
+  @media ($row-coloum-brk-point) {
+    margin: auto;
+  }
+}
+
+.skill-header {
+  margin: 2rem 0;
+  margin-bottom: 3.8rem;
+  position: relative;
+  letter-spacing: 2px;
+  padding-bottom: 0rem;
+  font-size: 3.2rem;
+  font-family: 'Cormorant Garamond', serif;
+  justify-content: flex-start;
+  &:after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    height: 3px;
+    top: 100%;
+    left: 0;
+    background: $off-white;
+  }
+}
+
+.skill-type {
+  position: relative;
+  margin: 1.2rem 0;
+  padding-bottom: 0.2rem;
+  font-size: 1.6rem;
+  &:after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: 70%;
+    height: 1.5px;
+    top: 100%;
+    left: 0;
+    background: $off-white;
+  }
+}
+
+.skill-names {
+  margin-left: 2.8rem;
+  margin-bottom: 2rem;
+  margin-top: -0.6rem;
+}

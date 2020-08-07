@@ -1,0 +1,37 @@
+<div (click)="onBackClick()" class="back-icon">
+  <app-back-icon></app-back-icon>
+</div>
+
+<div class="root">
+  <div>
+    <h1 class="page-header">CONTACT & PROFILES</h1>
+  </div>
+  <div class="container">
+    <div class="part part1">
+      <div class="section icons flex-1">
+        <a [href]="profileLinks.url" target="_blank" *ngFor="let profileLinks of contactProfile.profile" class="img icon">
+          <img [title]="profileLinks.name" [src]="profileLinks.iconUrl" [alt]="profileLinks.name">
+        </a>
+      </div>
+      <div class="section min-section">
+        <a [href]="vscodeMarketplace.url" target="_blank" class="img icon">
+          <img [title]="vscodeMarketplace.name" [src]="vscodeMarketplace.iconUrl" [alt]="vscodeMarketplace.name">
+        </a>
+        <p>{{vscodeMarketplace.name}}</p>
+      </div>
+    </div>
+    <div class="part part2">
+      <div class="section min-section">
+        <a class="img icon" [href]="email.url" target="_top">
+          <img [title]="email.name" [src]="email.iconUrl" [alt]="email.name">
+        </a>
+        <p>{{email.url.replace('mailto:', '')}}</p>
+      </div>
+      <div class="section icons flex-1">
+        <a *ngFor="let workProfile of contactProfile.work" class="img icon" [href]="workProfile.url" target="_blank">
+          <img [title]="workProfile.name" [src]="workProfile.iconUrl" [alt]="workProfile.name">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
