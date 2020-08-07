@@ -12,7 +12,6 @@ install:
   - yarn install
 
 script:
-  - yarn lint
   - yarn build
 
 deploy:
