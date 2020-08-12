@@ -69,6 +69,32 @@ $row-coloum-brk-point: 'max-width: 1040px';
   transform: translate(0, 45%);
 }
 
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.button0 {
+  background-color: #e74c3c;
+  color: white;
+  border: 2px solid white;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.button0:hover {
+  background-color: white;
+  color: #e74c3c;
+}
+
 .skill-container {
   padding: 3rem 1.8rem;
   margin-left: 5rem;
