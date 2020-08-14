@@ -5,6 +5,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
+import { AboutMoreComponent } from './aboutmore/aboutmore.component';
 
 const APP_ROUTES: Routes = [
   {
@@ -36,6 +37,11 @@ const APP_ROUTES: Routes = [
     path: 'profiles',
     component: ContactComponent,
     data: { animation: 'contact' }
+  },
+  {
+    path: 'aboutmore',
+    component: AboutMoreComponent,
+    data: { animation: 'aboutmore' }
   },
   { path: '**', redirectTo: '/' }
 ];

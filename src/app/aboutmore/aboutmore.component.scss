@@ -1,0 +1,62 @@
+@import '../var';
+$text-card-shift:45%;
+$row-coloum-brk-point: 'max-width: 1040px';
+
+.overlay {
+  display: inline-block;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: -100%;
+  position: fixed;
+  background: $color2;
+  transform: scale(2) skew(-10deg);
+  z-index: -1;
+  transition: 0.3s all ease-in-out;
+  @media ($row-coloum-brk-point) {
+    transform: scale(2) skew(-55deg);
+  }
+}
+
+.container {
+  font-size: 1.8rem;
+  height: 100vh;
+  width: 100vw;
+  justify-content: space-around;
+  color: $off-white;
+  align-items: center;
+  padding: 5rem;
+  @media ($row-coloum-brk-point) {
+    flex-direction: column;
+  }
+  .side {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media ($row-coloum-brk-point) {
+      flex: none;
+      height: auto;
+    }
+    &>h1 {
+      margin-bottom: 0;
+      padding: 3rem 0.8rem 0.2rem;
+    }
+  }
+}
+
+.text-container {
+  height: auto;
+  max-width: 90rem;
+  background: #e74c3c;
+  padding: 3rem 1.8rem;
+  padding-top: 8.8rem;
+  border-radius: 2rem;
+  min-width: 92rem;
+}
+
+.dp-logo {
+  font-size: 4.6rem;
+  transform: translate(0, 45%);
+}
