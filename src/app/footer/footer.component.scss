@@ -1,0 +1,12 @@
+@import '../var';
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  font-size: 1.2rem;
+  background-color: $color3;
+  color: white;
+  text-align: center;
+}
