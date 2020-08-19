@@ -30,6 +30,7 @@ import { appRouting } from './app.routing';
 import { NoEmojiPipe } from './pipes/no-emoji.pipe';
 import { SkillsService } from './services/skills.service';
 import { AboutMoreComponent } from './aboutmore/aboutmore.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { AboutMoreComponent } from './aboutmore/aboutmore.component';
     TypingComponent,
     LandingPageComponent,
     NoEmojiPipe,
-    AboutMoreComponent
+    AboutMoreComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
