@@ -2,45 +2,33 @@ import { ISkill } from '../ISkill';
 
 export const SKILLS_DATA: ISkill[] = [
   {
-    type: 'Programming Language',
+    type: 'EDA Tools',
     names: [
-      'C', 'C#', 'JavaScript', 'TypeScript', 'Python'
+      'Cadence OrCAD', 'Altium Designer', 'Cadence Analog Workbench', 'MATLAB', 'Cadence Virtuoso'
     ]
   },
   {
-    type: 'Backend',
+    type: 'Computer Coding Languages',
     names: [
-      'Node.js & Express.js', 'ASP.NET Core/MVC/WebAPI'
+      'Python', 'C', 'MATLAB', 'Verilog', 'Julia', 'JavaScript', 'TypeScript', 'Shell Scripting'
     ]
   },
   {
-    type: 'Frontend',
+    type: 'Automation Tools',
     names: [
-      'Angular', 'React.js', 'CSS', 'HTML', 'jQuery'
+      'NI LabVIEW', 'DAQ Systems', 'Selenium'
     ]
   },
   {
-    type: 'Database & ORM',
+    type: 'T&M Tools',
     names: [
-      'SQL Server', 'MongoDB', 'Entity Framework', 'Mongoose'
-    ]
-  },
-  {
-    type: 'Cloud',
-    names: [
-      'Azure Web Service & Storage', 'Firebase DB & Functions', 'Heroku'
-    ]
-  },
-  {
-    type: 'Testing',
-    names: [
-      'Jest', 'Mocha'
+      'Spectrum Analyzers', 'Logic Analyzers', 'Digital Meters', 'Safety Testers', 'Signal Generators', 'DSOs', '& Other Tools'
     ]
   },
   {
     type: 'Others',
     names: [
-      'Git & GitHub', 'CI/CD', 'REST API', 'JWT', 'Auth0'
+      'Microsoft Office', 'VCS', 'CI/CD', 'Test Management', 'Project Scoping'
     ]
   },
 ];
