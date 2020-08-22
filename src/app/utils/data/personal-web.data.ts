@@ -2,7 +2,7 @@ import { IProject } from '../IProject';
 
 export const PersonalWebData: IProject = {
   id: '87fbeedb-e436-11ea-9206-68ecc5e082cd',
-  name: 'Personal Website 💘',
+  name: 'Personal Website ✨',
   description:
     'This is my personal website, designed with Adobe XD & developed with Angular 9',
   projectLink: 'https://github.com/suryakantamangaraj/suryakantamangaraj.github.io',
