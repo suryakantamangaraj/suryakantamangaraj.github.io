@@ -20,7 +20,7 @@
       </div>
 
       <div *ngIf="project.techStuff && project.techStuff.length > 0" class="poject-section project-features">
-        <h4 class="project-section__header">Languages and Tools: </h4>
+        <h4 class="project-section__header">Technology Used: </h4>
         <ul class="project-features-details">
           <li *ngFor="let tech of project.techStuff">{{tech}}</li>
         </ul>
@@ -43,8 +43,9 @@
       </div>
 
     </div>
-    <div class="end-section">
-      :wq!
+    <div class="astrodivider">
+      <div class="astrodividermask"></div>
+      <span><i>&#10038;</i></span>
     </div>
   </div>
 </div>

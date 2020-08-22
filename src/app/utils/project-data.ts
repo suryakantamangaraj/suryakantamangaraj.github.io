@@ -3,25 +3,13 @@ import { environment } from '../../environments/environment';
 import { IProject } from './IProject';
 import { testUniqueness } from './utils';
 
-import { liveServerData } from './data/live-server.data';
-import { LiveSassData } from './data/live-sass.data';
-import { CakeShopData } from './data/cake-shop.data';
-import { portfoliloData } from './data/portfolio.data';
-import { OShopData } from './data/oshop.data';
-import { LiveServerWebExtensionData } from './data/live-server-web-extension.data';
-import { LargeNumberFactorialData } from './data/large-number-factorial.data';
-import { techFestData } from './data/college-tech-fest.data';
+import { PersonalWebData } from './data/personal-web.data';
+import { TwoStageClassicalOpAmpData } from './data/two-stage-classical-opamp.data';
 
 const getAllProject = () => {
   const projects = [
-    liveServerData,
-    LiveSassData,
-    portfoliloData,
-    OShopData,
-    CakeShopData,
-    techFestData,
-    LiveServerWebExtensionData,
-    LargeNumberFactorialData,
+    PersonalWebData,
+    TwoStageClassicalOpAmpData,
   ];
 
   if (!environment.production) {
