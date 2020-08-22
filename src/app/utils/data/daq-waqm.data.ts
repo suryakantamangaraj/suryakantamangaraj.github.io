@@ -19,7 +19,7 @@ export const DAQWAQMData: IProject = {
     {
       title: 'About',
       data: [
-        'This project is a India Govt. project maintained by e-COE, BBSR and more than 10-15 members'
+        'This project maintained by e-COE, BBSR with all rights and I have a small contribution to it'
       ]
     }
   ]
