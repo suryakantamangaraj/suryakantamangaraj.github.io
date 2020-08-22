@@ -62,10 +62,10 @@ export class ContactComponent implements OnInit {
     iconUrl: './assets/icons/email.svg'
   };
 
-  vscodeMarketplace = {
-    name: 'VSCode Extension Publisher',
-    url: 'https://marketplace.visualstudio.com/publishers/',
-    iconUrl: './assets/icons/vscode.svg'
+  youtube = {
+    name: 'YouTube',
+    url: 'https://www.youtube.com/channel/UC5D6jADsclM8baXuxUjCXlA',
+    iconUrl: './assets/icons/youtube.svg'
   };
   ngOnInit() {}
 

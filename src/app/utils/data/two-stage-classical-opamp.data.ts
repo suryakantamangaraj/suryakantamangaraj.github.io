@@ -9,18 +9,17 @@ export const TwoStageClassicalOpAmpData: IProject = {
   liveUrl: null,
   isFeatured: true,
   features: [
-    'Compile SASS & SCSS with live browser reload',
-    'Fully customizable such as CSS Style & file ext name',
-    'Integrated Autoprefix'
+    'Minimum physical size',
+    'Improved slew rate',
+    'Low power consumption'
   ],
-  tags: ['web apps'],
-  techStuff: ['Node.js', 'vscode-extension'],
+  tags: ['semiconductor'],
+  techStuff: ['Cadence Virtuoso', 'UMC 180nm'],
   additionalData: [
     {
-      title: 'About',
+      title: 'Publication',
       data: [
-        'This extension is installed 100K times from marketplace (by 03.07.18)',
-        'Rating of this extension is 4.7 out of 5 (by 03.07.18)'
+        'Conference Proceedings: IEEE Electron Device Society(National Conference on Devices and Circuits 2018, ISBN: 978-93-83060-16-0)'
       ]
     }
   ]
