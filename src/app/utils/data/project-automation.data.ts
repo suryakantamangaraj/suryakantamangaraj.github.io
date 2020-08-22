@@ -13,7 +13,7 @@ export const ProjectAutomationData: IProject = {
     'It opens VS Code for coding at desired project location',
     'Windows OS only'
   ],
-  tags: ['Automation'],
+  tags: ['automation'],
   techStuff: ['Python', 'Shell Scripting'],
   additionalData: []
 };
