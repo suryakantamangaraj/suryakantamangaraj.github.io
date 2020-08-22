@@ -8,5 +8,5 @@ export interface IProject {
   features?: string[];
   tags: string[];
   techStuff: string[];
-  additionalData?: { title: string; data: string[] }[];
+  additionalData?: { title: string; data: string[]; }[];
 }

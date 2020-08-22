@@ -1,19 +1,19 @@
 import { IProject } from '../IProject';
 
-export const LiveSassData: IProject = {
-  id: '8108A2CA-4227-4704-99FF-E2250AE6C0D4',
-  name: 'Live Sass Compiler - VsCode Extension 🚚',
+export const TwoStageClassicalOpAmpData: IProject = {
+  id: 'e27a7116-e439-11ea-ac3d-68ecc5e082cd',
+  name: 'Two Stage Classical Model Op-amp',
   description:
-    'Compile Sass or Scss file to CSS at realtime with live browser reload feature.',
+    'Design of Two Stage Classical Model Operational Amplifier for LDO Application',
   projectLink: null,
-  isFeatured: true,
   liveUrl: null,
+  isFeatured: true,
   features: [
     'Compile SASS & SCSS with live browser reload',
     'Fully customizable such as CSS Style & file ext name',
     'Integrated Autoprefix'
   ],
-  tags: ['node.js'],
+  tags: ['web apps'],
   techStuff: ['Node.js', 'vscode-extension'],
   additionalData: [
     {
