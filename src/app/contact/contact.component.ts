@@ -62,10 +62,10 @@ export class ContactComponent implements OnInit {
     iconUrl: './assets/icons/email.svg'
   };
 
-  youtube = {
-    name: 'YouTube',
-    url: 'https://www.youtube.com/channel/UC5D6jADsclM8baXuxUjCXlA',
-    iconUrl: './assets/icons/youtube.svg'
+  reddit = {
+    name: 'Reddit',
+    url: 'https://www.reddit.com/user/suryakantamangaraj',
+    iconUrl: './assets/icons/reddit.svg'
   };
   ngOnInit() {}
 
