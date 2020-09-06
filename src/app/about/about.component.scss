@@ -57,7 +57,7 @@ $row-coloum-brk-point: 'max-width: 1040px';
 .text-container {
   height: auto;
   max-width: 32rem;
-  background: #e74c3c;
+  background: $color1;
   padding: 3rem 1.8rem;
   padding-top: 5.8rem;
   border-radius: 2rem;
@@ -80,11 +80,12 @@ $row-coloum-brk-point: 'max-width: 1040px';
   font-size: 18px;
   margin: 4px 2px;
   transition-duration: 0.4s;
+  //border-radius: 4px;
   border-radius: 100rem;
   cursor: pointer;
 }
 .button0 {
-  background-color: #e74c3c;
+  background-color: $color1;
   color: white;
   border: 2px solid white;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
@@ -92,7 +93,7 @@ $row-coloum-brk-point: 'max-width: 1040px';
 
 .button0:hover {
   background-color: white;
-  color: #e74c3c;
+  color: $color1;
 }
 
 .skill-container {
