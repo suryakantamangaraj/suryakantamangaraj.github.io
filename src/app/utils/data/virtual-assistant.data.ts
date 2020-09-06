@@ -9,7 +9,7 @@ export const VirtualAssistantData: IProject = {
   liveUrl: null,
   isFeatured: false,
   features: [
-    '4. Voice Activation',
+    'Voice Activation',
     'Improved Search',
     'Multitasking',
     'Personality and Humor'
