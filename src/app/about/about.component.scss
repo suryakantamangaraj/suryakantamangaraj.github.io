@@ -70,7 +70,7 @@ $row-coloum-brk-point: 'max-width: 1040px';
 }
 
 .button {
-  background-color: #4CAF50; /* Green */
+  background-color: $bg-color;
   border: none;
   color: white;
   padding: 10px 24px;
