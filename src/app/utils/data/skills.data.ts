@@ -4,7 +4,7 @@ export const SKILLS_DATA: ISkill[] = [
   {
     type: 'EDA Tools',
     names: [
-      'Cadence OrCAD', 'Altium Designer', 'Cadence Analog Workbench', 'MATLAB', 'Cadence Virtuoso'
+      'Cadence OrCAD', 'Xilinx Vivado', 'MATLAB', 'Cadence Analog Workbench', 'Cadence Virtuoso', 'Altium Designer'
     ]
   },
   {
