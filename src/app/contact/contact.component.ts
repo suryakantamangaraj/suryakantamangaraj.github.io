@@ -34,9 +34,9 @@ export class ContactComponent implements OnInit {
     ],
     work: [
       {
-        name: 'GitHub',
-        url: 'https://github.com/suryakantamangaraj',
-        iconUrl: './assets/icons/github.svg'
+        name: 'Tumblr',
+        url: 'https://suryaraj.tumblr.com/',
+        iconUrl: './assets/icons/tumblr.svg'
       },
       {
         name: 'Medium',
@@ -62,10 +62,10 @@ export class ContactComponent implements OnInit {
     iconUrl: './assets/icons/email.svg'
   };
 
-  reddit = {
-    name: 'Reddit',
-    url: 'https://www.reddit.com/user/suryakantamangaraj',
-    iconUrl: './assets/icons/reddit.svg'
+  github = {
+    name: 'GitHub',
+    url: 'https://github.com/suryakantamangaraj',
+    iconUrl: './assets/icons/github.svg'
   };
   ngOnInit() {}
 
