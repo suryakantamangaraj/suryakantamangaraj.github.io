@@ -13,7 +13,7 @@ export class ContactComponent implements OnInit {
     profile: [
       {
         name: 'Instagram',
-        url: 'https://www.instagram.com/suryaraj.ig/',
+        url: 'https://www.instagram.com/suryaraj.me/',
         iconUrl: './assets/icons/instagram.svg'
       },
       {
@@ -23,7 +23,7 @@ export class ContactComponent implements OnInit {
       },
       {
         name: 'Facebook',
-        url: 'https://www.facebook.com/suryaraj.fb',
+        url: 'https://www.facebook.com/suryaraj.me',
         iconUrl: './assets/icons/facebook.svg'
       },
       {
