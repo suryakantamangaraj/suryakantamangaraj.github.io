@@ -57,7 +57,7 @@ import { FooterComponent } from './footer/footer.component';
     FooterComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
     appRouting
     // ServiceWorkerModule.register('/ngsw-worker.js', {

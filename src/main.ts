@@ -10,7 +10,8 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)  .then(() => {
+document.addEventListener('DOMContentLoaded', () => {
+  platformBrowserDynamic().bootstrapModule(AppModule)  .then(() => {
   // Ensure Angular destroys itself on hot reloads.
   if ('serviceWorker' in navigator && environment.production) {
     navigator.serviceWorker.getRegistrations().then(registrations => {
@@ -20,3 +21,4 @@ platformBrowserDynamic().bootstrapModule(AppModule)  .then(() => {
   }
     // Otherwise, log the boot error
   }).catch(err => console.log(err));
+});
