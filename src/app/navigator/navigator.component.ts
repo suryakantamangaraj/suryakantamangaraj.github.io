@@ -74,7 +74,7 @@ export class NavigatorComponent implements OnInit {
     { displayName: 'Portfolio', url: '/portfolio' },
     { displayName: 'About & Skills', url: '/about' },
     { displayName: 'Contacts & Profiles', url: '/profiles' },
-    { displayName: 'Profile Card', url: '/profile-card' }
+    { displayName: 'Profile Card', url: '/profile-card' },
     { displayName: 'Blog', url: '/blog'}
   ];
 
