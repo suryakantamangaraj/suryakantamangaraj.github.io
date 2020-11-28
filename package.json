@@ -7,11 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "dev:ssr": "ng run SuryaRaj:serve-ssr",
-    "serve:ssr": "node dist/SuryaRaj/server/main.js",
-    "build:ssr": "ng build --prod && ng run SuryaRaj:server:production",
-    "prerender": "ng run SuryaRaj:prerender"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -22,10 +18,7 @@
     "@angular/forms": "~10.0.6",
     "@angular/platform-browser": "~10.0.6",
     "@angular/platform-browser-dynamic": "~10.0.6",
-    "@angular/platform-server": "~10.0.6",
     "@angular/router": "~10.0.6",
-    "@nguniversal/express-engine": "^10.0.2",
-    "express": "^4.15.2",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
@@ -34,8 +27,6 @@
     "@angular-devkit/build-angular": "~0.1000.5",
     "@angular/cli": "~10.0.5",
     "@angular/compiler-cli": "~10.0.6",
-    "@nguniversal/builders": "^10.0.2",
-    "@types/express": "^4.17.0",
     "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
