@@ -75,6 +75,7 @@ export class NavigatorComponent implements OnInit {
     { displayName: 'About & Skills', url: '/about' },
     { displayName: 'Contacts & Profiles', url: '/profiles' },
     { displayName: 'Profile Card', url: '/profile-card' }
+    { displayName: 'Blog', url: '/blog'}
   ];
 
   @Output('cancellation') cancellation = new EventEmitter();
