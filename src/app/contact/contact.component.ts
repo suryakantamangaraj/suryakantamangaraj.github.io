@@ -40,7 +40,7 @@ export class ContactComponent implements OnInit {
       },
       {
         name: 'Medium',
-        url: 'https://medium.com/@surya.raj',
+        url: 'https://surya-raj.medium.com/',
         iconUrl: './assets/icons/medium.svg'
       },
       {
