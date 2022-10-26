@@ -29,7 +29,7 @@ jobs:
     - run: yarn build
 
     - name: Deploy
-      uses: suryakantamangaraj/suryakantamangaraj.github.io/suryakantamangaraj.github.io
+      uses: suryakantamangaraj/suryakantamangaraj.github.io@ref
       with:
         branch: master
         folder: dist
