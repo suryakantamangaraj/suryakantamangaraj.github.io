@@ -29,7 +29,8 @@ jobs:
     - run: yarn build
 
     - name: Deploy
-      uses: /home/runner/work/suryakantamangaraj.github.io/suryakantamangaraj.github.io
-      with:
+      uses: s0/git-publish-subdir-action@develop
+      env:
+        repo: self
         branch: master
         folder: dist
