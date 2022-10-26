@@ -6,7 +6,7 @@ export const ConnectedAgricultureData: IProject = {
   description:
     'Combining AI, IoT, and predictive analytics across the agriculture ecosystem in gaining insights into projected yields and potential problems, helping to enable better decisions',
   projectLink: null,
-  liveUrl: 'https://suryakantamangaraj.github.io/SmartFarming',
+  liveUrl: 'https://suryaraj.me/SmartFarming/',
   isFeatured: true,
   features: [
     'Ongoing Project'

@@ -4,13 +4,13 @@ export const SKILLS_DATA: ISkill[] = [
   {
     type: 'EDA Tools',
     names: [
-      'Cadence OrCAD', 'Xilinx Vivado', 'MATLAB', 'Cadence Analog Workbench', 'Cadence Virtuoso', 'Altium Designer'
+      'Cadence OrCAD', 'Xilinx Vivado', 'MATLAB', 'Cadence Analog Workbench', 'Cadence Virtuoso', 'Altium Designer', 'LTSpice'
     ]
   },
   {
     type: 'Computer Coding Languages',
     names: [
-      'Python', 'C', 'MATLAB', 'Verilog', 'Julia', 'JavaScript', 'TypeScript', 'Shell Scripting'
+      'Python', 'C', 'MATLAB', 'Verilog', 'JavaScript', 'TypeScript', 'Shell Scripting'
     ]
   },
   {

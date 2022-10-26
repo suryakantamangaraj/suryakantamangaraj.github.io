@@ -5,7 +5,7 @@ export const DAQWAQMData: IProject = {
   name: 'SoC DAQ for smart water quality monitoring',
   description:
     'Design of SoC data acquisition system board for smart water quality monitoring with testability',
-  projectLink: null,
+  projectLink: https://www.researchgate.net/publication/352169765_The_Architecture_of_VENUS_Data_Acquisition_System_for_WAQM_Project,
   liveUrl: null,
   isFeatured: false,
   features: [

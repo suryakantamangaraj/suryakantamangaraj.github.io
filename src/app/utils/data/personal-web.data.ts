@@ -6,7 +6,7 @@ export const PersonalWebData: IProject = {
   description:
     'This is my personal website, designed with Adobe XD & developed with Angular 9',
   projectLink: 'https://github.com/suryakantamangaraj/suryakantamangaraj.github.io',
-  liveUrl: 'https://suryakantamangaraj.github.io',
+  liveUrl: 'https://suryaraj.me/',
   isFeatured: true,
   features: [
     'No 3rd party CSS library or component is used 💖',
