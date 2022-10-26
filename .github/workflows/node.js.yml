@@ -26,6 +26,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn install
-      working-dirctory: dist
+        working-dirctory: ./dist
     - run: yarn build
-      working-directory: dist
+        working-directory: ./dist
