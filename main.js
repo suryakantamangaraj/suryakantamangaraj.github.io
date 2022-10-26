@@ -3045,11 +3045,11 @@ AboutComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCom
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](7, "app-dp-logo", 5);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "div", 6);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "p");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](10, " I am Surya Raj. You can also call me a Product Designer, Developer, System Architect or by any other market defined function-title. I prefer to keep learning, continue challenging myself and do the cool things that matter. My abundant energy fuels me in the pursuit of many interests, hobbies, areas of study and artistic endeavors. I\u2019m a fast learner, able to pick up new skills and juggle different projects and roles with relative ease. Adding this line to check if workflow is working. ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](10, " I am Surya Raj. You can also call me a Product Designer, Developer, System Architect or by any other market defined function-title. I prefer to keep learning, continue challenging myself and do the cool things that matter. My abundant energy fuels me in the pursuit of many interests, hobbies, areas of study and artistic endeavors. I\u2019m a fast learner, able to pick up new skills and juggle different projects and roles with relative ease. ");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](11, "br");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "p");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](13, " I like to develop expertise in several areas throughout my life and career. I currently work remotely and have a full-time commitment at GSAS MicroSystems. Outside of my commitments I work with a select freelance client base. ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](13, " I like to develop expertise in several areas throughout my life and career. I currently work remotely and have a full-time commitment at Honeywell. Outside of my commitments I work with a select freelance client base. ");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](14, "br");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "p");
@@ -3787,7 +3787,7 @@ FooterComponent.ɵfac = function FooterComponent_Factory(t) { return new (t || F
 FooterComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: FooterComponent, selectors: [["app-footer"]], decls: 3, vars: 0, consts: [[1, "footer"]], template: function FooterComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "p");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "\u00A9 2020 Surya Raj \u2022 Made with \uD83E\uDD0D by Surya");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "\u00A9 2020-22 Surya Raj \u2022 Made with \uD83E\uDD0D by Surya");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } }, styles: [".footer[_ngcontent-%COMP%] {\n  position: fixed;\n  left: 0;\n  bottom: 0;\n  width: 100%;\n  font-size: 1.4rem;\n  background-color: #800000;\n  color: white;\n  text-align: center;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZm9vdGVyL2Zvb3Rlci5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvX3Zhci5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVBO0VBQ0UsZUFBQTtFQUNBLE9BQUE7RUFDQSxTQUFBO0VBQ0EsV0FBQTtFQUNBLGlCQUFBO0VBQ0EseUJDTE87RURNUCxZQUFBO0VBQ0Esa0JBQUE7QUFERiIsImZpbGUiOiJzcmMvYXBwL2Zvb3Rlci9mb290ZXIuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAaW1wb3J0ICcuLi92YXInO1xuXG4uZm9vdGVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBsZWZ0OiAwO1xuICBib3R0b206IDA7XG4gIHdpZHRoOiAxMDAlO1xuICBmb250LXNpemU6IDEuNHJlbTtcbiAgYmFja2dyb3VuZC1jb2xvcjogJGNvbG9yMztcbiAgY29sb3I6IHdoaXRlO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG4iLCIkYmctY29sb3I6ICM0MDVjYTE7XG4kY29sb3IxOiAjOGIwMDAwO1xuJGNvbG9yMjogIzAwMDtcbiRjb2xvcjM6ICM4MDAwMDA7XG4kY29sb3I0OiAjOGIwMDAwO1xuJHRleHQtY29sb3I6ICNmZmZmZmY7XG4kYmxhY2s6ICM1NTU7XG4kb2ZmLXdoaXRlOiAjZjhmOGY4O1xuJHdoaXRlOiAjZmZmO1xuJGRhcms6ICMwMDA7XG4iXX0= */"] });
@@ -5431,7 +5431,7 @@ const ConnectedAgricultureData = {
     name: 'Smart farming with EDGE AI and Intelligence Cloud',
     description: 'Combining AI, IoT, and predictive analytics across the agriculture ecosystem in gaining insights into projected yields and potential problems, helping to enable better decisions',
     projectLink: null,
-    liveUrl: 'https://suryakantamangaraj.github.io/SmartFarming',
+    liveUrl: 'https://suryaraj.me/SmartFarming/',
     isFeatured: true,
     features: [
         'Ongoing Project'
@@ -5458,7 +5458,7 @@ const DAQWAQMData = {
     id: 'dc9a7e1b-e47c-11ea-a146-68ecc5e082cd',
     name: 'SoC DAQ for smart water quality monitoring',
     description: 'Design of SoC data acquisition system board for smart water quality monitoring with testability',
-    projectLink: null,
+    projectLink: 'https://www.researchgate.net/publication/352169765_The_Architecture_of_VENUS_Data_Acquisition_System_for_WAQM_Project',
     liveUrl: null,
     isFeatured: false,
     features: [
@@ -5598,7 +5598,7 @@ const PersonalWebData = {
     name: 'Personal Website ✨',
     description: 'This is my personal website, designed with Adobe XD & developed with Angular 9',
     projectLink: 'https://github.com/suryakantamangaraj/suryakantamangaraj.github.io',
-    liveUrl: 'https://suryakantamangaraj.github.io',
+    liveUrl: 'https://suryaraj.me/',
     isFeatured: true,
     features: [
         'No 3rd party CSS library or component is used 💖',
@@ -5659,13 +5659,13 @@ const SKILLS_DATA = [
     {
         type: 'EDA Tools',
         names: [
-            'Cadence OrCAD', 'Xilinx Vivado', 'MATLAB', 'Cadence Analog Workbench', 'Cadence Virtuoso', 'Altium Designer'
+            'Cadence OrCAD', 'Xilinx Vivado', 'MATLAB', 'Cadence Analog Workbench', 'Cadence Virtuoso', 'Altium Designer', 'LTSpice'
         ]
     },
     {
         type: 'Computer Coding Languages',
         names: [
-            'Python', 'C', 'MATLAB', 'Verilog', 'Julia', 'JavaScript', 'TypeScript', 'Shell Scripting'
+            'Python', 'C', 'MATLAB', 'Verilog', 'JavaScript', 'TypeScript', 'Shell Scripting'
         ]
     },
     {
@@ -5705,7 +5705,7 @@ const TwoStageClassicalOpAmpData = {
     id: 'e27a7116-e439-11ea-ac3d-68ecc5e082cd',
     name: 'Two Stage Classical Model Op-amp',
     description: 'Design of Two Stage Classical Model Operational Amplifier for LDO Application',
-    projectLink: null,
+    projectLink: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=mUm3SwkAAAAJ&authuser=1&citation_for_view=mUm3SwkAAAAJ:u5HHmVD_uO8C',
     liveUrl: null,
     isFeatured: true,
     features: [
