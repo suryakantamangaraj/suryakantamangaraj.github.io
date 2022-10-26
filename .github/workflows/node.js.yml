@@ -28,3 +28,9 @@ jobs:
     - run: yarn install
     - run: yarn build
 
+    - name: Deploy
+      uses: suryakantamangaraj.github.io
+      with:
+        branch: master
+        folder: dist
+
