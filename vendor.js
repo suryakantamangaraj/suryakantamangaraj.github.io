@@ -29,7 +29,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵAnimationGroupPlayer", function() { return AnimationGroupPlayer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵPRE_STYLE", function() { return ɵPRE_STYLE; });
 /**
- * @license Angular v10.0.8
+ * @license Angular v10.0.14
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1262,7 +1262,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_animations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/animations */ "./node_modules/@angular/animations/__ivy_ngcc__/fesm2015/animations.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /**
- * @license Angular v10.0.8
+ * @license Angular v10.0.14
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -6050,7 +6050,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵsetRootDomAdapter", function() { return setRootDomAdapter; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /**
- * @license Angular v10.0.8
+ * @license Angular v10.0.14
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -9199,7 +9199,7 @@ class NgForOf {
      * rather than the identity of the object itself.
      *
      * The function receives two inputs,
-     * the iteration index and the node object ID.
+     * the iteration index and the associated node data.
      */
     set ngForTrackBy(fn) {
         if (Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["isDevMode"])() && fn != null && typeof fn !== 'function') {
@@ -11333,7 +11333,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["Version"]('10.0.8');
+const VERSION = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["Version"]('10.0.14');
 
 /**
  * @license
@@ -11386,7 +11386,7 @@ class BrowserViewportScroller {
      * @returns The position in screen coordinates.
      */
     getScrollPosition() {
-        if (this.supportScrollRestoration()) {
+        if (this.supportsScrolling()) {
             return [this.window.scrollX, this.window.scrollY];
         }
         else {
@@ -11398,7 +11398,7 @@ class BrowserViewportScroller {
      * @param position The new position in screen coordinates.
      */
     scrollToPosition(position) {
-        if (this.supportScrollRestoration()) {
+        if (this.supportsScrolling()) {
             this.window.scrollTo(position[0], position[1]);
         }
     }
@@ -11407,29 +11407,10 @@ class BrowserViewportScroller {
      * @param anchor The ID of the anchor element.
      */
     scrollToAnchor(anchor) {
-        if (this.supportScrollRestoration()) {
-            // Escape anything passed to `querySelector` as it can throw errors and stop the application
-            // from working if invalid values are passed.
-            if (this.window.CSS && this.window.CSS.escape) {
-                anchor = this.window.CSS.escape(anchor);
-            }
-            else {
-                anchor = anchor.replace(/(\"|\'\ |:|\.|\[|\]|,|=)/g, '\\$1');
-            }
-            try {
-                const elSelectedById = this.document.querySelector(`#${anchor}`);
-                if (elSelectedById) {
-                    this.scrollToElement(elSelectedById);
-                    return;
-                }
-                const elSelectedByName = this.document.querySelector(`[name='${anchor}']`);
-                if (elSelectedByName) {
-                    this.scrollToElement(elSelectedByName);
-                    return;
-                }
-            }
-            catch (e) {
-                this.errorHandler.handleError(e);
+        if (this.supportsScrolling()) {
+            const elSelected = this.document.getElementById(anchor) || this.document.getElementsByName(anchor)[0];
+            if (elSelected) {
+                this.scrollToElement(elSelected);
             }
         }
     }
@@ -11461,12 +11442,32 @@ class BrowserViewportScroller {
      */
     supportScrollRestoration() {
         try {
-            return !!this.window && !!this.window.scrollTo;
+            if (!this.window || !this.window.scrollTo) {
+                return false;
+            }
+            // The `scrollRestoration` property could be on the `history` instance or its prototype.
+            const scrollRestorationDescriptor = getScrollRestorationProperty(this.window.history) ||
+                getScrollRestorationProperty(Object.getPrototypeOf(this.window.history));
+            // We can write to the `scrollRestoration` property if it is a writable data field or it has a
+            // setter function.
+            return !!scrollRestorationDescriptor &&
+                !!(scrollRestorationDescriptor.writable || scrollRestorationDescriptor.set);
         }
         catch (_a) {
             return false;
         }
     }
+    supportsScrolling() {
+        try {
+            return !!this.window.scrollTo;
+        }
+        catch (_a) {
+            return false;
+        }
+    }
+}
+function getScrollRestorationProperty(obj) {
+    return Object.getOwnPropertyDescriptor(obj, 'scrollRestoration');
 }
 /**
  * Provides an empty implementation of the viewport scroller. This will
@@ -11536,7 +11537,7 @@ class NullViewportScroller {
 /*!******************************************************************!*\
   !*** ./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js ***!
   \******************************************************************/
-/*! exports provided: ANALYZE_FOR_ENTRY_COMPONENTS, APP_BOOTSTRAP_LISTENER, APP_ID, APP_INITIALIZER, ApplicationInitStatus, ApplicationModule, ApplicationRef, Attribute, COMPILER_OPTIONS, CUSTOM_ELEMENTS_SCHEMA, ChangeDetectionStrategy, ChangeDetectorRef, Compiler, CompilerFactory, Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, ContentChild, ContentChildren, DEFAULT_CURRENCY_CODE, DebugElement, DebugEventListener, DebugNode, DefaultIterableDiffer, Directive, ElementRef, EmbeddedViewRef, ErrorHandler, EventEmitter, Host, HostBinding, HostListener, INJECTOR, Inject, InjectFlags, Injectable, InjectionToken, Injector, Input, IterableDiffers, KeyValueDiffers, LOCALE_ID, MissingTranslationStrategy, ModuleWithComponentFactories, NO_ERRORS_SCHEMA, NgModule, NgModuleFactory, NgModuleFactoryLoader, NgModuleRef, NgProbeToken, NgZone, Optional, Output, PACKAGE_ROOT_URL, PLATFORM_ID, PLATFORM_INITIALIZER, Pipe, PlatformRef, Query, QueryList, ReflectiveInjector, ReflectiveKey, Renderer2, RendererFactory2, RendererStyleFlags2, ResolvedReflectiveFactory, Sanitizer, SecurityContext, Self, SimpleChange, SkipSelf, SystemJsNgModuleLoader, SystemJsNgModuleLoaderConfig, TRANSLATIONS, TRANSLATIONS_FORMAT, TemplateRef, Testability, TestabilityRegistry, Type, VERSION, Version, ViewChild, ViewChildren, ViewContainerRef, ViewEncapsulation, ViewRef, WrappedValue, asNativeElements, assertPlatform, createPlatform, createPlatformFactory, defineInjectable, destroyPlatform, enableProdMode, forwardRef, getDebugNode, getModuleFactory, getPlatform, inject, isDevMode, platformCore, resolveForwardRef, setTestabilityGetter, ɵ0, ɵ1, ɵALLOW_MULTIPLE_PLATFORMS, ɵAPP_ID_RANDOM_PROVIDER, ɵChangeDetectorStatus, ɵCodegenComponentFactoryResolver, ɵCompiler_compileModuleAndAllComponentsAsync__POST_R3__, ɵCompiler_compileModuleAndAllComponentsSync__POST_R3__, ɵCompiler_compileModuleAsync__POST_R3__, ɵCompiler_compileModuleSync__POST_R3__, ɵComponentFactory, ɵConsole, ɵDEFAULT_LOCALE_ID, ɵEMPTY_ARRAY, ɵEMPTY_MAP, ɵINJECTOR_IMPL__POST_R3__, ɵINJECTOR_SCOPE, ɵLifecycleHooksFeature, ɵLocaleDataIndex, ɵNG_COMP_DEF, ɵNG_DIR_DEF, ɵNG_ELEMENT_ID, ɵNG_INJ_DEF, ɵNG_MOD_DEF, ɵNG_PIPE_DEF, ɵNG_PROV_DEF, ɵNOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR, ɵNO_CHANGE, ɵNgModuleFactory, ɵNoopNgZone, ɵReflectionCapabilities, ɵRender3ComponentFactory, ɵRender3ComponentRef, ɵRender3NgModuleRef, ɵSWITCH_CHANGE_DETECTOR_REF_FACTORY__POST_R3__, ɵSWITCH_COMPILE_COMPONENT__POST_R3__, ɵSWITCH_COMPILE_DIRECTIVE__POST_R3__, ɵSWITCH_COMPILE_INJECTABLE__POST_R3__, ɵSWITCH_COMPILE_NGMODULE__POST_R3__, ɵSWITCH_COMPILE_PIPE__POST_R3__, ɵSWITCH_ELEMENT_REF_FACTORY__POST_R3__, ɵSWITCH_IVY_ENABLED__POST_R3__, ɵSWITCH_RENDERER2_FACTORY__POST_R3__, ɵSWITCH_TEMPLATE_REF_FACTORY__POST_R3__, ɵSWITCH_VIEW_CONTAINER_REF_FACTORY__POST_R3__, ɵ_sanitizeHtml, ɵ_sanitizeUrl, ɵallowSanitizationBypassAndThrow, ɵand, ɵangular_packages_core_core_a, ɵangular_packages_core_core_b, ɵangular_packages_core_core_ba, ɵangular_packages_core_core_bb, ɵangular_packages_core_core_bc, ɵangular_packages_core_core_bd, ɵangular_packages_core_core_be, ɵangular_packages_core_core_bg, ɵangular_packages_core_core_bh, ɵangular_packages_core_core_bi, ɵangular_packages_core_core_bj, ɵangular_packages_core_core_bk, ɵangular_packages_core_core_bl, ɵangular_packages_core_core_bm, ɵangular_packages_core_core_bn, ɵangular_packages_core_core_bo, ɵangular_packages_core_core_bq, ɵangular_packages_core_core_br, ɵangular_packages_core_core_c, ɵangular_packages_core_core_d, ɵangular_packages_core_core_e, ɵangular_packages_core_core_f, ɵangular_packages_core_core_g, ɵangular_packages_core_core_h, ɵangular_packages_core_core_i, ɵangular_packages_core_core_j, ɵangular_packages_core_core_k, ɵangular_packages_core_core_l, ɵangular_packages_core_core_m, ɵangular_packages_core_core_n, ɵangular_packages_core_core_o, ɵangular_packages_core_core_p, ɵangular_packages_core_core_q, ɵangular_packages_core_core_r, ɵangular_packages_core_core_s, ɵangular_packages_core_core_t, ɵangular_packages_core_core_u, ɵangular_packages_core_core_v, ɵangular_packages_core_core_w, ɵangular_packages_core_core_x, ɵangular_packages_core_core_y, ɵangular_packages_core_core_z, ɵbypassSanitizationTrustHtml, ɵbypassSanitizationTrustResourceUrl, ɵbypassSanitizationTrustScript, ɵbypassSanitizationTrustStyle, ɵbypassSanitizationTrustUrl, ɵccf, ɵclearOverrides, ɵclearResolutionOfComponentResourcesQueue, ɵcmf, ɵcompileComponent, ɵcompileDirective, ɵcompileNgModule, ɵcompileNgModuleDefs, ɵcompileNgModuleFactory__POST_R3__, ɵcompilePipe, ɵcreateInjector, ɵcrt, ɵdefaultIterableDiffers, ɵdefaultKeyValueDiffers, ɵdetectChanges, ɵdevModeEqual, ɵdid, ɵeld, ɵfindLocaleData, ɵflushModuleScopingQueueAsMuchAsPossible, ɵgetComponentViewDefinitionFactory, ɵgetDebugNodeR2, ɵgetDebugNode__POST_R3__, ɵgetDirectives, ɵgetHostElement, ɵgetInjectableDef, ɵgetLContext, ɵgetLocaleCurrencyCode, ɵgetLocalePluralCase, ɵgetModuleFactory__POST_R3__, ɵgetSanitizationBypassType, ɵglobal, ɵinitServicesIfNeeded, ɵinlineInterpolate, ɵinterpolate, ɵisBoundToModule__POST_R3__, ɵisDefaultChangeDetectionStrategy, ɵisListLikeIterable, ɵisObservable, ɵisPromise, ɵivyEnabled, ɵmakeDecorator, ɵmarkDirty, ɵmod, ɵmpd, ɵncd, ɵnov, ɵoverrideComponentView, ɵoverrideProvider, ɵpad, ɵpatchComponentDefWithScope, ɵpid, ɵpod, ɵppd, ɵprd, ɵpublishDefaultGlobalUtils, ɵpublishGlobalUtil, ɵqud, ɵregisterLocaleData, ɵregisterModuleFactory, ɵregisterNgModuleType, ɵrenderComponent, ɵresetCompiledComponents, ɵresetJitOptions, ɵresolveComponentResources, ɵsetClassMetadata, ɵsetCurrentInjector, ɵsetDocument, ɵsetLocaleId, ɵstore, ɵstringify, ɵted, ɵtransitiveScopesFor, ɵunregisterLocaleData, ɵunv, ɵunwrapSafeValue, ɵvid, ɵwhenRendered, ɵɵCopyDefinitionFeature, ɵɵInheritDefinitionFeature, ɵɵNgOnChangesFeature, ɵɵProvidersFeature, ɵɵadvance, ɵɵattribute, ɵɵattributeInterpolate1, ɵɵattributeInterpolate2, ɵɵattributeInterpolate3, ɵɵattributeInterpolate4, ɵɵattributeInterpolate5, ɵɵattributeInterpolate6, ɵɵattributeInterpolate7, ɵɵattributeInterpolate8, ɵɵattributeInterpolateV, ɵɵclassMap, ɵɵclassMapInterpolate1, ɵɵclassMapInterpolate2, ɵɵclassMapInterpolate3, ɵɵclassMapInterpolate4, ɵɵclassMapInterpolate5, ɵɵclassMapInterpolate6, ɵɵclassMapInterpolate7, ɵɵclassMapInterpolate8, ɵɵclassMapInterpolateV, ɵɵclassProp, ɵɵcontentQuery, ɵɵdefineComponent, ɵɵdefineDirective, ɵɵdefineInjectable, ɵɵdefineInjector, ɵɵdefineNgModule, ɵɵdefinePipe, ɵɵdirectiveInject, ɵɵdisableBindings, ɵɵelement, ɵɵelementContainer, ɵɵelementContainerEnd, ɵɵelementContainerStart, ɵɵelementEnd, ɵɵelementStart, ɵɵenableBindings, ɵɵgetCurrentView, ɵɵgetFactoryOf, ɵɵgetInheritedFactory, ɵɵhostProperty, ɵɵi18n, ɵɵi18nApply, ɵɵi18nAttributes, ɵɵi18nEnd, ɵɵi18nExp, ɵɵi18nPostprocess, ɵɵi18nStart, ɵɵinject, ɵɵinjectAttribute, ɵɵinjectPipeChangeDetectorRef, ɵɵinvalidFactory, ɵɵinvalidFactoryDep, ɵɵlistener, ɵɵloadQuery, ɵɵnamespaceHTML, ɵɵnamespaceMathML, ɵɵnamespaceSVG, ɵɵnextContext, ɵɵpipe, ɵɵpipeBind1, ɵɵpipeBind2, ɵɵpipeBind3, ɵɵpipeBind4, ɵɵpipeBindV, ɵɵprojection, ɵɵprojectionDef, ɵɵproperty, ɵɵpropertyInterpolate, ɵɵpropertyInterpolate1, ɵɵpropertyInterpolate2, ɵɵpropertyInterpolate3, ɵɵpropertyInterpolate4, ɵɵpropertyInterpolate5, ɵɵpropertyInterpolate6, ɵɵpropertyInterpolate7, ɵɵpropertyInterpolate8, ɵɵpropertyInterpolateV, ɵɵpureFunction0, ɵɵpureFunction1, ɵɵpureFunction2, ɵɵpureFunction3, ɵɵpureFunction4, ɵɵpureFunction5, ɵɵpureFunction6, ɵɵpureFunction7, ɵɵpureFunction8, ɵɵpureFunctionV, ɵɵqueryRefresh, ɵɵreference, ɵɵresolveBody, ɵɵresolveDocument, ɵɵresolveWindow, ɵɵrestoreView, ɵɵsanitizeHtml, ɵɵsanitizeResourceUrl, ɵɵsanitizeScript, ɵɵsanitizeStyle, ɵɵsanitizeUrl, ɵɵsanitizeUrlOrResourceUrl, ɵɵselect, ɵɵsetComponentScope, ɵɵsetNgModuleScope, ɵɵstaticContentQuery, ɵɵstaticViewQuery, ɵɵstyleMap, ɵɵstyleMapInterpolate1, ɵɵstyleMapInterpolate2, ɵɵstyleMapInterpolate3, ɵɵstyleMapInterpolate4, ɵɵstyleMapInterpolate5, ɵɵstyleMapInterpolate6, ɵɵstyleMapInterpolate7, ɵɵstyleMapInterpolate8, ɵɵstyleMapInterpolateV, ɵɵstyleProp, ɵɵstylePropInterpolate1, ɵɵstylePropInterpolate2, ɵɵstylePropInterpolate3, ɵɵstylePropInterpolate4, ɵɵstylePropInterpolate5, ɵɵstylePropInterpolate6, ɵɵstylePropInterpolate7, ɵɵstylePropInterpolate8, ɵɵstylePropInterpolateV, ɵɵsyntheticHostListener, ɵɵsyntheticHostProperty, ɵɵtemplate, ɵɵtemplateRefExtractor, ɵɵtext, ɵɵtextInterpolate, ɵɵtextInterpolate1, ɵɵtextInterpolate2, ɵɵtextInterpolate3, ɵɵtextInterpolate4, ɵɵtextInterpolate5, ɵɵtextInterpolate6, ɵɵtextInterpolate7, ɵɵtextInterpolate8, ɵɵtextInterpolateV, ɵɵviewQuery */
+/*! exports provided: ANALYZE_FOR_ENTRY_COMPONENTS, APP_BOOTSTRAP_LISTENER, APP_ID, APP_INITIALIZER, ApplicationInitStatus, ApplicationModule, ApplicationRef, Attribute, COMPILER_OPTIONS, CUSTOM_ELEMENTS_SCHEMA, ChangeDetectionStrategy, ChangeDetectorRef, Compiler, CompilerFactory, Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, ContentChild, ContentChildren, DEFAULT_CURRENCY_CODE, DebugElement, DebugEventListener, DebugNode, DefaultIterableDiffer, Directive, ElementRef, EmbeddedViewRef, ErrorHandler, EventEmitter, Host, HostBinding, HostListener, INJECTOR, Inject, InjectFlags, Injectable, InjectionToken, Injector, Input, IterableDiffers, KeyValueDiffers, LOCALE_ID, MissingTranslationStrategy, ModuleWithComponentFactories, NO_ERRORS_SCHEMA, NgModule, NgModuleFactory, NgModuleFactoryLoader, NgModuleRef, NgProbeToken, NgZone, Optional, Output, PACKAGE_ROOT_URL, PLATFORM_ID, PLATFORM_INITIALIZER, Pipe, PlatformRef, Query, QueryList, ReflectiveInjector, ReflectiveKey, Renderer2, RendererFactory2, RendererStyleFlags2, ResolvedReflectiveFactory, Sanitizer, SecurityContext, Self, SimpleChange, SkipSelf, SystemJsNgModuleLoader, SystemJsNgModuleLoaderConfig, TRANSLATIONS, TRANSLATIONS_FORMAT, TemplateRef, Testability, TestabilityRegistry, Type, VERSION, Version, ViewChild, ViewChildren, ViewContainerRef, ViewEncapsulation, ViewRef, WrappedValue, asNativeElements, assertPlatform, createPlatform, createPlatformFactory, defineInjectable, destroyPlatform, enableProdMode, forwardRef, getDebugNode, getModuleFactory, getPlatform, inject, isDevMode, platformCore, resolveForwardRef, setTestabilityGetter, ɵ0, ɵ1, ɵALLOW_MULTIPLE_PLATFORMS, ɵAPP_ID_RANDOM_PROVIDER, ɵChangeDetectorStatus, ɵCodegenComponentFactoryResolver, ɵCompiler_compileModuleAndAllComponentsAsync__POST_R3__, ɵCompiler_compileModuleAndAllComponentsSync__POST_R3__, ɵCompiler_compileModuleAsync__POST_R3__, ɵCompiler_compileModuleSync__POST_R3__, ɵComponentFactory, ɵConsole, ɵDEFAULT_LOCALE_ID, ɵEMPTY_ARRAY, ɵEMPTY_MAP, ɵINJECTOR_IMPL__POST_R3__, ɵINJECTOR_SCOPE, ɵLifecycleHooksFeature, ɵLocaleDataIndex, ɵNG_COMP_DEF, ɵNG_DIR_DEF, ɵNG_ELEMENT_ID, ɵNG_INJ_DEF, ɵNG_MOD_DEF, ɵNG_PIPE_DEF, ɵNG_PROV_DEF, ɵNOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR, ɵNO_CHANGE, ɵNgModuleFactory, ɵNoopNgZone, ɵReflectionCapabilities, ɵRender3ComponentFactory, ɵRender3ComponentRef, ɵRender3NgModuleRef, ɵSWITCH_CHANGE_DETECTOR_REF_FACTORY__POST_R3__, ɵSWITCH_COMPILE_COMPONENT__POST_R3__, ɵSWITCH_COMPILE_DIRECTIVE__POST_R3__, ɵSWITCH_COMPILE_INJECTABLE__POST_R3__, ɵSWITCH_COMPILE_NGMODULE__POST_R3__, ɵSWITCH_COMPILE_PIPE__POST_R3__, ɵSWITCH_ELEMENT_REF_FACTORY__POST_R3__, ɵSWITCH_IVY_ENABLED__POST_R3__, ɵSWITCH_RENDERER2_FACTORY__POST_R3__, ɵSWITCH_TEMPLATE_REF_FACTORY__POST_R3__, ɵSWITCH_VIEW_CONTAINER_REF_FACTORY__POST_R3__, ɵ_sanitizeHtml, ɵ_sanitizeUrl, ɵallowSanitizationBypassAndThrow, ɵand, ɵangular_packages_core_core_a, ɵangular_packages_core_core_b, ɵangular_packages_core_core_ba, ɵangular_packages_core_core_bb, ɵangular_packages_core_core_bc, ɵangular_packages_core_core_bd, ɵangular_packages_core_core_be, ɵangular_packages_core_core_bg, ɵangular_packages_core_core_bh, ɵangular_packages_core_core_bi, ɵangular_packages_core_core_bj, ɵangular_packages_core_core_bk, ɵangular_packages_core_core_bl, ɵangular_packages_core_core_bm, ɵangular_packages_core_core_bn, ɵangular_packages_core_core_bo, ɵangular_packages_core_core_bq, ɵangular_packages_core_core_br, ɵangular_packages_core_core_c, ɵangular_packages_core_core_d, ɵangular_packages_core_core_e, ɵangular_packages_core_core_f, ɵangular_packages_core_core_g, ɵangular_packages_core_core_h, ɵangular_packages_core_core_i, ɵangular_packages_core_core_j, ɵangular_packages_core_core_k, ɵangular_packages_core_core_l, ɵangular_packages_core_core_m, ɵangular_packages_core_core_n, ɵangular_packages_core_core_o, ɵangular_packages_core_core_p, ɵangular_packages_core_core_q, ɵangular_packages_core_core_r, ɵangular_packages_core_core_s, ɵangular_packages_core_core_t, ɵangular_packages_core_core_u, ɵangular_packages_core_core_v, ɵangular_packages_core_core_w, ɵangular_packages_core_core_x, ɵangular_packages_core_core_y, ɵangular_packages_core_core_z, ɵbypassSanitizationTrustHtml, ɵbypassSanitizationTrustResourceUrl, ɵbypassSanitizationTrustScript, ɵbypassSanitizationTrustStyle, ɵbypassSanitizationTrustUrl, ɵccf, ɵclearOverrides, ɵclearResolutionOfComponentResourcesQueue, ɵcmf, ɵcompileComponent, ɵcompileDirective, ɵcompileNgModule, ɵcompileNgModuleDefs, ɵcompileNgModuleFactory__POST_R3__, ɵcompilePipe, ɵcreateInjector, ɵcrt, ɵdefaultIterableDiffers, ɵdefaultKeyValueDiffers, ɵdetectChanges, ɵdevModeEqual, ɵdid, ɵeld, ɵfindLocaleData, ɵflushModuleScopingQueueAsMuchAsPossible, ɵgetComponentViewDefinitionFactory, ɵgetDebugNodeR2, ɵgetDebugNode__POST_R3__, ɵgetDirectives, ɵgetHostElement, ɵgetInjectableDef, ɵgetLContext, ɵgetLocaleCurrencyCode, ɵgetLocalePluralCase, ɵgetModuleFactory__POST_R3__, ɵgetSanitizationBypassType, ɵglobal, ɵinitServicesIfNeeded, ɵinlineInterpolate, ɵinterpolate, ɵisBoundToModule__POST_R3__, ɵisDefaultChangeDetectionStrategy, ɵisListLikeIterable, ɵisObservable, ɵisPromise, ɵivyEnabled, ɵmakeDecorator, ɵmarkDirty, ɵmod, ɵmpd, ɵncd, ɵnoSideEffects, ɵnov, ɵoverrideComponentView, ɵoverrideProvider, ɵpad, ɵpatchComponentDefWithScope, ɵpid, ɵpod, ɵppd, ɵprd, ɵpublishDefaultGlobalUtils, ɵpublishGlobalUtil, ɵqud, ɵregisterLocaleData, ɵregisterModuleFactory, ɵregisterNgModuleType, ɵrenderComponent, ɵresetCompiledComponents, ɵresetJitOptions, ɵresolveComponentResources, ɵsetClassMetadata, ɵsetCurrentInjector, ɵsetDocument, ɵsetLocaleId, ɵstore, ɵstringify, ɵted, ɵtransitiveScopesFor, ɵunregisterLocaleData, ɵunv, ɵunwrapSafeValue, ɵvid, ɵwhenRendered, ɵɵCopyDefinitionFeature, ɵɵInheritDefinitionFeature, ɵɵNgOnChangesFeature, ɵɵProvidersFeature, ɵɵadvance, ɵɵattribute, ɵɵattributeInterpolate1, ɵɵattributeInterpolate2, ɵɵattributeInterpolate3, ɵɵattributeInterpolate4, ɵɵattributeInterpolate5, ɵɵattributeInterpolate6, ɵɵattributeInterpolate7, ɵɵattributeInterpolate8, ɵɵattributeInterpolateV, ɵɵclassMap, ɵɵclassMapInterpolate1, ɵɵclassMapInterpolate2, ɵɵclassMapInterpolate3, ɵɵclassMapInterpolate4, ɵɵclassMapInterpolate5, ɵɵclassMapInterpolate6, ɵɵclassMapInterpolate7, ɵɵclassMapInterpolate8, ɵɵclassMapInterpolateV, ɵɵclassProp, ɵɵcontentQuery, ɵɵdefineComponent, ɵɵdefineDirective, ɵɵdefineInjectable, ɵɵdefineInjector, ɵɵdefineNgModule, ɵɵdefinePipe, ɵɵdirectiveInject, ɵɵdisableBindings, ɵɵelement, ɵɵelementContainer, ɵɵelementContainerEnd, ɵɵelementContainerStart, ɵɵelementEnd, ɵɵelementStart, ɵɵenableBindings, ɵɵgetCurrentView, ɵɵgetFactoryOf, ɵɵgetInheritedFactory, ɵɵhostProperty, ɵɵi18n, ɵɵi18nApply, ɵɵi18nAttributes, ɵɵi18nEnd, ɵɵi18nExp, ɵɵi18nPostprocess, ɵɵi18nStart, ɵɵinject, ɵɵinjectAttribute, ɵɵinjectPipeChangeDetectorRef, ɵɵinvalidFactory, ɵɵinvalidFactoryDep, ɵɵlistener, ɵɵloadQuery, ɵɵnamespaceHTML, ɵɵnamespaceMathML, ɵɵnamespaceSVG, ɵɵnextContext, ɵɵpipe, ɵɵpipeBind1, ɵɵpipeBind2, ɵɵpipeBind3, ɵɵpipeBind4, ɵɵpipeBindV, ɵɵprojection, ɵɵprojectionDef, ɵɵproperty, ɵɵpropertyInterpolate, ɵɵpropertyInterpolate1, ɵɵpropertyInterpolate2, ɵɵpropertyInterpolate3, ɵɵpropertyInterpolate4, ɵɵpropertyInterpolate5, ɵɵpropertyInterpolate6, ɵɵpropertyInterpolate7, ɵɵpropertyInterpolate8, ɵɵpropertyInterpolateV, ɵɵpureFunction0, ɵɵpureFunction1, ɵɵpureFunction2, ɵɵpureFunction3, ɵɵpureFunction4, ɵɵpureFunction5, ɵɵpureFunction6, ɵɵpureFunction7, ɵɵpureFunction8, ɵɵpureFunctionV, ɵɵqueryRefresh, ɵɵreference, ɵɵresolveBody, ɵɵresolveDocument, ɵɵresolveWindow, ɵɵrestoreView, ɵɵsanitizeHtml, ɵɵsanitizeResourceUrl, ɵɵsanitizeScript, ɵɵsanitizeStyle, ɵɵsanitizeUrl, ɵɵsanitizeUrlOrResourceUrl, ɵɵselect, ɵɵsetComponentScope, ɵɵsetNgModuleScope, ɵɵstaticContentQuery, ɵɵstaticViewQuery, ɵɵstyleMap, ɵɵstyleMapInterpolate1, ɵɵstyleMapInterpolate2, ɵɵstyleMapInterpolate3, ɵɵstyleMapInterpolate4, ɵɵstyleMapInterpolate5, ɵɵstyleMapInterpolate6, ɵɵstyleMapInterpolate7, ɵɵstyleMapInterpolate8, ɵɵstyleMapInterpolateV, ɵɵstyleProp, ɵɵstylePropInterpolate1, ɵɵstylePropInterpolate2, ɵɵstylePropInterpolate3, ɵɵstylePropInterpolate4, ɵɵstylePropInterpolate5, ɵɵstylePropInterpolate6, ɵɵstylePropInterpolate7, ɵɵstylePropInterpolate8, ɵɵstylePropInterpolateV, ɵɵsyntheticHostListener, ɵɵsyntheticHostProperty, ɵɵtemplate, ɵɵtemplateRefExtractor, ɵɵtext, ɵɵtextInterpolate, ɵɵtextInterpolate1, ɵɵtextInterpolate2, ɵɵtextInterpolate3, ɵɵtextInterpolate4, ɵɵtextInterpolate5, ɵɵtextInterpolate6, ɵɵtextInterpolate7, ɵɵtextInterpolate8, ɵɵtextInterpolateV, ɵɵviewQuery */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11710,8 +11711,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵangular_packages_core_core_bm", function() { return makeParamDecorator; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵangular_packages_core_core_bn", function() { return makePropDecorator; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵangular_packages_core_core_bo", function() { return getClosureSafeProperty; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵangular_packages_core_core_bq", function() { return noSideEffects; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵangular_packages_core_core_br", function() { return getRootContext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵangular_packages_core_core_bq", function() { return getRootContext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵangular_packages_core_core_br", function() { return i18nPostprocess; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵangular_packages_core_core_c", function() { return NullInjector; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵangular_packages_core_core_d", function() { return ReflectiveInjector_; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵangular_packages_core_core_e", function() { return ReflectiveDependency; });
@@ -11787,6 +11788,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵmod", function() { return moduleDef; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵmpd", function() { return moduleProvideDef; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵncd", function() { return ngContentDef; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵnoSideEffects", function() { return noSideEffects; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵnov", function() { return nodeValue; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵoverrideComponentView", function() { return overrideComponentView; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵoverrideProvider", function() { return overrideProvider; });
@@ -11968,7 +11970,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
 /**
- * @license Angular v10.0.8
+ * @license Angular v10.0.14
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -13054,7 +13056,7 @@ function assertDomNode(node) {
         (typeof node === 'object' && node != null &&
             node.constructor.name === 'WebWorkerRenderNode'), true, `The provided value must be an instance of a DOM Node but got ${stringify(node)}`);
 }
-function assertDataInRange(arr, index) {
+function assertIndexInRange(arr, index) {
     const maxLen = arr ? arr.length : 0;
     assertLessThan(index, maxLen, `Index expected to be less than ${maxLen} but got ${index}`);
 }
@@ -14300,7 +14302,7 @@ function getNativeByIndex(index, lView) {
  */
 function getNativeByTNode(tNode, lView) {
     ngDevMode && assertTNodeForLView(tNode, lView);
-    ngDevMode && assertDataInRange(lView, tNode.index);
+    ngDevMode && assertIndexInRange(lView, tNode.index);
     const node = unwrapRNode(lView[tNode.index]);
     ngDevMode && !isProceduralRenderer(lView[RENDERER]) && assertDomNode(node);
     return node;
@@ -14330,12 +14332,12 @@ function getTNode(tView, index) {
 }
 /** Retrieves a value from any `LView` or `TData`. */
 function load(view, index) {
-    ngDevMode && assertDataInRange(view, index + HEADER_OFFSET);
+    ngDevMode && assertIndexInRange(view, index + HEADER_OFFSET);
     return view[index + HEADER_OFFSET];
 }
 function getComponentLViewByIndex(nodeIndex, hostView) {
     // Could be an LView or an LContainer. If LContainer, unwrap to find LView.
-    ngDevMode && assertDataInRange(hostView, nodeIndex);
+    ngDevMode && assertIndexInRange(hostView, nodeIndex);
     const slotValue = hostView[nodeIndex];
     const lView = isLView(slotValue) ? slotValue : slotValue[HOST];
     return lView;
@@ -16452,8 +16454,9 @@ class DOMParserHelper {
     getInertBodyElement(html) {
         // We add these extra elements to ensure that the rest of the content is parsed as expected
         // e.g. leading whitespace is maintained and tags like `<meta>` do not get hoisted to the
-        // `<head>` tag.
-        html = '<body><remove></remove>' + html + '</body>';
+        // `<head>` tag. Note that the `<body>` tag is closed implicitly to prevent unclosed tags
+        // in `html` from consuming the otherwise explicit `</body>` tag.
+        html = '<body><remove></remove>' + html;
         try {
             const body = new window.DOMParser().parseFromString(html, 'text/html').body;
             body.removeChild(body.firstChild);
@@ -17486,6 +17489,18 @@ function getExpressionChangedErrorDetails(lView, bindingIndex, oldValue, newValu
     return { propName: undefined, oldValue, newValue };
 }
 
+/**
+ * Converts `TNodeType` into human readable text.
+ * Make sure this matches with `TNodeType`
+ */
+const TNodeTypeAsString = [
+    'Container',
+    'Projection',
+    'View',
+    'Element',
+    'ElementContainer',
+    'IcuContainer' // 5
+];
 // Note: This hack is necessary so we don't erroneously get a circular dependency
 // failure based on types.
 const unusedValueExportToPlacateAjd$4 = 1;
@@ -18119,7 +18134,7 @@ function ɵɵselect(index) {
 }
 function selectIndexInternal(tView, lView, index, checkNoChangesMode) {
     ngDevMode && assertGreaterThan(index, -1, 'Invalid index');
-    ngDevMode && assertDataInRange(lView, index + HEADER_OFFSET);
+    ngDevMode && assertIndexInRange(lView, index + HEADER_OFFSET);
     // Flush the initial hooks for elements in the view that have been added up to this point.
     // PERF WARNING: do NOT extract this to a separate function without running benchmarks
     if (!checkNoChangesMode) {
@@ -18143,33 +18158,6 @@ function selectIndexInternal(tView, lView, index, checkNoChangesMode) {
     // will be altered by the time we leave the `ɵɵadvance` instruction.
     setSelectedIndex(index);
 }
-
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * Marks that the next string is for element.
- *
- * See `I18nMutateOpCodes` documentation.
- */
-const ELEMENT_MARKER = {
-    marker: 'element'
-};
-/**
- * Marks that the next string is for comment.
- *
- * See `I18nMutateOpCodes` documentation.
- */
-const COMMENT_MARKER = {
-    marker: 'comment'
-};
-// Note: This hack is necessary so we don't erroneously get a circular dependency
-// failure based on types.
-const unusedValueExportToPlacateAjd$6 = 1;
 
 /**
  * @license
@@ -18234,8 +18222,37 @@ function getTStylingRangeTail(tStylingRange) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+/**
+ * Patch a `debug` property on top of the existing object.
+ *
+ * NOTE: always call this method with `ngDevMode && attachDebugObject(...)`
+ *
+ * @param obj Object to patch
+ * @param debug Value to patch
+ */
 function attachDebugObject(obj, debug) {
-    Object.defineProperty(obj, 'debug', { value: debug, enumerable: false });
+    if (ngDevMode) {
+        Object.defineProperty(obj, 'debug', { value: debug, enumerable: false });
+    }
+    else {
+        throw new Error('This method should be guarded with `ngDevMode` so that it can be tree shaken in production!');
+    }
+}
+/**
+ * Patch a `debug` property getter on top of the existing object.
+ *
+ * NOTE: always call this method with `ngDevMode && attachDebugObject(...)`
+ *
+ * @param obj Object to patch
+ * @param debugGetter Getter returning a value to patch
+ */
+function attachDebugGetter(obj, debugGetter) {
+    if (ngDevMode) {
+        Object.defineProperty(obj, 'debug', { get: debugGetter, enumerable: false });
+    }
+    else {
+        throw new Error('This method should be guarded with `ngDevMode` so that it can be tree shaken in production!');
+    }
 }
 
 /**
@@ -18356,8 +18373,9 @@ const TViewConstructor = class TView {
     firstChild, //
     schemas, //
     consts, //
-    incompleteFirstPass //
-    ) {
+    incompleteFirstPass, //
+    _decls, //
+    _vars) {
         this.type = type;
         this.id = id;
         this.blueprint = blueprint;
@@ -18389,6 +18407,8 @@ const TViewConstructor = class TView {
         this.schemas = schemas;
         this.consts = consts;
         this.incompleteFirstPass = incompleteFirstPass;
+        this._decls = _decls;
+        this._vars = _vars;
     }
     get template_() {
         const buf = [];
@@ -18608,19 +18628,23 @@ function toDebug(obj) {
 function toHtml(value, includeChildren = false) {
     const node = unwrapRNode(value);
     if (node) {
-        const isTextNode = node.nodeType === Node.TEXT_NODE;
-        const outerHTML = (isTextNode ? node.textContent : node.outerHTML) || '';
-        if (includeChildren || isTextNode) {
-            return outerHTML;
-        }
-        else {
-            const innerHTML = '>' + node.innerHTML + '<';
-            return (outerHTML.split(innerHTML)[0]) + '>';
+        switch (node.nodeType) {
+            case Node.TEXT_NODE:
+                return node.textContent;
+            case Node.COMMENT_NODE:
+                return `<!--${node.textContent}-->`;
+            case Node.ELEMENT_NODE:
+                const outerHTML = node.outerHTML;
+                if (includeChildren) {
+                    return outerHTML;
+                }
+                else {
+                    const innerHTML = '>' + node.innerHTML + '<';
+                    return (outerHTML.split(innerHTML)[0]) + '>';
+                }
         }
     }
-    else {
-        return null;
-    }
+    return null;
 }
 class LViewDebug {
     constructor(_raw_lView) {
@@ -18647,7 +18671,7 @@ class LViewDebug {
     get parent() {
         return toDebug(this._raw_lView[PARENT]);
     }
-    get host() {
+    get hostHTML() {
         return toHtml(this._raw_lView[HOST], true);
     }
     get html() {
@@ -18658,8 +18682,7 @@ class LViewDebug {
     }
     /**
      * The tree of nodes associated with the current `LView`. The nodes have been normalized into
-     * a
-     * tree structure with relevant details pulled out for readability.
+     * a tree structure with relevant details pulled out for readability.
      */
     get nodes() {
         const lView = this._raw_lView;
@@ -18702,6 +18725,25 @@ class LViewDebug {
     get tHost() {
         return this._raw_lView[T_HOST];
     }
+    get decls() {
+        const tView = this.tView;
+        const start = HEADER_OFFSET;
+        return toLViewRange(this.tView, this._raw_lView, start, start + tView._decls);
+    }
+    get vars() {
+        const tView = this.tView;
+        const start = HEADER_OFFSET + tView._decls;
+        return toLViewRange(this.tView, this._raw_lView, start, start + tView._vars);
+    }
+    get i18n() {
+        const tView = this.tView;
+        const start = HEADER_OFFSET + tView._decls + tView._vars;
+        return toLViewRange(this.tView, this._raw_lView, start, this.tView.expandoStartIndex);
+    }
+    get expando() {
+        const tView = this.tView;
+        return toLViewRange(this.tView, this._raw_lView, this.tView.expandoStartIndex, this._raw_lView.length);
+    }
     /**
      * Normalized view of child views (and containers) attached at this location.
      */
@@ -18714,6 +18756,13 @@ class LViewDebug {
         }
         return childViews;
     }
+}
+function toLViewRange(tView, lView, start, end) {
+    let content = [];
+    for (let index = start; index < end; index++) {
+        content.push({ index: index, t: tView.data[index], l: lView[index] });
+    }
+    return { start: start, end: end, length: end - start, content: content };
 }
 /**
  * Turns a flat list of nodes into a tree by walking the associated `TNode` tree.
@@ -18732,18 +18781,17 @@ function toDebugNodes(tNode, lView) {
         return debugNodes;
     }
     else {
-        return null;
+        return [];
     }
 }
 function buildDebugNode(tNode, lView, nodeIndex) {
     const rawValue = lView[nodeIndex];
     const native = unwrapRNode(rawValue);
-    const componentLViewDebug = toDebug(readLViewValue(rawValue));
     return {
         html: toHtml(native),
+        type: TNodeTypeAsString[tNode.type],
         native: native,
-        nodes: toDebugNodes(tNode.child, lView),
-        component: componentLViewDebug,
+        children: toDebugNodes(tNode.child, lView),
     };
 }
 class LContainerDebug {
@@ -18787,196 +18835,6 @@ function readLViewValue(value) {
         value = value[HOST];
     }
     return null;
-}
-class I18NDebugItem {
-    constructor(__raw_opCode, _lView, nodeIndex, type) {
-        this.__raw_opCode = __raw_opCode;
-        this._lView = _lView;
-        this.nodeIndex = nodeIndex;
-        this.type = type;
-    }
-    get tNode() {
-        return getTNode(this._lView[TVIEW], this.nodeIndex);
-    }
-}
-/**
- * Turns a list of "Create" & "Update" OpCodes into a human-readable list of operations for
- * debugging purposes.
- * @param mutateOpCodes mutation opCodes to read
- * @param updateOpCodes update opCodes to read
- * @param icus list of ICU expressions
- * @param lView The view the opCodes are acting on
- */
-function attachI18nOpCodesDebug(mutateOpCodes, updateOpCodes, icus, lView) {
-    attachDebugObject(mutateOpCodes, new I18nMutateOpCodesDebug(mutateOpCodes, lView));
-    attachDebugObject(updateOpCodes, new I18nUpdateOpCodesDebug(updateOpCodes, icus, lView));
-    if (icus) {
-        icus.forEach(icu => {
-            icu.create.forEach(icuCase => {
-                attachDebugObject(icuCase, new I18nMutateOpCodesDebug(icuCase, lView));
-            });
-            icu.update.forEach(icuCase => {
-                attachDebugObject(icuCase, new I18nUpdateOpCodesDebug(icuCase, icus, lView));
-            });
-        });
-    }
-}
-class I18nMutateOpCodesDebug {
-    constructor(__raw_opCodes, __lView) {
-        this.__raw_opCodes = __raw_opCodes;
-        this.__lView = __lView;
-    }
-    /**
-     * A list of operation information about how the OpCodes will act on the view.
-     */
-    get operations() {
-        const { __lView, __raw_opCodes } = this;
-        const results = [];
-        for (let i = 0; i < __raw_opCodes.length; i++) {
-            const opCode = __raw_opCodes[i];
-            let result;
-            if (typeof opCode === 'string') {
-                result = {
-                    __raw_opCode: opCode,
-                    type: 'Create Text Node',
-                    nodeIndex: __raw_opCodes[++i],
-                    text: opCode,
-                };
-            }
-            if (typeof opCode === 'number') {
-                switch (opCode & 7 /* MASK_OPCODE */) {
-                    case 1 /* AppendChild */:
-                        const destinationNodeIndex = opCode >>> 17 /* SHIFT_PARENT */;
-                        result = new I18NDebugItem(opCode, __lView, destinationNodeIndex, 'AppendChild');
-                        break;
-                    case 0 /* Select */:
-                        const nodeIndex = opCode >>> 3 /* SHIFT_REF */;
-                        result = new I18NDebugItem(opCode, __lView, nodeIndex, 'Select');
-                        break;
-                    case 5 /* ElementEnd */:
-                        let elementIndex = opCode >>> 3 /* SHIFT_REF */;
-                        result = new I18NDebugItem(opCode, __lView, elementIndex, 'ElementEnd');
-                        break;
-                    case 4 /* Attr */:
-                        elementIndex = opCode >>> 3 /* SHIFT_REF */;
-                        result = new I18NDebugItem(opCode, __lView, elementIndex, 'Attr');
-                        result['attrName'] = __raw_opCodes[++i];
-                        result['attrValue'] = __raw_opCodes[++i];
-                        break;
-                }
-            }
-            if (!result) {
-                switch (opCode) {
-                    case COMMENT_MARKER:
-                        result = {
-                            __raw_opCode: opCode,
-                            type: 'COMMENT_MARKER',
-                            commentValue: __raw_opCodes[++i],
-                            nodeIndex: __raw_opCodes[++i],
-                        };
-                        break;
-                    case ELEMENT_MARKER:
-                        result = {
-                            __raw_opCode: opCode,
-                            type: 'ELEMENT_MARKER',
-                        };
-                        break;
-                }
-            }
-            if (!result) {
-                result = {
-                    __raw_opCode: opCode,
-                    type: 'Unknown Op Code',
-                    code: opCode,
-                };
-            }
-            results.push(result);
-        }
-        return results;
-    }
-}
-class I18nUpdateOpCodesDebug {
-    constructor(__raw_opCodes, icus, __lView) {
-        this.__raw_opCodes = __raw_opCodes;
-        this.icus = icus;
-        this.__lView = __lView;
-    }
-    /**
-     * A list of operation information about how the OpCodes will act on the view.
-     */
-    get operations() {
-        const { __lView, __raw_opCodes, icus } = this;
-        const results = [];
-        for (let i = 0; i < __raw_opCodes.length; i++) {
-            // bit code to check if we should apply the next update
-            const checkBit = __raw_opCodes[i];
-            // Number of opCodes to skip until next set of update codes
-            const skipCodes = __raw_opCodes[++i];
-            let value = '';
-            for (let j = i + 1; j <= (i + skipCodes); j++) {
-                const opCode = __raw_opCodes[j];
-                if (typeof opCode === 'string') {
-                    value += opCode;
-                }
-                else if (typeof opCode == 'number') {
-                    if (opCode < 0) {
-                        // It's a binding index whose value is negative
-                        // We cannot know the value of the binding so we only show the index
-                        value += `�${-opCode - 1}�`;
-                    }
-                    else {
-                        const nodeIndex = opCode >>> 2 /* SHIFT_REF */;
-                        let tIcuIndex;
-                        let tIcu;
-                        switch (opCode & 3 /* MASK_OPCODE */) {
-                            case 1 /* Attr */:
-                                const attrName = __raw_opCodes[++j];
-                                const sanitizeFn = __raw_opCodes[++j];
-                                results.push({
-                                    __raw_opCode: opCode,
-                                    checkBit,
-                                    type: 'Attr',
-                                    attrValue: value,
-                                    attrName,
-                                    sanitizeFn,
-                                });
-                                break;
-                            case 0 /* Text */:
-                                results.push({
-                                    __raw_opCode: opCode,
-                                    checkBit,
-                                    type: 'Text',
-                                    nodeIndex,
-                                    text: value,
-                                });
-                                break;
-                            case 2 /* IcuSwitch */:
-                                tIcuIndex = __raw_opCodes[++j];
-                                tIcu = icus[tIcuIndex];
-                                let result = new I18NDebugItem(opCode, __lView, nodeIndex, 'IcuSwitch');
-                                result['tIcuIndex'] = tIcuIndex;
-                                result['checkBit'] = checkBit;
-                                result['mainBinding'] = value;
-                                result['tIcu'] = tIcu;
-                                results.push(result);
-                                break;
-                            case 3 /* IcuUpdate */:
-                                tIcuIndex = __raw_opCodes[++j];
-                                tIcu = icus[tIcuIndex];
-                                result = new I18NDebugItem(opCode, __lView, nodeIndex, 'IcuUpdate');
-                                result['tIcuIndex'] = tIcuIndex;
-                                result['checkBit'] = checkBit;
-                                result['tIcu'] = tIcu;
-                                results.push(result);
-                                break;
-                        }
-                    }
-                }
-            }
-            i += skipCodes;
-        }
-        return results;
-    }
 }
 
 const ɵ0$4 = () => Promise.resolve(null);
@@ -19498,7 +19356,7 @@ function createTView(type, viewIndex, templateFn, decls, vars, directives, pipes
     // that has a host binding, we will update the blueprint with that def's hostVars count.
     const initialViewLength = bindingStartIndex + vars;
     const blueprint = createViewBlueprint(bindingStartIndex, initialViewLength);
-    return blueprint[TVIEW] = ngDevMode ?
+    const tView = blueprint[TVIEW] = ngDevMode ?
         new TViewConstructor(type, viewIndex, // id: number,
         blueprint, // blueprint: LView,
         templateFn, // template: ComponentTemplate<{}>|null,
@@ -19530,8 +19388,9 @@ function createTView(type, viewIndex, templateFn, decls, vars, directives, pipes
         null, // firstChild: TNode|null,
         schemas, // schemas: SchemaMetadata[]|null,
         consts, // consts: TConstants|null
-        false // incompleteFirstPass: boolean
-        ) :
+        false, // incompleteFirstPass: boolean
+        decls, // ngDevMode only: decls
+        vars) :
         {
             type: type,
             id: viewIndex,
@@ -19565,6 +19424,13 @@ function createTView(type, viewIndex, templateFn, decls, vars, directives, pipes
             consts: consts,
             incompleteFirstPass: false
         };
+    if (ngDevMode) {
+        // For performance reasons it is important that the tView retains the same shape during runtime.
+        // (To make sure that all of the code is monomorphic.) For this reason we seal the object to
+        // prevent class transitions.
+        Object.seal(tView);
+    }
+    return tView;
 }
 function createViewBlueprint(bindingStartIndex, initialViewLength) {
     const blueprint = ngDevMode ? new LViewBlueprint() : [];
@@ -19638,37 +19504,38 @@ function storeCleanupWithContext(tView, lView, context, cleanupFn) {
 function createTNode(tView, tParent, type, adjustedIndex, tagName, attrs) {
     ngDevMode && ngDevMode.tNode++;
     let injectorIndex = tParent ? tParent.injectorIndex : -1;
-    return ngDevMode ? new TNodeDebug(tView, // tView_: TView
-    type, // type: TNodeType
-    adjustedIndex, // index: number
-    injectorIndex, // injectorIndex: number
-    -1, // directiveStart: number
-    -1, // directiveEnd: number
-    -1, // directiveStylingLast: number
-    null, // propertyBindings: number[]|null
-    0, // flags: TNodeFlags
-    0, // providerIndexes: TNodeProviderIndexes
-    tagName, // tagName: string|null
-    attrs, // attrs: (string|AttributeMarker|(string|SelectorFlags)[])[]|null
-    null, // mergedAttrs
-    null, // localNames: (string|number)[]|null
-    undefined, // initialInputs: (string[]|null)[]|null|undefined
-    null, // inputs: PropertyAliases|null
-    null, // outputs: PropertyAliases|null
-    null, // tViews: ITView|ITView[]|null
-    null, // next: ITNode|null
-    null, // projectionNext: ITNode|null
-    null, // child: ITNode|null
-    tParent, // parent: TElementNode|TContainerNode|null
-    null, // projection: number|(ITNode|RNode[])[]|null
-    null, // styles: string|null
-    null, // stylesWithoutHost: string|null
-    undefined, // residualStyles: string|null
-    null, // classes: string|null
-    null, // classesWithoutHost: string|null
-    undefined, // residualClasses: string|null
-    0, // classBindings: TStylingRange;
-    0) :
+    const tNode = ngDevMode ?
+        new TNodeDebug(tView, // tView_: TView
+        type, // type: TNodeType
+        adjustedIndex, // index: number
+        injectorIndex, // injectorIndex: number
+        -1, // directiveStart: number
+        -1, // directiveEnd: number
+        -1, // directiveStylingLast: number
+        null, // propertyBindings: number[]|null
+        0, // flags: TNodeFlags
+        0, // providerIndexes: TNodeProviderIndexes
+        tagName, // tagName: string|null
+        attrs, // attrs: (string|AttributeMarker|(string|SelectorFlags)[])[]|null
+        null, // mergedAttrs
+        null, // localNames: (string|number)[]|null
+        undefined, // initialInputs: (string[]|null)[]|null|undefined
+        null, // inputs: PropertyAliases|null
+        null, // outputs: PropertyAliases|null
+        null, // tViews: ITView|ITView[]|null
+        null, // next: ITNode|null
+        null, // projectionNext: ITNode|null
+        null, // child: ITNode|null
+        tParent, // parent: TElementNode|TContainerNode|null
+        null, // projection: number|(ITNode|RNode[])[]|null
+        null, // styles: string|null
+        null, // stylesWithoutHost: string|null
+        undefined, // residualStyles: string|null
+        null, // classes: string|null
+        null, // classesWithoutHost: string|null
+        undefined, // residualClasses: string|null
+        0, // classBindings: TStylingRange;
+        0) :
         {
             type: type,
             index: adjustedIndex,
@@ -19701,6 +19568,13 @@ function createTNode(tView, tParent, type, adjustedIndex, tagName, attrs) {
             classBindings: 0,
             styleBindings: 0,
         };
+    if (ngDevMode) {
+        // For performance reasons it is important that the tNode retains the same shape during runtime.
+        // (To make sure that all of the code is monomorphic.) For this reason we seal the object to
+        // prevent class transitions.
+        Object.seal(tNode);
+    }
+    return tNode;
 }
 function generatePropertyAliases(inputAliasMap, directiveDefIdx, propStore) {
     for (let publicName in inputAliasMap) {
@@ -20736,7 +20610,7 @@ function setInputsForProperty(tView, lView, inputs, publicName, value) {
         const index = inputs[i++];
         const privateName = inputs[i++];
         const instance = lView[index];
-        ngDevMode && assertDataInRange(lView, index);
+        ngDevMode && assertIndexInRange(lView, index);
         const def = tView.data[index];
         if (def.setInput !== null) {
             def.setInput(instance, value, publicName, privateName);
@@ -20751,7 +20625,7 @@ function setInputsForProperty(tView, lView, inputs, publicName, value) {
  */
 function textBindingInternal(lView, index, value) {
     ngDevMode && assertNotSame(value, NO_CHANGE, 'value should not be NO_CHANGE');
-    ngDevMode && assertDataInRange(lView, index + HEADER_OFFSET);
+    ngDevMode && assertIndexInRange(lView, index + HEADER_OFFSET);
     const element = getNativeByIndex(index, lView);
     ngDevMode && assertDefined(element, 'native element should exist');
     ngDevMode && ngDevMode.rendererSetText++;
@@ -21031,16 +20905,6 @@ function detachView(lContainer, removeIndex) {
         viewToDetach[FLAGS] &= ~128 /* Attached */;
     }
     return viewToDetach;
-}
-/**
- * Removes a view from a container, i.e. detaches it and then destroys the underlying LView.
- *
- * @param lContainer The container from which to remove a view
- * @param removeIndex The index of the view to remove
- */
-function removeView(lContainer, removeIndex) {
-    const detachedView = detachView(lContainer, removeIndex);
-    detachedView && destroyLView(detachedView[TVIEW], detachedView);
 }
 /**
  * A standalone function which destroys an LView,
@@ -22264,8 +22128,17 @@ function createContainerRef(ViewContainerRefToken, ElementRefToken, hostTNode, h
             remove(index) {
                 this.allocateContainerIfNeeded();
                 const adjustedIdx = this._adjustIndex(index, -1);
-                removeView(this._lContainer, adjustedIdx);
-                removeFromArray(this._lContainer[VIEW_REFS], adjustedIdx);
+                const detachedView = detachView(this._lContainer, adjustedIdx);
+                if (detachedView) {
+                    // Before destroying the view, remove it from the container's array of `ViewRef`s.
+                    // This ensures the view container length is updated before calling
+                    // `destroyLView`, which could recursively call view container methods that
+                    // rely on an accurate container length.
+                    // (e.g. a method on this view container being called by a child directive's OnDestroy
+                    // lifecycle hook)
+                    removeFromArray(this._lContainer[VIEW_REFS], adjustedIdx);
+                    destroyLView(detachedView[TVIEW], detachedView);
+                }
             }
             detach(index) {
                 this.allocateContainerIfNeeded();
@@ -22477,13 +22350,42 @@ function isType(v) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- * Attention: These regex has to hold even if the code is minified!
+/*
+ * #########################
+ * Attention: These Regular expressions have to hold even if the code is minified!
+ * ##########################
  */
-const DELEGATE_CTOR = /^function\s+\S+\(\)\s*{[\s\S]+\.apply\(this,\s*arguments\)/;
-const INHERITED_CLASS = /^class\s+[A-Za-z\d$_]*\s*extends\s+[^{]+{/;
-const INHERITED_CLASS_WITH_CTOR = /^class\s+[A-Za-z\d$_]*\s*extends\s+[^{]+{[\s\S]*constructor\s*\(/;
-const INHERITED_CLASS_WITH_DELEGATE_CTOR = /^class\s+[A-Za-z\d$_]*\s*extends\s+[^{]+{[\s\S]*constructor\s*\(\)\s*{\s*super\(\.\.\.arguments\)/;
+/**
+ * Regular expression that detects pass-through constructors for ES5 output. This Regex
+ * intends to capture the common delegation pattern emitted by TypeScript and Babel. Also
+ * it intends to capture the pattern where existing constructors have been downleveled from
+ * ES2015 to ES5 using TypeScript w/ downlevel iteration. e.g.
+ *
+ * ```
+ *   function MyClass() {
+ *     var _this = _super.apply(this, arguments) || this;
+ * ```
+ *
+ * ```
+ *   function MyClass() {
+ *     var _this = _super.apply(this, __spread(arguments)) || this;
+ * ```
+ *
+ * More details can be found in: https://github.com/angular/angular/issues/38453.
+ */
+const ES5_DELEGATE_CTOR = /^function\s+\S+\(\)\s*{[\s\S]+\.apply\(this,\s*(arguments|[^()]+\(arguments\))\)/;
+/** Regular expression that detects ES2015 classes which extend from other classes. */
+const ES2015_INHERITED_CLASS = /^class\s+[A-Za-z\d$_]*\s*extends\s+[^{]+{/;
+/**
+ * Regular expression that detects ES2015 classes which extend from other classes and
+ * have an explicit constructor defined.
+ */
+const ES2015_INHERITED_CLASS_WITH_CTOR = /^class\s+[A-Za-z\d$_]*\s*extends\s+[^{]+{[\s\S]*constructor\s*\(/;
+/**
+ * Regular expression that detects ES2015 classes which extend from other classes
+ * and inherit a constructor.
+ */
+const ES2015_INHERITED_CLASS_WITH_DELEGATE_CTOR = /^class\s+[A-Za-z\d$_]*\s*extends\s+[^{]+{[\s\S]*constructor\s*\(\)\s*{\s*super\(\.\.\.arguments\)/;
 /**
  * Determine whether a stringified type is a class which delegates its constructor
  * to its parent.
@@ -22493,8 +22395,9 @@ const INHERITED_CLASS_WITH_DELEGATE_CTOR = /^class\s+[A-Za-z\d$_]*\s*extends\s+[
  * an initialized instance property.
  */
 function isDelegateCtor(typeStr) {
-    return DELEGATE_CTOR.test(typeStr) || INHERITED_CLASS_WITH_DELEGATE_CTOR.test(typeStr) ||
-        (INHERITED_CLASS.test(typeStr) && !INHERITED_CLASS_WITH_CTOR.test(typeStr));
+    return ES5_DELEGATE_CTOR.test(typeStr) ||
+        ES2015_INHERITED_CLASS_WITH_DELEGATE_CTOR.test(typeStr) ||
+        (ES2015_INHERITED_CLASS.test(typeStr) && !ES2015_INHERITED_CLASS_WITH_CTOR.test(typeStr));
 }
 class ReflectionCapabilities {
     constructor(reflect) {
@@ -25045,7 +24948,7 @@ function updateBinding(lView, bindingIndex, value) {
 }
 /** Gets the current binding value. */
 function getBinding(lView, bindingIndex) {
-    ngDevMode && assertDataInRange(lView, bindingIndex);
+    ngDevMode && assertIndexInRange(lView, bindingIndex);
     ngDevMode &&
         assertNotSame(lView[bindingIndex], NO_CHANGE, 'Stored value should never be NO_CHANGE.');
     return lView[bindingIndex];
@@ -25939,7 +25842,7 @@ function ɵɵelementStart(index, name, attrsIndex, localRefsIndex) {
     ngDevMode &&
         assertEqual(getBindingIndex(), tView.bindingStartIndex, 'elements should be created before any bindings');
     ngDevMode && ngDevMode.rendererCreateElement++;
-    ngDevMode && assertDataInRange(lView, adjustedIndex);
+    ngDevMode && assertIndexInRange(lView, adjustedIndex);
     const renderer = lView[RENDERER];
     const native = lView[adjustedIndex] = elementCreate(name, renderer, getNamespace());
     const tNode = tView.firstCreatePass ?
@@ -26099,7 +26002,7 @@ function ɵɵelementContainerStart(index, attrsIndex, localRefsIndex) {
     const lView = getLView();
     const tView = getTView();
     const adjustedIndex = index + HEADER_OFFSET;
-    ngDevMode && assertDataInRange(lView, adjustedIndex);
+    ngDevMode && assertIndexInRange(lView, adjustedIndex);
     ngDevMode &&
         assertEqual(getBindingIndex(), tView.bindingStartIndex, 'element containers should be created before any bindings');
     const tNode = tView.firstCreatePass ?
@@ -26363,7 +26266,7 @@ function listenerInternal(tView, lView, renderer, tNode, eventName, listenerFn, 
         if (propsLength) {
             for (let i = 0; i < propsLength; i += 2) {
                 const index = props[i];
-                ngDevMode && assertDataInRange(lView, index);
+                ngDevMode && assertIndexInRange(lView, index);
                 const minifiedName = props[i + 1];
                 const directiveInstance = lView[index];
                 const output = directiveInstance[minifiedName];
@@ -27421,7 +27324,7 @@ function markDuplicates(tData, tStylingKey, index, isPrevDir, isClassBinding) {
     // - we are a map in which case we have to continue searching even after we find what we were
     //   looking for since we are a wild card and everything needs to be flipped to duplicate.
     while (cursor !== 0 && (foundDuplicate === false || isMap)) {
-        ngDevMode && assertDataInRange(tData, cursor);
+        ngDevMode && assertIndexInRange(tData, cursor);
         const tStylingValueAtCursor = tData[cursor];
         const tStyleRangeAtCursor = tData[cursor + 1];
         if (isStylingMatch(tStylingValueAtCursor, tStylingKey)) {
@@ -27644,7 +27547,8 @@ function consumeStyleKey(text, startIndex, endIndex) {
     let ch;
     while (startIndex < endIndex &&
         ((ch = text.charCodeAt(startIndex)) === 45 /* DASH */ || ch === 95 /* UNDERSCORE */ ||
-            ((ch & -33 /* UPPER_CASE */) >= 65 /* A */ && (ch & -33 /* UPPER_CASE */) <= 90 /* Z */))) {
+            ((ch & -33 /* UPPER_CASE */) >= 65 /* A */ && (ch & -33 /* UPPER_CASE */) <= 90 /* Z */) ||
+            (ch >= 48 /* ZERO */ && ch <= 57 /* NINE */))) {
         startIndex++;
     }
     return startIndex;
@@ -28537,7 +28441,7 @@ function ɵɵtext(index, value = '') {
     const adjustedIndex = index + HEADER_OFFSET;
     ngDevMode &&
         assertEqual(getBindingIndex(), tView.bindingStartIndex, 'text nodes should be created before any bindings');
-    ngDevMode && assertDataInRange(lView, adjustedIndex);
+    ngDevMode && assertIndexInRange(lView, adjustedIndex);
     const tNode = tView.firstCreatePass ?
         getOrCreateTNode(tView, lView[T_HOST], index, 3 /* Element */, null, null) :
         tView.data[adjustedIndex];
@@ -30405,7 +30309,7 @@ function renderComponent$1(componentType /* Type as workaround for: Microsoft/Ty
  */
 function createRootComponentView(rNode, def, rootView, rendererFactory, hostRenderer, sanitizer) {
     const tView = rootView[TVIEW];
-    ngDevMode && assertDataInRange(rootView, 0 + HEADER_OFFSET);
+    ngDevMode && assertIndexInRange(rootView, 0 + HEADER_OFFSET);
     rootView[0 + HEADER_OFFSET] = rNode;
     const tNode = getOrCreateTNode(tView, null, 0, 3 /* Element */, null, null);
     const mergedAttrs = tNode.mergedAttrs = def.hostAttrs;
@@ -31277,7 +31181,7 @@ class Version {
 /**
  * @publicApi
  */
-const VERSION = new Version('10.0.8');
+const VERSION = new Version('10.0.14');
 
 /**
  * @license
@@ -34323,30 +34227,6 @@ class ComponentRef$1 extends ComponentRef {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- * NOTE: changes to the `ngI18nClosureMode` name must be synced with `compiler-cli/src/tooling.ts`.
- */
-if (typeof ngI18nClosureMode === 'undefined') {
-    // These property accesses can be ignored because ngI18nClosureMode will be set to false
-    // when optimizing code and the whole if statement will be dropped.
-    // Make sure to refer to ngI18nClosureMode as ['ngI18nClosureMode'] for closure.
-    // NOTE: we need to have it in IIFE so that the tree-shaker is happy.
-    (function () {
-        // tslint:disable-next-line:no-toplevel-property-access
-        _global['ngI18nClosureMode'] =
-            // TODO(FW-1250): validate that this actually, you know, works.
-            // tslint:disable-next-line:no-toplevel-property-access
-            typeof goog !== 'undefined' && typeof goog.getMsg === 'function';
-    })();
-}
-
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
 const u = undefined;
@@ -34553,277 +34433,723 @@ const USD_CURRENCY_CODE = 'USD';
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-const MARKER = `�`;
-const ICU_BLOCK_REGEXP = /^\s*(�\d+:?\d*�)\s*,\s*(select|plural)\s*,/;
-const SUBTEMPLATE_REGEXP = /�\/?\*(\d+:\d+)�/gi;
-const PH_REGEXP = /�(\/?[#*!]\d+):?\d*�/gi;
-const BINDING_REGEXP = /�(\d+):?\d*�/gi;
-const ICU_REGEXP = /({\s*�\d+:?\d*�\s*,\s*\S{6}\s*,[\s\S]*})/gi;
-// i18nPostprocess consts
-const ROOT_TEMPLATE_ID = 0;
-const PP_MULTI_VALUE_PLACEHOLDERS_REGEXP = /\[(�.+?�?)\]/;
-const PP_PLACEHOLDERS_REGEXP = /\[(�.+?�?)\]|(�\/?\*\d+:\d+�)/g;
-const PP_ICU_VARS_REGEXP = /({\s*)(VAR_(PLURAL|SELECT)(_\d+)?)(\s*,)/g;
-const PP_ICU_PLACEHOLDERS_REGEXP = /{([A-Z0-9_]+)}/g;
-const PP_ICUS_REGEXP = /�I18N_EXP_(ICU(_\d+)?)�/g;
-const PP_CLOSE_TEMPLATE_REGEXP = /\/\*/;
-const PP_TEMPLATE_ID_REGEXP = /\d+\:(\d+)/;
 /**
- * Breaks pattern into strings and top level {...} blocks.
- * Can be used to break a message into text and ICU expressions, or to break an ICU expression into
- * keys and cases.
- * Original code from closure library, modified for Angular.
- *
- * @param pattern (sub)Pattern to be broken.
- *
+ * The locale id that the application is currently using (for translations and ICU expressions).
+ * This is the ivy version of `LOCALE_ID` that was defined as an injection token for the view engine
+ * but is now defined as a global value.
  */
-function extractParts(pattern) {
-    if (!pattern) {
-        return [];
-    }
-    let prevPos = 0;
-    const braceStack = [];
-    const results = [];
-    const braces = /[{}]/g;
-    // lastIndex doesn't get set to 0 so we have to.
-    braces.lastIndex = 0;
-    let match;
-    while (match = braces.exec(pattern)) {
-        const pos = match.index;
-        if (match[0] == '}') {
-            braceStack.pop();
-            if (braceStack.length == 0) {
-                // End of the block.
-                const block = pattern.substring(prevPos, pos);
-                if (ICU_BLOCK_REGEXP.test(block)) {
-                    results.push(parseICUBlock(block));
-                }
-                else {
-                    results.push(block);
-                }
-                prevPos = pos + 1;
-            }
-        }
-        else {
-            if (braceStack.length == 0) {
-                const substring = pattern.substring(prevPos, pos);
-                results.push(substring);
-                prevPos = pos + 1;
-            }
-            braceStack.push('{');
-        }
-    }
-    const substring = pattern.substring(prevPos);
-    results.push(substring);
-    return results;
-}
+let LOCALE_ID = DEFAULT_LOCALE_ID;
 /**
- * Parses text containing an ICU expression and produces a JSON object for it.
- * Original code from closure library, modified for Angular.
+ * Sets the locale id that will be used for translations and ICU expressions.
+ * This is the ivy version of `LOCALE_ID` that was defined as an injection token for the view engine
+ * but is now defined as a global value.
  *
- * @param pattern Text containing an ICU expression that needs to be parsed.
- *
+ * @param localeId
  */
-function parseICUBlock(pattern) {
-    const cases = [];
-    const values = [];
-    let icuType = 1 /* plural */;
-    let mainBinding = 0;
-    pattern = pattern.replace(ICU_BLOCK_REGEXP, function (str, binding, type) {
-        if (type === 'select') {
-            icuType = 0 /* select */;
-        }
-        else {
-            icuType = 1 /* plural */;
-        }
-        mainBinding = parseInt(binding.substr(1), 10);
-        return '';
-    });
-    const parts = extractParts(pattern);
-    // Looking for (key block)+ sequence. One of the keys has to be "other".
-    for (let pos = 0; pos < parts.length;) {
-        let key = parts[pos++].trim();
-        if (icuType === 1 /* plural */) {
-            // Key can be "=x", we just want "x"
-            key = key.replace(/\s*(?:=)?(\w+)\s*/, '$1');
-        }
-        if (key.length) {
-            cases.push(key);
-        }
-        const blocks = extractParts(parts[pos++]);
-        if (cases.length > values.length) {
-            values.push(blocks);
-        }
-    }
-    // TODO(ocombe): support ICU expressions in attributes, see #21615
-    return { type: icuType, mainBinding: mainBinding, cases, values };
-}
-/**
- * Removes everything inside the sub-templates of a message.
- */
-function removeInnerTemplateTranslation(message) {
-    let match;
-    let res = '';
-    let index = 0;
-    let inTemplate = false;
-    let tagMatched;
-    while ((match = SUBTEMPLATE_REGEXP.exec(message)) !== null) {
-        if (!inTemplate) {
-            res += message.substring(index, match.index + match[0].length);
-            tagMatched = match[1];
-            inTemplate = true;
-        }
-        else {
-            if (match[0] === `${MARKER}/*${tagMatched}${MARKER}`) {
-                index = match.index;
-                inTemplate = false;
-            }
-        }
-    }
-    ngDevMode &&
-        assertEqual(inTemplate, false, `Tag mismatch: unable to find the end of the sub-template in the translation "${message}"`);
-    res += message.substr(index);
-    return res;
-}
-/**
- * Extracts a part of a message and removes the rest.
- *
- * This method is used for extracting a part of the message associated with a template. A translated
- * message can span multiple templates.
- *
- * Example:
- * ```
- * <div i18n>Translate <span *ngIf>me</span>!</div>
- * ```
- *
- * @param message The message to crop
- * @param subTemplateIndex Index of the sub-template to extract. If undefined it returns the
- * external template and removes all sub-templates.
- */
-function getTranslationForTemplate(message, subTemplateIndex) {
-    if (isRootTemplateMessage(subTemplateIndex)) {
-        // We want the root template message, ignore all sub-templates
-        return removeInnerTemplateTranslation(message);
-    }
-    else {
-        // We want a specific sub-template
-        const start = message.indexOf(`:${subTemplateIndex}${MARKER}`) + 2 + subTemplateIndex.toString().length;
-        const end = message.search(new RegExp(`${MARKER}\\/\\*\\d+:${subTemplateIndex}${MARKER}`));
-        return removeInnerTemplateTranslation(message.substring(start, end));
+function setLocaleId(localeId) {
+    assertDefined(localeId, `Expected localeId to be defined`);
+    if (typeof localeId === 'string') {
+        LOCALE_ID = localeId.toLowerCase().replace(/_/g, '-');
     }
 }
 /**
- * Generate the OpCodes to update the bindings of a string.
- *
- * @param str The string containing the bindings.
- * @param destinationNode Index of the destination node which will receive the binding.
- * @param attrName Name of the attribute, if the string belongs to an attribute.
- * @param sanitizeFn Sanitization function used to sanitize the string after update, if necessary.
+ * Gets the locale id that will be used for translations and ICU expressions.
+ * This is the ivy version of `LOCALE_ID` that was defined as an injection token for the view engine
+ * but is now defined as a global value.
  */
-function generateBindingUpdateOpCodes(str, destinationNode, attrName, sanitizeFn = null) {
-    const updateOpCodes = [null, null]; // Alloc space for mask and size
-    const textParts = str.split(BINDING_REGEXP);
-    let mask = 0;
-    for (let j = 0; j < textParts.length; j++) {
-        const textValue = textParts[j];
-        if (j & 1) {
-            // Odd indexes are bindings
-            const bindingIndex = parseInt(textValue, 10);
-            updateOpCodes.push(-1 - bindingIndex);
-            mask = mask | toMaskBit(bindingIndex);
-        }
-        else if (textValue !== '') {
-            // Even indexes are text
-            updateOpCodes.push(textValue);
-        }
-    }
-    updateOpCodes.push(destinationNode << 2 /* SHIFT_REF */ |
-        (attrName ? 1 /* Attr */ : 0 /* Text */));
-    if (attrName) {
-        updateOpCodes.push(attrName, sanitizeFn);
-    }
-    updateOpCodes[0] = mask;
-    updateOpCodes[1] = updateOpCodes.length - 2;
-    return updateOpCodes;
+function getLocaleId() {
+    return LOCALE_ID;
 }
-function getBindingMask(icuExpression, mask = 0) {
-    mask = mask | toMaskBit(icuExpression.mainBinding);
-    let match;
-    for (let i = 0; i < icuExpression.values.length; i++) {
-        const valueArr = icuExpression.values[i];
-        for (let j = 0; j < valueArr.length; j++) {
-            const value = valueArr[j];
-            if (typeof value === 'string') {
-                while (match = BINDING_REGEXP.exec(value)) {
-                    mask = mask | toMaskBit(parseInt(match[1], 10));
-                }
-            }
-            else {
-                mask = getBindingMask(value, mask);
-            }
-        }
-    }
-    return mask;
+
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * NOTE: changes to the `ngI18nClosureMode` name must be synced with `compiler-cli/src/tooling.ts`.
+ */
+if (typeof ngI18nClosureMode === 'undefined') {
+    // These property accesses can be ignored because ngI18nClosureMode will be set to false
+    // when optimizing code and the whole if statement will be dropped.
+    // Make sure to refer to ngI18nClosureMode as ['ngI18nClosureMode'] for closure.
+    // NOTE: we need to have it in IIFE so that the tree-shaker is happy.
+    (function () {
+        // tslint:disable-next-line:no-toplevel-property-access
+        _global['ngI18nClosureMode'] =
+            // TODO(FW-1250): validate that this actually, you know, works.
+            // tslint:disable-next-line:no-toplevel-property-access
+            typeof goog !== 'undefined' && typeof goog.getMsg === 'function';
+    })();
 }
+
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+function getParentFromI18nMutateOpCode(mergedCode) {
+    return mergedCode >>> 17 /* SHIFT_PARENT */;
+}
+function getRefFromI18nMutateOpCode(mergedCode) {
+    return (mergedCode & 131064 /* MASK_REF */) >>> 3 /* SHIFT_REF */;
+}
+function getInstructionFromI18nMutateOpCode(mergedCode) {
+    return mergedCode & 7 /* MASK_INSTRUCTION */;
+}
+/**
+ * Marks that the next string is an element name.
+ *
+ * See `I18nMutateOpCodes` documentation.
+ */
+const ELEMENT_MARKER = {
+    marker: 'element'
+};
+/**
+ * Marks that the next string is comment text.
+ *
+ * See `I18nMutateOpCodes` documentation.
+ */
+const COMMENT_MARKER = {
+    marker: 'comment'
+};
+// Note: This hack is necessary so we don't erroneously get a circular dependency
+// failure based on types.
+const unusedValueExportToPlacateAjd$6 = 1;
+
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 const i18nIndexStack = [];
 let i18nIndexStackPointer = -1;
-/**
- * Convert binding index to mask bit.
- *
- * Each index represents a single bit on the bit-mask. Because bit-mask only has 32 bits, we make
- * the 32nd bit share all masks for all bindings higher than 32. Since it is extremely rare to have
- * more than 32 bindings this will be hit very rarely. The downside of hitting this corner case is
- * that we will execute binding code more often than necessary. (penalty of performance)
- */
-function toMaskBit(bindingIndex) {
-    return 1 << Math.min(bindingIndex, 31);
+function popI18nIndex() {
+    return i18nIndexStack[i18nIndexStackPointer--];
 }
-const parentIndexStack = [];
-/**
- * Marks a block of text as translatable.
- *
- * The instructions `i18nStart` and `i18nEnd` mark the translation block in the template.
- * The translation `message` is the value which is locale specific. The translation string may
- * contain placeholders which associate inner elements and sub-templates within the translation.
- *
- * The translation `message` placeholders are:
- * - `�{index}(:{block})�`: *Binding Placeholder*: Marks a location where an expression will be
- *   interpolated into. The placeholder `index` points to the expression binding index. An optional
- *   `block` that matches the sub-template in which it was declared.
- * - `�#{index}(:{block})�`/`�/#{index}(:{block})�`: *Element Placeholder*:  Marks the beginning
- *   and end of DOM element that were embedded in the original translation block. The placeholder
- *   `index` points to the element index in the template instructions set. An optional `block` that
- *   matches the sub-template in which it was declared.
- * - `�!{index}(:{block})�`/`�/!{index}(:{block})�`: *Projection Placeholder*:  Marks the
- *   beginning and end of <ng-content> that was embedded in the original translation block.
- *   The placeholder `index` points to the element index in the template instructions set.
- *   An optional `block` that matches the sub-template in which it was declared.
- * - `�*{index}:{block}�`/`�/*{index}:{block}�`: *Sub-template Placeholder*: Sub-templates must be
- *   split up and translated separately in each angular template function. The `index` points to the
- *   `template` instruction index. A `block` that matches the sub-template in which it was declared.
- *
- * @param index A unique index of the translation in the static block.
- * @param message The translation message.
- * @param subTemplateIndex Optional sub-template index in the `message`.
- *
- * @codeGenApi
- */
-function ɵɵi18nStart(index, message, subTemplateIndex) {
-    const tView = getTView();
-    ngDevMode && assertDefined(tView, `tView should be defined`);
+function pushI18nIndex(index) {
     i18nIndexStack[++i18nIndexStackPointer] = index;
-    // We need to delay projections until `i18nEnd`
-    setDelayProjection(true);
-    if (tView.firstCreatePass && tView.data[index + HEADER_OFFSET] === null) {
-        i18nStartFirstPass(getLView(), tView, index, message, subTemplateIndex);
+}
+let changeMask = 0b0;
+let shiftsCounter = 0;
+function setMaskBit(bit) {
+    if (bit) {
+        changeMask = changeMask | (1 << shiftsCounter);
+    }
+    shiftsCounter++;
+}
+function applyI18n(tView, lView, index) {
+    if (shiftsCounter > 0) {
+        ngDevMode && assertDefined(tView, `tView should be defined`);
+        const tI18n = tView.data[index + HEADER_OFFSET];
+        let updateOpCodes;
+        let tIcus = null;
+        if (Array.isArray(tI18n)) {
+            updateOpCodes = tI18n;
+        }
+        else {
+            updateOpCodes = tI18n.update;
+            tIcus = tI18n.icus;
+        }
+        const bindingsStartIndex = getBindingIndex() - shiftsCounter - 1;
+        applyUpdateOpCodes(tView, tIcus, lView, updateOpCodes, bindingsStartIndex, changeMask);
+        // Reset changeMask & maskBit to default for the next update cycle
+        changeMask = 0b0;
+        shiftsCounter = 0;
     }
 }
+/**
+ * Apply `I18nMutateOpCodes` OpCodes.
+ *
+ * @param tView Current `TView`
+ * @param rootIndex Pointer to the root (parent) tNode for the i18n.
+ * @param createOpCodes OpCodes to process
+ * @param lView Current `LView`
+ */
+function applyCreateOpCodes(tView, rootindex, createOpCodes, lView) {
+    const renderer = lView[RENDERER];
+    let currentTNode = null;
+    let previousTNode = null;
+    const visitedNodes = [];
+    for (let i = 0; i < createOpCodes.length; i++) {
+        const opCode = createOpCodes[i];
+        if (typeof opCode == 'string') {
+            const textRNode = createTextNode(opCode, renderer);
+            const textNodeIndex = createOpCodes[++i];
+            ngDevMode && ngDevMode.rendererCreateTextNode++;
+            previousTNode = currentTNode;
+            currentTNode =
+                createDynamicNodeAtIndex(tView, lView, textNodeIndex, 3 /* Element */, textRNode, null);
+            visitedNodes.push(textNodeIndex);
+            setIsNotParent();
+        }
+        else if (typeof opCode == 'number') {
+            switch (opCode & 7 /* MASK_INSTRUCTION */) {
+                case 1 /* AppendChild */:
+                    const destinationNodeIndex = opCode >>> 17 /* SHIFT_PARENT */;
+                    let destinationTNode;
+                    if (destinationNodeIndex === rootindex) {
+                        // If the destination node is `i18nStart`, we don't have a
+                        // top-level node and we should use the host node instead
+                        destinationTNode = lView[T_HOST];
+                    }
+                    else {
+                        destinationTNode = getTNode(tView, destinationNodeIndex);
+                    }
+                    ngDevMode &&
+                        assertDefined(currentTNode, `You need to create or select a node before you can insert it into the DOM`);
+                    previousTNode =
+                        appendI18nNode(tView, currentTNode, destinationTNode, previousTNode, lView);
+                    break;
+                case 0 /* Select */:
+                    // Negative indices indicate that a given TNode is a sibling node, not a parent node
+                    // (see `i18nStartFirstPass` for additional information).
+                    const isParent = opCode >= 0;
+                    // FIXME(misko): This SHIFT_REF looks suspect as it does not have mask.
+                    const nodeIndex = (isParent ? opCode : ~opCode) >>> 3 /* SHIFT_REF */;
+                    visitedNodes.push(nodeIndex);
+                    previousTNode = currentTNode;
+                    currentTNode = getTNode(tView, nodeIndex);
+                    if (currentTNode) {
+                        setPreviousOrParentTNode(currentTNode, isParent);
+                    }
+                    break;
+                case 5 /* ElementEnd */:
+                    const elementIndex = opCode >>> 3 /* SHIFT_REF */;
+                    previousTNode = currentTNode = getTNode(tView, elementIndex);
+                    setPreviousOrParentTNode(currentTNode, false);
+                    break;
+                case 4 /* Attr */:
+                    const elementNodeIndex = opCode >>> 3 /* SHIFT_REF */;
+                    const attrName = createOpCodes[++i];
+                    const attrValue = createOpCodes[++i];
+                    // This code is used for ICU expressions only, since we don't support
+                    // directives/components in ICUs, we don't need to worry about inputs here
+                    elementAttributeInternal(getTNode(tView, elementNodeIndex), lView, attrName, attrValue, null, null);
+                    break;
+                default:
+                    throw new Error(`Unable to determine the type of mutate operation for "${opCode}"`);
+            }
+        }
+        else {
+            switch (opCode) {
+                case COMMENT_MARKER:
+                    const commentValue = createOpCodes[++i];
+                    const commentNodeIndex = createOpCodes[++i];
+                    ngDevMode &&
+                        assertEqual(typeof commentValue, 'string', `Expected "${commentValue}" to be a comment node value`);
+                    const commentRNode = renderer.createComment(commentValue);
+                    ngDevMode && ngDevMode.rendererCreateComment++;
+                    previousTNode = currentTNode;
+                    currentTNode = createDynamicNodeAtIndex(tView, lView, commentNodeIndex, 5 /* IcuContainer */, commentRNode, null);
+                    visitedNodes.push(commentNodeIndex);
+                    attachPatchData(commentRNode, lView);
+                    // We will add the case nodes later, during the update phase
+                    setIsNotParent();
+                    break;
+                case ELEMENT_MARKER:
+                    const tagNameValue = createOpCodes[++i];
+                    const elementNodeIndex = createOpCodes[++i];
+                    ngDevMode &&
+                        assertEqual(typeof tagNameValue, 'string', `Expected "${tagNameValue}" to be an element node tag name`);
+                    const elementRNode = renderer.createElement(tagNameValue);
+                    ngDevMode && ngDevMode.rendererCreateElement++;
+                    previousTNode = currentTNode;
+                    currentTNode = createDynamicNodeAtIndex(tView, lView, elementNodeIndex, 3 /* Element */, elementRNode, tagNameValue);
+                    visitedNodes.push(elementNodeIndex);
+                    break;
+                default:
+                    throw new Error(`Unable to determine the type of mutate operation for "${opCode}"`);
+            }
+        }
+    }
+    setIsNotParent();
+    return visitedNodes;
+}
+/**
+ * Apply `I18nUpdateOpCodes` OpCodes
+ *
+ * @param tView Current `TView`
+ * @param tIcus If ICUs present than this contains them.
+ * @param lView Current `LView`
+ * @param updateOpCodes OpCodes to process
+ * @param bindingsStartIndex Location of the first `ɵɵi18nApply`
+ * @param changeMask Each bit corresponds to a `ɵɵi18nExp` (Counting backwards from
+ *     `bindingsStartIndex`)
+ */
+function applyUpdateOpCodes(tView, tIcus, lView, updateOpCodes, bindingsStartIndex, changeMask) {
+    let caseCreated = false;
+    for (let i = 0; i < updateOpCodes.length; i++) {
+        // bit code to check if we should apply the next update
+        const checkBit = updateOpCodes[i];
+        // Number of opCodes to skip until next set of update codes
+        const skipCodes = updateOpCodes[++i];
+        if (checkBit & changeMask) {
+            // The value has been updated since last checked
+            let value = '';
+            for (let j = i + 1; j <= (i + skipCodes); j++) {
+                const opCode = updateOpCodes[j];
+                if (typeof opCode == 'string') {
+                    value += opCode;
+                }
+                else if (typeof opCode == 'number') {
+                    if (opCode < 0) {
+                        // Negative opCode represent `i18nExp` values offset.
+                        value += renderStringify(lView[bindingsStartIndex - opCode]);
+                    }
+                    else {
+                        const nodeIndex = opCode >>> 2 /* SHIFT_REF */;
+                        switch (opCode & 3 /* MASK_OPCODE */) {
+                            case 1 /* Attr */:
+                                const propName = updateOpCodes[++j];
+                                const sanitizeFn = updateOpCodes[++j];
+                                elementPropertyInternal(tView, getTNode(tView, nodeIndex), lView, propName, value, lView[RENDERER], sanitizeFn, false);
+                                break;
+                            case 0 /* Text */:
+                                textBindingInternal(lView, nodeIndex, value);
+                                break;
+                            case 2 /* IcuSwitch */:
+                                caseCreated =
+                                    applyIcuSwitchCase(tView, tIcus, updateOpCodes[++j], lView, value);
+                                break;
+                            case 3 /* IcuUpdate */:
+                                applyIcuUpdateCase(tView, tIcus, updateOpCodes[++j], bindingsStartIndex, lView, caseCreated);
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+        i += skipCodes;
+    }
+}
+/**
+ * Apply OpCodes associated with updating an existing ICU.
+ *
+ * @param tView Current `TView`
+ * @param tIcus ICUs active at this location.
+ * @param tIcuIndex Index into `tIcus` to process.
+ * @param bindingsStartIndex Location of the first `ɵɵi18nApply`
+ * @param lView Current `LView`
+ * @param changeMask Each bit corresponds to a `ɵɵi18nExp` (Counting backwards from
+ *     `bindingsStartIndex`)
+ */
+function applyIcuUpdateCase(tView, tIcus, tIcuIndex, bindingsStartIndex, lView, caseCreated) {
+    ngDevMode && assertIndexInRange(tIcus, tIcuIndex);
+    const tIcu = tIcus[tIcuIndex];
+    ngDevMode && assertIndexInRange(lView, tIcu.currentCaseLViewIndex);
+    const activeCaseIndex = lView[tIcu.currentCaseLViewIndex];
+    if (activeCaseIndex !== null) {
+        const mask = caseCreated ?
+            -1 : // -1 is same as all bits on, which simulates creation since it marks all bits dirty
+            changeMask;
+        applyUpdateOpCodes(tView, tIcus, lView, tIcu.update[activeCaseIndex], bindingsStartIndex, mask);
+    }
+}
+/**
+ * Apply OpCodes associated with switching a case on ICU.
+ *
+ * This involves tearing down existing case and than building up a new case.
+ *
+ * @param tView Current `TView`
+ * @param tIcus ICUs active at this location.
+ * @param tICuIndex Index into `tIcus` to process.
+ * @param lView Current `LView`
+ * @param value Value of the case to update to.
+ * @returns true if a new case was created (needed so that the update executes regardless of the
+ *     bitmask)
+ */
+function applyIcuSwitchCase(tView, tIcus, tICuIndex, lView, value) {
+    applyIcuSwitchCaseRemove(tView, tIcus, tICuIndex, lView);
+    // Rebuild a new case for this ICU
+    let caseCreated = false;
+    const tIcu = tIcus[tICuIndex];
+    const caseIndex = getCaseIndex(tIcu, value);
+    lView[tIcu.currentCaseLViewIndex] = caseIndex !== -1 ? caseIndex : null;
+    if (caseIndex > -1) {
+        // Add the nodes for the new case
+        applyCreateOpCodes(tView, -1, // -1 means we don't have parent node
+        tIcu.create[caseIndex], lView);
+        caseCreated = true;
+    }
+    return caseCreated;
+}
+/**
+ * Apply OpCodes associated with tearing down of DOM.
+ *
+ * This involves tearing down existing case and than building up a new case.
+ *
+ * @param tView Current `TView`
+ * @param tIcus ICUs active at this location.
+ * @param tIcuIndex Index into `tIcus` to process.
+ * @param lView Current `LView`
+ * @returns true if a new case was created (needed so that the update executes regardless of the
+ *     bitmask)
+ */
+function applyIcuSwitchCaseRemove(tView, tIcus, tIcuIndex, lView) {
+    ngDevMode && assertIndexInRange(tIcus, tIcuIndex);
+    const tIcu = tIcus[tIcuIndex];
+    const activeCaseIndex = lView[tIcu.currentCaseLViewIndex];
+    if (activeCaseIndex !== null) {
+        const removeCodes = tIcu.remove[activeCaseIndex];
+        for (let k = 0; k < removeCodes.length; k++) {
+            const removeOpCode = removeCodes[k];
+            const nodeOrIcuIndex = removeOpCode >>> 3 /* SHIFT_REF */;
+            switch (removeOpCode & 7 /* MASK_INSTRUCTION */) {
+                case 3 /* Remove */:
+                    // FIXME(misko): this comment is wrong!
+                    // Remove DOM element, but do *not* mark TNode as detached, since we are
+                    // just switching ICU cases (while keeping the same TNode), so a DOM element
+                    // representing a new ICU case will be re-created.
+                    removeNode(tView, lView, nodeOrIcuIndex, /* markAsDetached */ false);
+                    break;
+                case 6 /* RemoveNestedIcu */:
+                    applyIcuSwitchCaseRemove(tView, tIcus, nodeOrIcuIndex, lView);
+                    break;
+            }
+        }
+    }
+}
+function appendI18nNode(tView, tNode, parentTNode, previousTNode, lView) {
+    ngDevMode && ngDevMode.rendererMoveNode++;
+    const nextNode = tNode.next;
+    if (!previousTNode) {
+        previousTNode = parentTNode;
+    }
+    // Re-organize node tree to put this node in the correct position.
+    if (previousTNode === parentTNode && tNode !== parentTNode.child) {
+        tNode.next = parentTNode.child;
+        parentTNode.child = tNode;
+    }
+    else if (previousTNode !== parentTNode && tNode !== previousTNode.next) {
+        tNode.next = previousTNode.next;
+        previousTNode.next = tNode;
+    }
+    else {
+        tNode.next = null;
+    }
+    if (parentTNode !== lView[T_HOST]) {
+        tNode.parent = parentTNode;
+    }
+    // If tNode was moved around, we might need to fix a broken link.
+    let cursor = tNode.next;
+    while (cursor) {
+        if (cursor.next === tNode) {
+            cursor.next = nextNode;
+        }
+        cursor = cursor.next;
+    }
+    // If the placeholder to append is a projection, we need to move the projected nodes instead
+    if (tNode.type === 1 /* Projection */) {
+        applyProjection(tView, lView, tNode);
+        return tNode;
+    }
+    appendChild(tView, lView, getNativeByTNode(tNode, lView), tNode);
+    const slotValue = lView[tNode.index];
+    if (tNode.type !== 0 /* Container */ && isLContainer(slotValue)) {
+        // Nodes that inject ViewContainerRef also have a comment node that should be moved
+        appendChild(tView, lView, slotValue[NATIVE], tNode);
+    }
+    return tNode;
+}
+/**
+ * See `i18nEnd` above.
+ */
+function i18nEndFirstPass(tView, lView) {
+    ngDevMode &&
+        assertEqual(getBindingIndex(), tView.bindingStartIndex, 'i18nEnd should be called before any binding');
+    const rootIndex = popI18nIndex();
+    const tI18n = tView.data[rootIndex + HEADER_OFFSET];
+    ngDevMode && assertDefined(tI18n, `You should call i18nStart before i18nEnd`);
+    // Find the last node that was added before `i18nEnd`
+    const lastCreatedNode = getPreviousOrParentTNode();
+    // Read the instructions to insert/move/remove DOM elements
+    const visitedNodes = applyCreateOpCodes(tView, rootIndex, tI18n.create, lView);
+    // Remove deleted nodes
+    let index = rootIndex + 1;
+    while (index <= lastCreatedNode.index - HEADER_OFFSET) {
+        if (visitedNodes.indexOf(index) === -1) {
+            removeNode(tView, lView, index, /* markAsDetached */ true);
+        }
+        // Check if an element has any local refs and skip them
+        const tNode = getTNode(tView, index);
+        if (tNode &&
+            (tNode.type === 0 /* Container */ || tNode.type === 3 /* Element */ ||
+                tNode.type === 4 /* ElementContainer */) &&
+            tNode.localNames !== null) {
+            // Divide by 2 to get the number of local refs,
+            // since they are stored as an array that also includes directive indexes,
+            // i.e. ["localRef", directiveIndex, ...]
+            index += tNode.localNames.length >> 1;
+        }
+        index++;
+    }
+}
+function removeNode(tView, lView, index, markAsDetached) {
+    const removedPhTNode = getTNode(tView, index);
+    const removedPhRNode = getNativeByIndex(index, lView);
+    if (removedPhRNode) {
+        nativeRemoveNode(lView[RENDERER], removedPhRNode);
+    }
+    const slotValue = load(lView, index);
+    if (isLContainer(slotValue)) {
+        const lContainer = slotValue;
+        if (removedPhTNode.type !== 0 /* Container */) {
+            nativeRemoveNode(lView[RENDERER], lContainer[NATIVE]);
+        }
+    }
+    if (markAsDetached) {
+        // Define this node as detached to avoid projecting it later
+        removedPhTNode.flags |= 64 /* isDetached */;
+    }
+    ngDevMode && ngDevMode.rendererRemoveNode++;
+}
+/**
+ * Creates and stores the dynamic TNode, and unhooks it from the tree for now.
+ */
+function createDynamicNodeAtIndex(tView, lView, index, type, native, name) {
+    const previousOrParentTNode = getPreviousOrParentTNode();
+    ngDevMode && assertIndexInRange(lView, index + HEADER_OFFSET);
+    lView[index + HEADER_OFFSET] = native;
+    // FIXME(misko): Why does this create A TNode??? I would not expect this to be here.
+    const tNode = getOrCreateTNode(tView, lView[T_HOST], index, type, name, null);
+    // We are creating a dynamic node, the previous tNode might not be pointing at this node.
+    // We will link ourselves into the tree later with `appendI18nNode`.
+    if (previousOrParentTNode && previousOrParentTNode.next === tNode) {
+        previousOrParentTNode.next = null;
+    }
+    return tNode;
+}
+/**
+ * Returns the index of the current case of an ICU expression depending on the main binding value
+ *
+ * @param icuExpression
+ * @param bindingValue The value of the main binding used by this ICU expression
+ */
+function getCaseIndex(icuExpression, bindingValue) {
+    let index = icuExpression.cases.indexOf(bindingValue);
+    if (index === -1) {
+        switch (icuExpression.type) {
+            case 1 /* plural */: {
+                const resolvedCase = getPluralCase(bindingValue, getLocaleId());
+                index = icuExpression.cases.indexOf(resolvedCase);
+                if (index === -1 && resolvedCase !== 'other') {
+                    index = icuExpression.cases.indexOf('other');
+                }
+                break;
+            }
+            case 0 /* select */: {
+                index = icuExpression.cases.indexOf('other');
+                break;
+            }
+        }
+    }
+    return index;
+}
+
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * Converts `I18nUpdateOpCodes` array into a human readable format.
+ *
+ * This function is attached to the `I18nUpdateOpCodes.debug` property if `ngDevMode` is enabled.
+ * This function provides a human readable view of the opcodes. This is useful when debugging the
+ * application as well as writing more readable tests.
+ *
+ * @param this `I18nUpdateOpCodes` if attached as a method.
+ * @param opcodes `I18nUpdateOpCodes` if invoked as a function.
+ */
+function i18nUpdateOpCodesToString(opcodes) {
+    const parser = new OpCodeParser(opcodes || (Array.isArray(this) ? this : []));
+    let lines = [];
+    function consumeOpCode(value) {
+        const ref = value >>> 2 /* SHIFT_REF */;
+        const opCode = value & 3 /* MASK_OPCODE */;
+        switch (opCode) {
+            case 0 /* Text */:
+                return `(lView[${ref}] as Text).textContent = $$$`;
+            case 1 /* Attr */:
+                const attrName = parser.consumeString();
+                const sanitizationFn = parser.consumeFunction();
+                const value = sanitizationFn ? `(${sanitizationFn})($$$)` : '$$$';
+                return `(lView[${ref}] as Element).setAttribute('${attrName}', ${value})`;
+            case 2 /* IcuSwitch */:
+                return `icuSwitchCase(lView[${ref}] as Comment, ${parser.consumeNumber()}, $$$)`;
+            case 3 /* IcuUpdate */:
+                return `icuUpdateCase(lView[${ref}] as Comment, ${parser.consumeNumber()})`;
+        }
+        throw new Error('unexpected OpCode');
+    }
+    while (parser.hasMore()) {
+        let mask = parser.consumeNumber();
+        let size = parser.consumeNumber();
+        const end = parser.i + size;
+        const statements = [];
+        let statement = '';
+        while (parser.i < end) {
+            let value = parser.consumeNumberOrString();
+            if (typeof value === 'string') {
+                statement += value;
+            }
+            else if (value < 0) {
+                // Negative numbers are ref indexes
+                statement += '${lView[' + (0 - value) + ']}';
+            }
+            else {
+                // Positive numbers are operations.
+                const opCodeText = consumeOpCode(value);
+                statements.push(opCodeText.replace('$$$', '`' + statement + '`') + ';');
+                statement = '';
+            }
+        }
+        lines.push(`if (mask & 0b${mask.toString(2)}) { ${statements.join(' ')} }`);
+    }
+    return lines;
+}
+/**
+ * Converts `I18nMutableOpCodes` array into a human readable format.
+ *
+ * This function is attached to the `I18nMutableOpCodes.debug` if `ngDevMode` is enabled. This
+ * function provides a human readable view of the opcodes. This is useful when debugging the
+ * application as well as writing more readable tests.
+ *
+ * @param this `I18nMutableOpCodes` if attached as a method.
+ * @param opcodes `I18nMutableOpCodes` if invoked as a function.
+ */
+function i18nMutateOpCodesToString(opcodes) {
+    const parser = new OpCodeParser(opcodes || (Array.isArray(this) ? this : []));
+    let lines = [];
+    function consumeOpCode(opCode) {
+        const parent = getParentFromI18nMutateOpCode(opCode);
+        const ref = getRefFromI18nMutateOpCode(opCode);
+        switch (getInstructionFromI18nMutateOpCode(opCode)) {
+            case 0 /* Select */:
+                lastRef = ref;
+                return '';
+            case 1 /* AppendChild */:
+                return `(lView[${parent}] as Element).appendChild(lView[${lastRef}])`;
+            case 3 /* Remove */:
+                return `(lView[${parent}] as Element).remove(lView[${ref}])`;
+            case 4 /* Attr */:
+                return `(lView[${ref}] as Element).setAttribute("${parser.consumeString()}", "${parser.consumeString()}")`;
+            case 5 /* ElementEnd */:
+                return `setPreviousOrParentTNode(tView.data[${ref}] as TNode)`;
+            case 6 /* RemoveNestedIcu */:
+                return `removeNestedICU(${ref})`;
+        }
+        throw new Error('Unexpected OpCode');
+    }
+    let lastRef = -1;
+    while (parser.hasMore()) {
+        let value = parser.consumeNumberStringOrMarker();
+        if (value === COMMENT_MARKER) {
+            const text = parser.consumeString();
+            lastRef = parser.consumeNumber();
+            lines.push(`lView[${lastRef}] = document.createComment("${text}")`);
+        }
+        else if (value === ELEMENT_MARKER) {
+            const text = parser.consumeString();
+            lastRef = parser.consumeNumber();
+            lines.push(`lView[${lastRef}] = document.createElement("${text}")`);
+        }
+        else if (typeof value === 'string') {
+            lastRef = parser.consumeNumber();
+            lines.push(`lView[${lastRef}] = document.createTextNode("${value}")`);
+        }
+        else if (typeof value === 'number') {
+            const line = consumeOpCode(value);
+            line && lines.push(line);
+        }
+        else {
+            throw new Error('Unexpected value');
+        }
+    }
+    return lines;
+}
+class OpCodeParser {
+    constructor(codes) {
+        this.i = 0;
+        this.codes = codes;
+    }
+    hasMore() {
+        return this.i < this.codes.length;
+    }
+    consumeNumber() {
+        let value = this.codes[this.i++];
+        assertNumber(value, 'expecting number in OpCode');
+        return value;
+    }
+    consumeString() {
+        let value = this.codes[this.i++];
+        assertString(value, 'expecting string in OpCode');
+        return value;
+    }
+    consumeFunction() {
+        let value = this.codes[this.i++];
+        if (value === null || typeof value === 'function') {
+            return value;
+        }
+        throw new Error('expecting function in OpCode');
+    }
+    consumeNumberOrString() {
+        let value = this.codes[this.i++];
+        if (typeof value === 'string') {
+            return value;
+        }
+        assertNumber(value, 'expecting number or string in OpCode');
+        return value;
+    }
+    consumeNumberStringOrMarker() {
+        let value = this.codes[this.i++];
+        if (typeof value === 'string' || typeof value === 'number' || value == COMMENT_MARKER ||
+            value == ELEMENT_MARKER) {
+            return value;
+        }
+        assertNumber(value, 'expecting number, string, COMMENT_MARKER or ELEMENT_MARKER in OpCode');
+        return value;
+    }
+}
+
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+const BINDING_REGEXP = /�(\d+):?\d*�/gi;
+const ICU_REGEXP = /({\s*�\d+:?\d*�\s*,\s*\S{6}\s*,[\s\S]*})/gi;
+const NESTED_ICU = /�(\d+)�/;
+const ICU_BLOCK_REGEXP = /^\s*(�\d+:?\d*�)\s*,\s*(select|plural)\s*,/;
 // Count for the number of vars that will be allocated for each i18n block.
 // It is global because this is used in multiple functions that include loops and recursive calls.
 // This is reset to 0 when `i18nStartFirstPass` is called.
 let i18nVarsCount;
-function allocNodeIndex(startIndex) {
-    return startIndex + i18nVarsCount++;
+const parentIndexStack = [];
+const MARKER = `�`;
+const SUBTEMPLATE_REGEXP = /�\/?\*(\d+:\d+)�/gi;
+const PH_REGEXP = /�(\/?[#*!]\d+):?\d*�/gi;
+/**
+ * Angular Dart introduced &ngsp; as a placeholder for non-removable space, see:
+ * https://github.com/dart-lang/angular/blob/0bb611387d29d65b5af7f9d2515ab571fd3fbee4/_tests/test/compiler/preserve_whitespace_test.dart#L25-L32
+ * In Angular Dart &ngsp; is converted to the 0xE500 PUA (Private Use Areas) unicode character
+ * and later on replaced by a space. We are re-implementing the same idea here, since translations
+ * might contain this special character.
+ */
+const NGSP_UNICODE_REGEXP = /\uE500/g;
+function replaceNgsp(value) {
+    return value.replace(NGSP_UNICODE_REGEXP, ' ');
 }
 /**
  * See `i18nStart` above.
@@ -34837,6 +35163,9 @@ function i18nStartFirstPass(lView, tView, index, message, subTemplateIndex) {
     let parentIndexPointer = 0;
     parentIndexStack[parentIndexPointer] = parentIndex;
     const createOpCodes = [];
+    if (ngDevMode) {
+        attachDebugGetter(createOpCodes, i18nMutateOpCodesToString);
+    }
     // If the previous node wasn't the direct parent then we have a translation without top level
     // element and we need to keep a reference of the previous element if there is one. We should also
     // keep track whether an element was a parent node or not, so that the logic that consumes
@@ -34853,6 +35182,9 @@ function i18nStartFirstPass(lView, tView, index, message, subTemplateIndex) {
         createOpCodes.push(previousTNodeIndex << 3 /* SHIFT_REF */ | 0 /* Select */);
     }
     const updateOpCodes = [];
+    if (ngDevMode) {
+        attachDebugGetter(updateOpCodes, i18nUpdateOpCodesToString);
+    }
     const icuExpressions = [];
     if (message === '' && isRootTemplateMessage(subTemplateIndex)) {
         // If top level translation is an empty string, do not invoke additional processing
@@ -34934,8 +35266,6 @@ function i18nStartFirstPass(lView, tView, index, message, subTemplateIndex) {
     if (i18nVarsCount > 0) {
         allocExpando(tView, lView, i18nVarsCount);
     }
-    ngDevMode &&
-        attachI18nOpCodesDebug(createOpCodes, updateOpCodes, icuExpressions.length ? icuExpressions : null, lView);
     // NOTE: local var needed to properly assert the type of `TI18n`.
     const tI18n = {
         vars: i18nVarsCount,
@@ -34945,469 +35275,6 @@ function i18nStartFirstPass(lView, tView, index, message, subTemplateIndex) {
     };
     tView.data[index + HEADER_OFFSET] = tI18n;
 }
-function appendI18nNode(tView, tNode, parentTNode, previousTNode, lView) {
-    ngDevMode && ngDevMode.rendererMoveNode++;
-    const nextNode = tNode.next;
-    if (!previousTNode) {
-        previousTNode = parentTNode;
-    }
-    // Re-organize node tree to put this node in the correct position.
-    if (previousTNode === parentTNode && tNode !== parentTNode.child) {
-        tNode.next = parentTNode.child;
-        parentTNode.child = tNode;
-    }
-    else if (previousTNode !== parentTNode && tNode !== previousTNode.next) {
-        tNode.next = previousTNode.next;
-        previousTNode.next = tNode;
-    }
-    else {
-        tNode.next = null;
-    }
-    if (parentTNode !== lView[T_HOST]) {
-        tNode.parent = parentTNode;
-    }
-    // If tNode was moved around, we might need to fix a broken link.
-    let cursor = tNode.next;
-    while (cursor) {
-        if (cursor.next === tNode) {
-            cursor.next = nextNode;
-        }
-        cursor = cursor.next;
-    }
-    // If the placeholder to append is a projection, we need to move the projected nodes instead
-    if (tNode.type === 1 /* Projection */) {
-        applyProjection(tView, lView, tNode);
-        return tNode;
-    }
-    appendChild(tView, lView, getNativeByTNode(tNode, lView), tNode);
-    const slotValue = lView[tNode.index];
-    if (tNode.type !== 0 /* Container */ && isLContainer(slotValue)) {
-        // Nodes that inject ViewContainerRef also have a comment node that should be moved
-        appendChild(tView, lView, slotValue[NATIVE], tNode);
-    }
-    return tNode;
-}
-function isRootTemplateMessage(subTemplateIndex) {
-    return subTemplateIndex === undefined;
-}
-/**
- * Handles message string post-processing for internationalization.
- *
- * Handles message string post-processing by transforming it from intermediate
- * format (that might contain some markers that we need to replace) to the final
- * form, consumable by i18nStart instruction. Post processing steps include:
- *
- * 1. Resolve all multi-value cases (like [�*1:1��#2:1�|�#4:1�|�5�])
- * 2. Replace all ICU vars (like "VAR_PLURAL")
- * 3. Replace all placeholders used inside ICUs in a form of {PLACEHOLDER}
- * 4. Replace all ICU references with corresponding values (like �ICU_EXP_ICU_1�)
- *    in case multiple ICUs have the same placeholder name
- *
- * @param message Raw translation string for post processing
- * @param replacements Set of replacements that should be applied
- *
- * @returns Transformed string that can be consumed by i18nStart instruction
- *
- * @codeGenApi
- */
-function ɵɵi18nPostprocess(message, replacements = {}) {
-    /**
-     * Step 1: resolve all multi-value placeholders like [�#5�|�*1:1��#2:1�|�#4:1�]
-     *
-     * Note: due to the way we process nested templates (BFS), multi-value placeholders are typically
-     * grouped by templates, for example: [�#5�|�#6�|�#1:1�|�#3:2�] where �#5� and �#6� belong to root
-     * template, �#1:1� belong to nested template with index 1 and �#1:2� - nested template with index
-     * 3. However in real templates the order might be different: i.e. �#1:1� and/or �#3:2� may go in
-     * front of �#6�. The post processing step restores the right order by keeping track of the
-     * template id stack and looks for placeholders that belong to the currently active template.
-     */
-    let result = message;
-    if (PP_MULTI_VALUE_PLACEHOLDERS_REGEXP.test(message)) {
-        const matches = {};
-        const templateIdsStack = [ROOT_TEMPLATE_ID];
-        result = result.replace(PP_PLACEHOLDERS_REGEXP, (m, phs, tmpl) => {
-            const content = phs || tmpl;
-            const placeholders = matches[content] || [];
-            if (!placeholders.length) {
-                content.split('|').forEach((placeholder) => {
-                    const match = placeholder.match(PP_TEMPLATE_ID_REGEXP);
-                    const templateId = match ? parseInt(match[1], 10) : ROOT_TEMPLATE_ID;
-                    const isCloseTemplateTag = PP_CLOSE_TEMPLATE_REGEXP.test(placeholder);
-                    placeholders.push([templateId, isCloseTemplateTag, placeholder]);
-                });
-                matches[content] = placeholders;
-            }
-            if (!placeholders.length) {
-                throw new Error(`i18n postprocess: unmatched placeholder - ${content}`);
-            }
-            const currentTemplateId = templateIdsStack[templateIdsStack.length - 1];
-            let idx = 0;
-            // find placeholder index that matches current template id
-            for (let i = 0; i < placeholders.length; i++) {
-                if (placeholders[i][0] === currentTemplateId) {
-                    idx = i;
-                    break;
-                }
-            }
-            // update template id stack based on the current tag extracted
-            const [templateId, isCloseTemplateTag, placeholder] = placeholders[idx];
-            if (isCloseTemplateTag) {
-                templateIdsStack.pop();
-            }
-            else if (currentTemplateId !== templateId) {
-                templateIdsStack.push(templateId);
-            }
-            // remove processed tag from the list
-            placeholders.splice(idx, 1);
-            return placeholder;
-        });
-    }
-    // return current result if no replacements specified
-    if (!Object.keys(replacements).length) {
-        return result;
-    }
-    /**
-     * Step 2: replace all ICU vars (like "VAR_PLURAL")
-     */
-    result = result.replace(PP_ICU_VARS_REGEXP, (match, start, key, _type, _idx, end) => {
-        return replacements.hasOwnProperty(key) ? `${start}${replacements[key]}${end}` : match;
-    });
-    /**
-     * Step 3: replace all placeholders used inside ICUs in a form of {PLACEHOLDER}
-     */
-    result = result.replace(PP_ICU_PLACEHOLDERS_REGEXP, (match, key) => {
-        return replacements.hasOwnProperty(key) ? replacements[key] : match;
-    });
-    /**
-     * Step 4: replace all ICU references with corresponding values (like �ICU_EXP_ICU_1�) in case
-     * multiple ICUs have the same placeholder name
-     */
-    result = result.replace(PP_ICUS_REGEXP, (match, key) => {
-        if (replacements.hasOwnProperty(key)) {
-            const list = replacements[key];
-            if (!list.length) {
-                throw new Error(`i18n postprocess: unmatched ICU - ${match} with key: ${key}`);
-            }
-            return list.shift();
-        }
-        return match;
-    });
-    return result;
-}
-/**
- * Translates a translation block marked by `i18nStart` and `i18nEnd`. It inserts the text/ICU nodes
- * into the render tree, moves the placeholder nodes and removes the deleted nodes.
- *
- * @codeGenApi
- */
-function ɵɵi18nEnd() {
-    const lView = getLView();
-    const tView = getTView();
-    ngDevMode && assertDefined(tView, `tView should be defined`);
-    i18nEndFirstPass(tView, lView);
-    // Stop delaying projections
-    setDelayProjection(false);
-}
-/**
- * See `i18nEnd` above.
- */
-function i18nEndFirstPass(tView, lView) {
-    ngDevMode &&
-        assertEqual(getBindingIndex(), tView.bindingStartIndex, 'i18nEnd should be called before any binding');
-    const rootIndex = i18nIndexStack[i18nIndexStackPointer--];
-    const tI18n = tView.data[rootIndex + HEADER_OFFSET];
-    ngDevMode && assertDefined(tI18n, `You should call i18nStart before i18nEnd`);
-    // Find the last node that was added before `i18nEnd`
-    const lastCreatedNode = getPreviousOrParentTNode();
-    // Read the instructions to insert/move/remove DOM elements
-    const visitedNodes = readCreateOpCodes(rootIndex, tI18n.create, tView, lView);
-    // Remove deleted nodes
-    let index = rootIndex + 1;
-    while (index <= lastCreatedNode.index - HEADER_OFFSET) {
-        if (visitedNodes.indexOf(index) === -1) {
-            removeNode(tView, lView, index, /* markAsDetached */ true);
-        }
-        // Check if an element has any local refs and skip them
-        const tNode = getTNode(tView, index);
-        if (tNode &&
-            (tNode.type === 0 /* Container */ || tNode.type === 3 /* Element */ ||
-                tNode.type === 4 /* ElementContainer */) &&
-            tNode.localNames !== null) {
-            // Divide by 2 to get the number of local refs,
-            // since they are stored as an array that also includes directive indexes,
-            // i.e. ["localRef", directiveIndex, ...]
-            index += tNode.localNames.length >> 1;
-        }
-        index++;
-    }
-}
-/**
- * Creates and stores the dynamic TNode, and unhooks it from the tree for now.
- */
-function createDynamicNodeAtIndex(tView, lView, index, type, native, name) {
-    const previousOrParentTNode = getPreviousOrParentTNode();
-    ngDevMode && assertDataInRange(lView, index + HEADER_OFFSET);
-    lView[index + HEADER_OFFSET] = native;
-    const tNode = getOrCreateTNode(tView, lView[T_HOST], index, type, name, null);
-    // We are creating a dynamic node, the previous tNode might not be pointing at this node.
-    // We will link ourselves into the tree later with `appendI18nNode`.
-    if (previousOrParentTNode && previousOrParentTNode.next === tNode) {
-        previousOrParentTNode.next = null;
-    }
-    return tNode;
-}
-function readCreateOpCodes(index, createOpCodes, tView, lView) {
-    const renderer = lView[RENDERER];
-    let currentTNode = null;
-    let previousTNode = null;
-    const visitedNodes = [];
-    for (let i = 0; i < createOpCodes.length; i++) {
-        const opCode = createOpCodes[i];
-        if (typeof opCode == 'string') {
-            const textRNode = createTextNode(opCode, renderer);
-            const textNodeIndex = createOpCodes[++i];
-            ngDevMode && ngDevMode.rendererCreateTextNode++;
-            previousTNode = currentTNode;
-            currentTNode =
-                createDynamicNodeAtIndex(tView, lView, textNodeIndex, 3 /* Element */, textRNode, null);
-            visitedNodes.push(textNodeIndex);
-            setIsNotParent();
-        }
-        else if (typeof opCode == 'number') {
-            switch (opCode & 7 /* MASK_OPCODE */) {
-                case 1 /* AppendChild */:
-                    const destinationNodeIndex = opCode >>> 17 /* SHIFT_PARENT */;
-                    let destinationTNode;
-                    if (destinationNodeIndex === index) {
-                        // If the destination node is `i18nStart`, we don't have a
-                        // top-level node and we should use the host node instead
-                        destinationTNode = lView[T_HOST];
-                    }
-                    else {
-                        destinationTNode = getTNode(tView, destinationNodeIndex);
-                    }
-                    ngDevMode &&
-                        assertDefined(currentTNode, `You need to create or select a node before you can insert it into the DOM`);
-                    previousTNode =
-                        appendI18nNode(tView, currentTNode, destinationTNode, previousTNode, lView);
-                    break;
-                case 0 /* Select */:
-                    // Negative indicies indicate that a given TNode is a sibling node, not a parent node
-                    // (see `i18nStartFirstPass` for additional information).
-                    const isParent = opCode >= 0;
-                    const nodeIndex = (isParent ? opCode : ~opCode) >>> 3 /* SHIFT_REF */;
-                    visitedNodes.push(nodeIndex);
-                    previousTNode = currentTNode;
-                    currentTNode = getTNode(tView, nodeIndex);
-                    if (currentTNode) {
-                        setPreviousOrParentTNode(currentTNode, isParent);
-                    }
-                    break;
-                case 5 /* ElementEnd */:
-                    const elementIndex = opCode >>> 3 /* SHIFT_REF */;
-                    previousTNode = currentTNode = getTNode(tView, elementIndex);
-                    setPreviousOrParentTNode(currentTNode, false);
-                    break;
-                case 4 /* Attr */:
-                    const elementNodeIndex = opCode >>> 3 /* SHIFT_REF */;
-                    const attrName = createOpCodes[++i];
-                    const attrValue = createOpCodes[++i];
-                    // This code is used for ICU expressions only, since we don't support
-                    // directives/components in ICUs, we don't need to worry about inputs here
-                    elementAttributeInternal(getTNode(tView, elementNodeIndex), lView, attrName, attrValue, null, null);
-                    break;
-                default:
-                    throw new Error(`Unable to determine the type of mutate operation for "${opCode}"`);
-            }
-        }
-        else {
-            switch (opCode) {
-                case COMMENT_MARKER:
-                    const commentValue = createOpCodes[++i];
-                    const commentNodeIndex = createOpCodes[++i];
-                    ngDevMode &&
-                        assertEqual(typeof commentValue, 'string', `Expected "${commentValue}" to be a comment node value`);
-                    const commentRNode = renderer.createComment(commentValue);
-                    ngDevMode && ngDevMode.rendererCreateComment++;
-                    previousTNode = currentTNode;
-                    currentTNode = createDynamicNodeAtIndex(tView, lView, commentNodeIndex, 5 /* IcuContainer */, commentRNode, null);
-                    visitedNodes.push(commentNodeIndex);
-                    attachPatchData(commentRNode, lView);
-                    currentTNode.activeCaseIndex = null;
-                    // We will add the case nodes later, during the update phase
-                    setIsNotParent();
-                    break;
-                case ELEMENT_MARKER:
-                    const tagNameValue = createOpCodes[++i];
-                    const elementNodeIndex = createOpCodes[++i];
-                    ngDevMode &&
-                        assertEqual(typeof tagNameValue, 'string', `Expected "${tagNameValue}" to be an element node tag name`);
-                    const elementRNode = renderer.createElement(tagNameValue);
-                    ngDevMode && ngDevMode.rendererCreateElement++;
-                    previousTNode = currentTNode;
-                    currentTNode = createDynamicNodeAtIndex(tView, lView, elementNodeIndex, 3 /* Element */, elementRNode, tagNameValue);
-                    visitedNodes.push(elementNodeIndex);
-                    break;
-                default:
-                    throw new Error(`Unable to determine the type of mutate operation for "${opCode}"`);
-            }
-        }
-    }
-    setIsNotParent();
-    return visitedNodes;
-}
-function readUpdateOpCodes(updateOpCodes, icus, bindingsStartIndex, changeMask, tView, lView, bypassCheckBit = false) {
-    let caseCreated = false;
-    for (let i = 0; i < updateOpCodes.length; i++) {
-        // bit code to check if we should apply the next update
-        const checkBit = updateOpCodes[i];
-        // Number of opCodes to skip until next set of update codes
-        const skipCodes = updateOpCodes[++i];
-        if (bypassCheckBit || (checkBit & changeMask)) {
-            // The value has been updated since last checked
-            let value = '';
-            for (let j = i + 1; j <= (i + skipCodes); j++) {
-                const opCode = updateOpCodes[j];
-                if (typeof opCode == 'string') {
-                    value += opCode;
-                }
-                else if (typeof opCode == 'number') {
-                    if (opCode < 0) {
-                        // It's a binding index whose value is negative
-                        value += renderStringify(lView[bindingsStartIndex - opCode]);
-                    }
-                    else {
-                        const nodeIndex = opCode >>> 2 /* SHIFT_REF */;
-                        let tIcuIndex;
-                        let tIcu;
-                        let icuTNode;
-                        switch (opCode & 3 /* MASK_OPCODE */) {
-                            case 1 /* Attr */:
-                                const propName = updateOpCodes[++j];
-                                const sanitizeFn = updateOpCodes[++j];
-                                elementPropertyInternal(tView, getTNode(tView, nodeIndex), lView, propName, value, lView[RENDERER], sanitizeFn, false);
-                                break;
-                            case 0 /* Text */:
-                                textBindingInternal(lView, nodeIndex, value);
-                                break;
-                            case 2 /* IcuSwitch */:
-                                tIcuIndex = updateOpCodes[++j];
-                                tIcu = icus[tIcuIndex];
-                                icuTNode = getTNode(tView, nodeIndex);
-                                // If there is an active case, delete the old nodes
-                                if (icuTNode.activeCaseIndex !== null) {
-                                    const removeCodes = tIcu.remove[icuTNode.activeCaseIndex];
-                                    for (let k = 0; k < removeCodes.length; k++) {
-                                        const removeOpCode = removeCodes[k];
-                                        switch (removeOpCode & 7 /* MASK_OPCODE */) {
-                                            case 3 /* Remove */:
-                                                const nodeIndex = removeOpCode >>> 3 /* SHIFT_REF */;
-                                                // Remove DOM element, but do *not* mark TNode as detached, since we are
-                                                // just switching ICU cases (while keeping the same TNode), so a DOM element
-                                                // representing a new ICU case will be re-created.
-                                                removeNode(tView, lView, nodeIndex, /* markAsDetached */ false);
-                                                break;
-                                            case 6 /* RemoveNestedIcu */:
-                                                const nestedIcuNodeIndex = removeCodes[k + 1] >>> 3 /* SHIFT_REF */;
-                                                const nestedIcuTNode = getTNode(tView, nestedIcuNodeIndex);
-                                                const activeIndex = nestedIcuTNode.activeCaseIndex;
-                                                if (activeIndex !== null) {
-                                                    const nestedIcuTIndex = removeOpCode >>> 3 /* SHIFT_REF */;
-                                                    const nestedTIcu = icus[nestedIcuTIndex];
-                                                    addAllToArray(nestedTIcu.remove[activeIndex], removeCodes);
-                                                }
-                                                break;
-                                        }
-                                    }
-                                }
-                                // Update the active caseIndex
-                                const caseIndex = getCaseIndex(tIcu, value);
-                                icuTNode.activeCaseIndex = caseIndex !== -1 ? caseIndex : null;
-                                if (caseIndex > -1) {
-                                    // Add the nodes for the new case
-                                    readCreateOpCodes(-1, tIcu.create[caseIndex], tView, lView);
-                                    caseCreated = true;
-                                }
-                                break;
-                            case 3 /* IcuUpdate */:
-                                tIcuIndex = updateOpCodes[++j];
-                                tIcu = icus[tIcuIndex];
-                                icuTNode = getTNode(tView, nodeIndex);
-                                if (icuTNode.activeCaseIndex !== null) {
-                                    readUpdateOpCodes(tIcu.update[icuTNode.activeCaseIndex], icus, bindingsStartIndex, changeMask, tView, lView, caseCreated);
-                                }
-                                break;
-                        }
-                    }
-                }
-            }
-        }
-        i += skipCodes;
-    }
-}
-function removeNode(tView, lView, index, markAsDetached) {
-    const removedPhTNode = getTNode(tView, index);
-    const removedPhRNode = getNativeByIndex(index, lView);
-    if (removedPhRNode) {
-        nativeRemoveNode(lView[RENDERER], removedPhRNode);
-    }
-    const slotValue = load(lView, index);
-    if (isLContainer(slotValue)) {
-        const lContainer = slotValue;
-        if (removedPhTNode.type !== 0 /* Container */) {
-            nativeRemoveNode(lView[RENDERER], lContainer[NATIVE]);
-        }
-    }
-    if (markAsDetached) {
-        // Define this node as detached to avoid projecting it later
-        removedPhTNode.flags |= 64 /* isDetached */;
-    }
-    ngDevMode && ngDevMode.rendererRemoveNode++;
-}
-/**
- *
- * Use this instruction to create a translation block that doesn't contain any placeholder.
- * It calls both {@link i18nStart} and {@link i18nEnd} in one instruction.
- *
- * The translation `message` is the value which is locale specific. The translation string may
- * contain placeholders which associate inner elements and sub-templates within the translation.
- *
- * The translation `message` placeholders are:
- * - `�{index}(:{block})�`: *Binding Placeholder*: Marks a location where an expression will be
- *   interpolated into. The placeholder `index` points to the expression binding index. An optional
- *   `block` that matches the sub-template in which it was declared.
- * - `�#{index}(:{block})�`/`�/#{index}(:{block})�`: *Element Placeholder*:  Marks the beginning
- *   and end of DOM element that were embedded in the original translation block. The placeholder
- *   `index` points to the element index in the template instructions set. An optional `block` that
- *   matches the sub-template in which it was declared.
- * - `�*{index}:{block}�`/`�/*{index}:{block}�`: *Sub-template Placeholder*: Sub-templates must be
- *   split up and translated separately in each angular template function. The `index` points to the
- *   `template` instruction index. A `block` that matches the sub-template in which it was declared.
- *
- * @param index A unique index of the translation in the static block.
- * @param message The translation message.
- * @param subTemplateIndex Optional sub-template index in the `message`.
- *
- * @codeGenApi
- */
-function ɵɵi18n(index, message, subTemplateIndex) {
-    ɵɵi18nStart(index, message, subTemplateIndex);
-    ɵɵi18nEnd();
-}
-/**
- * Marks a list of attributes as translatable.
- *
- * @param index A unique index in the static block
- * @param values
- *
- * @codeGenApi
- */
-function ɵɵi18nAttributes(index, values) {
-    const lView = getLView();
-    const tView = getTView();
-    ngDevMode && assertDefined(tView, `tView should be defined`);
-    i18nAttributesFirstPass(lView, tView, index, values);
-}
 /**
  * See `i18nAttributes` above.
  */
@@ -35415,6 +35282,9 @@ function i18nAttributesFirstPass(lView, tView, index, values) {
     const previousElement = getPreviousOrParentTNode();
     const previousElementIndex = previousElement.index - HEADER_OFFSET;
     const updateOpCodes = [];
+    if (ngDevMode) {
+        attachDebugGetter(updateOpCodes, i18nUpdateOpCodesToString);
+    }
     for (let i = 0; i < values.length; i += 2) {
         const attrName = values[i];
         const message = values[i + 1];
@@ -35458,81 +35328,132 @@ function i18nAttributesFirstPass(lView, tView, index, values) {
         tView.data[index + HEADER_OFFSET] = updateOpCodes;
     }
 }
-let changeMask = 0b0;
-let shiftsCounter = 0;
 /**
- * Stores the values of the bindings during each update cycle in order to determine if we need to
- * update the translated nodes.
+ * Generate the OpCodes to update the bindings of a string.
  *
- * @param value The binding's value
- * @returns This function returns itself so that it may be chained
- * (e.g. `i18nExp(ctx.name)(ctx.title)`)
- *
- * @codeGenApi
+ * @param str The string containing the bindings.
+ * @param destinationNode Index of the destination node which will receive the binding.
+ * @param attrName Name of the attribute, if the string belongs to an attribute.
+ * @param sanitizeFn Sanitization function used to sanitize the string after update, if necessary.
  */
-function ɵɵi18nExp(value) {
-    const lView = getLView();
-    if (bindingUpdated(lView, nextBindingIndex(), value)) {
-        changeMask = changeMask | (1 << shiftsCounter);
+function generateBindingUpdateOpCodes(str, destinationNode, attrName, sanitizeFn = null) {
+    const updateOpCodes = [null, null]; // Alloc space for mask and size
+    if (ngDevMode) {
+        attachDebugGetter(updateOpCodes, i18nUpdateOpCodesToString);
     }
-    shiftsCounter++;
-    return ɵɵi18nExp;
+    const textParts = str.split(BINDING_REGEXP);
+    let mask = 0;
+    for (let j = 0; j < textParts.length; j++) {
+        const textValue = textParts[j];
+        if (j & 1) {
+            // Odd indexes are bindings
+            const bindingIndex = parseInt(textValue, 10);
+            updateOpCodes.push(-1 - bindingIndex);
+            mask = mask | toMaskBit(bindingIndex);
+        }
+        else if (textValue !== '') {
+            // Even indexes are text
+            updateOpCodes.push(textValue);
+        }
+    }
+    updateOpCodes.push(destinationNode << 2 /* SHIFT_REF */ |
+        (attrName ? 1 /* Attr */ : 0 /* Text */));
+    if (attrName) {
+        updateOpCodes.push(attrName, sanitizeFn);
+    }
+    updateOpCodes[0] = mask;
+    updateOpCodes[1] = updateOpCodes.length - 2;
+    return updateOpCodes;
+}
+function getBindingMask(icuExpression, mask = 0) {
+    mask = mask | toMaskBit(icuExpression.mainBinding);
+    let match;
+    for (let i = 0; i < icuExpression.values.length; i++) {
+        const valueArr = icuExpression.values[i];
+        for (let j = 0; j < valueArr.length; j++) {
+            const value = valueArr[j];
+            if (typeof value === 'string') {
+                while (match = BINDING_REGEXP.exec(value)) {
+                    mask = mask | toMaskBit(parseInt(match[1], 10));
+                }
+            }
+            else {
+                mask = getBindingMask(value, mask);
+            }
+        }
+    }
+    return mask;
+}
+function allocNodeIndex(startIndex) {
+    return startIndex + i18nVarsCount++;
 }
 /**
- * Updates a translation block or an i18n attribute when the bindings have changed.
+ * Convert binding index to mask bit.
  *
- * @param index Index of either {@link i18nStart} (translation block) or {@link i18nAttributes}
- * (i18n attribute) on which it should update the content.
- *
- * @codeGenApi
+ * Each index represents a single bit on the bit-mask. Because bit-mask only has 32 bits, we make
+ * the 32nd bit share all masks for all bindings higher than 32. Since it is extremely rare to have
+ * more than 32 bindings this will be hit very rarely. The downside of hitting this corner case is
+ * that we will execute binding code more often than necessary. (penalty of performance)
  */
-function ɵɵi18nApply(index) {
-    if (shiftsCounter) {
-        const tView = getTView();
-        ngDevMode && assertDefined(tView, `tView should be defined`);
-        const tI18n = tView.data[index + HEADER_OFFSET];
-        let updateOpCodes;
-        let icus = null;
-        if (Array.isArray(tI18n)) {
-            updateOpCodes = tI18n;
+function toMaskBit(bindingIndex) {
+    return 1 << Math.min(bindingIndex, 31);
+}
+function isRootTemplateMessage(subTemplateIndex) {
+    return subTemplateIndex === undefined;
+}
+/**
+ * Removes everything inside the sub-templates of a message.
+ */
+function removeInnerTemplateTranslation(message) {
+    let match;
+    let res = '';
+    let index = 0;
+    let inTemplate = false;
+    let tagMatched;
+    while ((match = SUBTEMPLATE_REGEXP.exec(message)) !== null) {
+        if (!inTemplate) {
+            res += message.substring(index, match.index + match[0].length);
+            tagMatched = match[1];
+            inTemplate = true;
         }
         else {
-            updateOpCodes = tI18n.update;
-            icus = tI18n.icus;
+            if (match[0] === `${MARKER}/*${tagMatched}${MARKER}`) {
+                index = match.index;
+                inTemplate = false;
+            }
         }
-        const bindingsStartIndex = getBindingIndex() - shiftsCounter - 1;
-        const lView = getLView();
-        readUpdateOpCodes(updateOpCodes, icus, bindingsStartIndex, changeMask, tView, lView);
-        // Reset changeMask & maskBit to default for the next update cycle
-        changeMask = 0b0;
-        shiftsCounter = 0;
     }
+    ngDevMode &&
+        assertEqual(inTemplate, false, `Tag mismatch: unable to find the end of the sub-template in the translation "${message}"`);
+    res += message.substr(index);
+    return res;
 }
 /**
- * Returns the index of the current case of an ICU expression depending on the main binding value
+ * Extracts a part of a message and removes the rest.
  *
- * @param icuExpression
- * @param bindingValue The value of the main binding used by this ICU expression
+ * This method is used for extracting a part of the message associated with a template. A translated
+ * message can span multiple templates.
+ *
+ * Example:
+ * ```
+ * <div i18n>Translate <span *ngIf>me</span>!</div>
+ * ```
+ *
+ * @param message The message to crop
+ * @param subTemplateIndex Index of the sub-template to extract. If undefined it returns the
+ * external template and removes all sub-templates.
  */
-function getCaseIndex(icuExpression, bindingValue) {
-    let index = icuExpression.cases.indexOf(bindingValue);
-    if (index === -1) {
-        switch (icuExpression.type) {
-            case 1 /* plural */: {
-                const resolvedCase = getPluralCase(bindingValue, getLocaleId());
-                index = icuExpression.cases.indexOf(resolvedCase);
-                if (index === -1 && resolvedCase !== 'other') {
-                    index = icuExpression.cases.indexOf('other');
-                }
-                break;
-            }
-            case 0 /* select */: {
-                index = icuExpression.cases.indexOf('other');
-                break;
-            }
-        }
+function getTranslationForTemplate(message, subTemplateIndex) {
+    if (isRootTemplateMessage(subTemplateIndex)) {
+        // We want the root template message, ignore all sub-templates
+        return removeInnerTemplateTranslation(message);
     }
-    return index;
+    else {
+        // We want a specific sub-template
+        const start = message.indexOf(`:${subTemplateIndex}${MARKER}`) + 2 + subTemplateIndex.toString().length;
+        const end = message.search(new RegExp(`${MARKER}\\/\\*\\d+:${subTemplateIndex}${MARKER}`));
+        return removeInnerTemplateTranslation(message.substring(start, end));
+    }
 }
 /**
  * Generate the OpCodes for ICU expressions.
@@ -35548,9 +35469,10 @@ function icuStart(tIcus, icuExpression, startIndex, expandoStartIndex) {
     const updateCodes = [];
     const vars = [];
     const childIcus = [];
-    for (let i = 0; i < icuExpression.values.length; i++) {
+    const values = icuExpression.values;
+    for (let i = 0; i < values.length; i++) {
         // Each value is an array of strings & other ICU expressions
-        const valueArr = icuExpression.values[i];
+        const valueArr = values[i];
         const nestedIcus = [];
         for (let j = 0; j < valueArr.length; j++) {
             const value = valueArr[j];
@@ -35571,6 +35493,9 @@ function icuStart(tIcus, icuExpression, startIndex, expandoStartIndex) {
     const tIcu = {
         type: icuExpression.type,
         vars,
+        currentCaseLViewIndex: HEADER_OFFSET +
+            expandoStartIndex // expandoStartIndex does not include the header so add it.
+            + 1,
         childIcus,
         cases: icuExpression.cases,
         create: createCodes,
@@ -35580,6 +35505,47 @@ function icuStart(tIcus, icuExpression, startIndex, expandoStartIndex) {
     tIcus.push(tIcu);
     // Adding the maximum possible of vars needed (based on the cases with the most vars)
     i18nVarsCount += Math.max(...vars);
+}
+/**
+ * Parses text containing an ICU expression and produces a JSON object for it.
+ * Original code from closure library, modified for Angular.
+ *
+ * @param pattern Text containing an ICU expression that needs to be parsed.
+ *
+ */
+function parseICUBlock(pattern) {
+    const cases = [];
+    const values = [];
+    let icuType = 1 /* plural */;
+    let mainBinding = 0;
+    pattern = pattern.replace(ICU_BLOCK_REGEXP, function (str, binding, type) {
+        if (type === 'select') {
+            icuType = 0 /* select */;
+        }
+        else {
+            icuType = 1 /* plural */;
+        }
+        mainBinding = parseInt(binding.substr(1), 10);
+        return '';
+    });
+    const parts = extractParts(pattern);
+    // Looking for (key block)+ sequence. One of the keys has to be "other".
+    for (let pos = 0; pos < parts.length;) {
+        let key = parts[pos++].trim();
+        if (icuType === 1 /* plural */) {
+            // Key can be "=x", we just want "x"
+            key = key.replace(/\s*(?:=)?(\w+)\s*/, '$1');
+        }
+        if (key.length) {
+            cases.push(key);
+        }
+        const blocks = extractParts(parts[pos++]);
+        if (cases.length > values.length) {
+            values.push(blocks);
+        }
+    }
+    // TODO(ocombe): support ICU expressions in attributes, see #21615
+    return { type: icuType, mainBinding: mainBinding, cases, values };
 }
 /**
  * Transforms a string template into an HTML template and a list of instructions used to update
@@ -35598,11 +35564,70 @@ function parseIcuCase(unsafeHtml, parentIndex, nestedIcus, tIcus, expandoStartIn
         throw new Error('Unable to generate inert body element');
     }
     const wrapper = getTemplateContent(inertBodyElement) || inertBodyElement;
-    const opCodes = { vars: 0, childIcus: [], create: [], remove: [], update: [] };
+    const opCodes = {
+        vars: 1,
+        childIcus: [],
+        create: [],
+        remove: [],
+        update: []
+    };
+    if (ngDevMode) {
+        attachDebugGetter(opCodes.create, i18nMutateOpCodesToString);
+        attachDebugGetter(opCodes.remove, i18nMutateOpCodesToString);
+        attachDebugGetter(opCodes.update, i18nUpdateOpCodesToString);
+    }
     parseNodes(wrapper.firstChild, opCodes, parentIndex, nestedIcus, tIcus, expandoStartIndex);
     return opCodes;
 }
-const NESTED_ICU = /�(\d+)�/;
+/**
+ * Breaks pattern into strings and top level {...} blocks.
+ * Can be used to break a message into text and ICU expressions, or to break an ICU expression into
+ * keys and cases.
+ * Original code from closure library, modified for Angular.
+ *
+ * @param pattern (sub)Pattern to be broken.
+ *
+ */
+function extractParts(pattern) {
+    if (!pattern) {
+        return [];
+    }
+    let prevPos = 0;
+    const braceStack = [];
+    const results = [];
+    const braces = /[{}]/g;
+    // lastIndex doesn't get set to 0 so we have to.
+    braces.lastIndex = 0;
+    let match;
+    while (match = braces.exec(pattern)) {
+        const pos = match.index;
+        if (match[0] == '}') {
+            braceStack.pop();
+            if (braceStack.length == 0) {
+                // End of the block.
+                const block = pattern.substring(prevPos, pos);
+                if (ICU_BLOCK_REGEXP.test(block)) {
+                    results.push(parseICUBlock(block));
+                }
+                else {
+                    results.push(block);
+                }
+                prevPos = pos + 1;
+            }
+        }
+        else {
+            if (braceStack.length == 0) {
+                const substring = pattern.substring(prevPos, pos);
+                results.push(substring);
+                prevPos = pos + 1;
+            }
+            braceStack.push('{');
+        }
+    }
+    const substring = pattern.substring(prevPos);
+    results.push(substring);
+    return results;
+}
 /**
  * Parses a node, its children and its siblings, and generates the mutate & update OpCodes.
  *
@@ -35704,50 +35729,291 @@ function parseNodes(currentNode, icuCase, parentIndex, nestedIcus, tIcus, expand
             const mask = getBindingMask(nestedIcu);
             icuCase.update.push(toMaskBit(nestedIcu.mainBinding), // mask of the main binding
             3, // skip 3 opCodes if not changed
-            -1 - nestedIcu.mainBinding, nestedIcuNodeIndex << 2 /* SHIFT_REF */ | 2 /* IcuSwitch */, nestTIcuIndex, mask, // mask of all the bindings of this ICU expression
+            -1 - nestedIcu.mainBinding, nestedIcuNodeIndex << 2 /* SHIFT_REF */ | 2 /* IcuSwitch */, 
+            // FIXME(misko): Index should be part of the opcode
+            nestTIcuIndex, mask, // mask of all the bindings of this ICU expression
             2, // skip 2 opCodes if not changed
             nestedIcuNodeIndex << 2 /* SHIFT_REF */ | 3 /* IcuUpdate */, nestTIcuIndex);
-            icuCase.remove.push(nestTIcuIndex << 3 /* SHIFT_REF */ | 6 /* RemoveNestedIcu */, nestedIcuNodeIndex << 3 /* SHIFT_REF */ | 3 /* Remove */);
+            icuCase.remove.push(nestTIcuIndex << 3 /* SHIFT_REF */ | 6 /* RemoveNestedIcu */, 
+            // FIXME(misko): Index should be part of the opcode
+            nestedIcuNodeIndex << 3 /* SHIFT_REF */ | 3 /* Remove */);
         }
     }
 }
+
 /**
- * Angular Dart introduced &ngsp; as a placeholder for non-removable space, see:
- * https://github.com/dart-lang/angular/blob/0bb611387d29d65b5af7f9d2515ab571fd3fbee4/_tests/test/compiler/preserve_whitespace_test.dart#L25-L32
- * In Angular Dart &ngsp; is converted to the 0xE500 PUA (Private Use Areas) unicode character
- * and later on replaced by a space. We are re-implementing the same idea here, since translations
- * might contain this special character.
- */
-const NGSP_UNICODE_REGEXP = /\uE500/g;
-function replaceNgsp(value) {
-    return value.replace(NGSP_UNICODE_REGEXP, ' ');
-}
-/**
- * The locale id that the application is currently using (for translations and ICU expressions).
- * This is the ivy version of `LOCALE_ID` that was defined as an injection token for the view engine
- * but is now defined as a global value.
- */
-let LOCALE_ID = DEFAULT_LOCALE_ID;
-/**
- * Sets the locale id that will be used for translations and ICU expressions.
- * This is the ivy version of `LOCALE_ID` that was defined as an injection token for the view engine
- * but is now defined as a global value.
+ * @license
+ * Copyright Google LLC All Rights Reserved.
  *
- * @param localeId
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
-function setLocaleId(localeId) {
-    assertDefined(localeId, `Expected localeId to be defined`);
-    if (typeof localeId === 'string') {
-        LOCALE_ID = localeId.toLowerCase().replace(/_/g, '-');
+// i18nPostprocess consts
+const ROOT_TEMPLATE_ID = 0;
+const PP_MULTI_VALUE_PLACEHOLDERS_REGEXP = /\[(�.+?�?)\]/;
+const PP_PLACEHOLDERS_REGEXP = /\[(�.+?�?)\]|(�\/?\*\d+:\d+�)/g;
+const PP_ICU_VARS_REGEXP = /({\s*)(VAR_(PLURAL|SELECT)(_\d+)?)(\s*,)/g;
+const PP_ICU_PLACEHOLDERS_REGEXP = /{([A-Z0-9_]+)}/g;
+const PP_ICUS_REGEXP = /�I18N_EXP_(ICU(_\d+)?)�/g;
+const PP_CLOSE_TEMPLATE_REGEXP = /\/\*/;
+const PP_TEMPLATE_ID_REGEXP = /\d+\:(\d+)/;
+/**
+ * Handles message string post-processing for internationalization.
+ *
+ * Handles message string post-processing by transforming it from intermediate
+ * format (that might contain some markers that we need to replace) to the final
+ * form, consumable by i18nStart instruction. Post processing steps include:
+ *
+ * 1. Resolve all multi-value cases (like [�*1:1��#2:1�|�#4:1�|�5�])
+ * 2. Replace all ICU vars (like "VAR_PLURAL")
+ * 3. Replace all placeholders used inside ICUs in a form of {PLACEHOLDER}
+ * 4. Replace all ICU references with corresponding values (like �ICU_EXP_ICU_1�)
+ *    in case multiple ICUs have the same placeholder name
+ *
+ * @param message Raw translation string for post processing
+ * @param replacements Set of replacements that should be applied
+ *
+ * @returns Transformed string that can be consumed by i18nStart instruction
+ *
+ * @codeGenApi
+ */
+function i18nPostprocess(message, replacements = {}) {
+    /**
+     * Step 1: resolve all multi-value placeholders like [�#5�|�*1:1��#2:1�|�#4:1�]
+     *
+     * Note: due to the way we process nested templates (BFS), multi-value placeholders are typically
+     * grouped by templates, for example: [�#5�|�#6�|�#1:1�|�#3:2�] where �#5� and �#6� belong to root
+     * template, �#1:1� belong to nested template with index 1 and �#1:2� - nested template with index
+     * 3. However in real templates the order might be different: i.e. �#1:1� and/or �#3:2� may go in
+     * front of �#6�. The post processing step restores the right order by keeping track of the
+     * template id stack and looks for placeholders that belong to the currently active template.
+     */
+    let result = message;
+    if (PP_MULTI_VALUE_PLACEHOLDERS_REGEXP.test(message)) {
+        const matches = {};
+        const templateIdsStack = [ROOT_TEMPLATE_ID];
+        result = result.replace(PP_PLACEHOLDERS_REGEXP, (m, phs, tmpl) => {
+            const content = phs || tmpl;
+            const placeholders = matches[content] || [];
+            if (!placeholders.length) {
+                content.split('|').forEach((placeholder) => {
+                    const match = placeholder.match(PP_TEMPLATE_ID_REGEXP);
+                    const templateId = match ? parseInt(match[1], 10) : ROOT_TEMPLATE_ID;
+                    const isCloseTemplateTag = PP_CLOSE_TEMPLATE_REGEXP.test(placeholder);
+                    placeholders.push([templateId, isCloseTemplateTag, placeholder]);
+                });
+                matches[content] = placeholders;
+            }
+            if (!placeholders.length) {
+                throw new Error(`i18n postprocess: unmatched placeholder - ${content}`);
+            }
+            const currentTemplateId = templateIdsStack[templateIdsStack.length - 1];
+            let idx = 0;
+            // find placeholder index that matches current template id
+            for (let i = 0; i < placeholders.length; i++) {
+                if (placeholders[i][0] === currentTemplateId) {
+                    idx = i;
+                    break;
+                }
+            }
+            // update template id stack based on the current tag extracted
+            const [templateId, isCloseTemplateTag, placeholder] = placeholders[idx];
+            if (isCloseTemplateTag) {
+                templateIdsStack.pop();
+            }
+            else if (currentTemplateId !== templateId) {
+                templateIdsStack.push(templateId);
+            }
+            // remove processed tag from the list
+            placeholders.splice(idx, 1);
+            return placeholder;
+        });
+    }
+    // return current result if no replacements specified
+    if (!Object.keys(replacements).length) {
+        return result;
+    }
+    /**
+     * Step 2: replace all ICU vars (like "VAR_PLURAL")
+     */
+    result = result.replace(PP_ICU_VARS_REGEXP, (match, start, key, _type, _idx, end) => {
+        return replacements.hasOwnProperty(key) ? `${start}${replacements[key]}${end}` : match;
+    });
+    /**
+     * Step 3: replace all placeholders used inside ICUs in a form of {PLACEHOLDER}
+     */
+    result = result.replace(PP_ICU_PLACEHOLDERS_REGEXP, (match, key) => {
+        return replacements.hasOwnProperty(key) ? replacements[key] : match;
+    });
+    /**
+     * Step 4: replace all ICU references with corresponding values (like �ICU_EXP_ICU_1�) in case
+     * multiple ICUs have the same placeholder name
+     */
+    result = result.replace(PP_ICUS_REGEXP, (match, key) => {
+        if (replacements.hasOwnProperty(key)) {
+            const list = replacements[key];
+            if (!list.length) {
+                throw new Error(`i18n postprocess: unmatched ICU - ${match} with key: ${key}`);
+            }
+            return list.shift();
+        }
+        return match;
+    });
+    return result;
+}
+
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * Marks a block of text as translatable.
+ *
+ * The instructions `i18nStart` and `i18nEnd` mark the translation block in the template.
+ * The translation `message` is the value which is locale specific. The translation string may
+ * contain placeholders which associate inner elements and sub-templates within the translation.
+ *
+ * The translation `message` placeholders are:
+ * - `�{index}(:{block})�`: *Binding Placeholder*: Marks a location where an expression will be
+ *   interpolated into. The placeholder `index` points to the expression binding index. An optional
+ *   `block` that matches the sub-template in which it was declared.
+ * - `�#{index}(:{block})�`/`�/#{index}(:{block})�`: *Element Placeholder*:  Marks the beginning
+ *   and end of DOM element that were embedded in the original translation block. The placeholder
+ *   `index` points to the element index in the template instructions set. An optional `block` that
+ *   matches the sub-template in which it was declared.
+ * - `�!{index}(:{block})�`/`�/!{index}(:{block})�`: *Projection Placeholder*:  Marks the
+ *   beginning and end of <ng-content> that was embedded in the original translation block.
+ *   The placeholder `index` points to the element index in the template instructions set.
+ *   An optional `block` that matches the sub-template in which it was declared.
+ * - `�*{index}:{block}�`/`�/*{index}:{block}�`: *Sub-template Placeholder*: Sub-templates must be
+ *   split up and translated separately in each angular template function. The `index` points to the
+ *   `template` instruction index. A `block` that matches the sub-template in which it was declared.
+ *
+ * @param index A unique index of the translation in the static block.
+ * @param message The translation message.
+ * @param subTemplateIndex Optional sub-template index in the `message`.
+ *
+ * @codeGenApi
+ */
+function ɵɵi18nStart(index, message, subTemplateIndex) {
+    const tView = getTView();
+    ngDevMode && assertDefined(tView, `tView should be defined`);
+    pushI18nIndex(index);
+    // We need to delay projections until `i18nEnd`
+    setDelayProjection(true);
+    if (tView.firstCreatePass && tView.data[index + HEADER_OFFSET] === null) {
+        i18nStartFirstPass(getLView(), tView, index, message, subTemplateIndex);
     }
 }
 /**
- * Gets the locale id that will be used for translations and ICU expressions.
- * This is the ivy version of `LOCALE_ID` that was defined as an injection token for the view engine
- * but is now defined as a global value.
+ * Translates a translation block marked by `i18nStart` and `i18nEnd`. It inserts the text/ICU nodes
+ * into the render tree, moves the placeholder nodes and removes the deleted nodes.
+ *
+ * @codeGenApi
  */
-function getLocaleId() {
-    return LOCALE_ID;
+function ɵɵi18nEnd() {
+    const lView = getLView();
+    const tView = getTView();
+    ngDevMode && assertDefined(tView, `tView should be defined`);
+    i18nEndFirstPass(tView, lView);
+    // Stop delaying projections
+    setDelayProjection(false);
+}
+/**
+ *
+ * Use this instruction to create a translation block that doesn't contain any placeholder.
+ * It calls both {@link i18nStart} and {@link i18nEnd} in one instruction.
+ *
+ * The translation `message` is the value which is locale specific. The translation string may
+ * contain placeholders which associate inner elements and sub-templates within the translation.
+ *
+ * The translation `message` placeholders are:
+ * - `�{index}(:{block})�`: *Binding Placeholder*: Marks a location where an expression will be
+ *   interpolated into. The placeholder `index` points to the expression binding index. An optional
+ *   `block` that matches the sub-template in which it was declared.
+ * - `�#{index}(:{block})�`/`�/#{index}(:{block})�`: *Element Placeholder*:  Marks the beginning
+ *   and end of DOM element that were embedded in the original translation block. The placeholder
+ *   `index` points to the element index in the template instructions set. An optional `block` that
+ *   matches the sub-template in which it was declared.
+ * - `�*{index}:{block}�`/`�/*{index}:{block}�`: *Sub-template Placeholder*: Sub-templates must be
+ *   split up and translated separately in each angular template function. The `index` points to the
+ *   `template` instruction index. A `block` that matches the sub-template in which it was declared.
+ *
+ * @param index A unique index of the translation in the static block.
+ * @param message The translation message.
+ * @param subTemplateIndex Optional sub-template index in the `message`.
+ *
+ * @codeGenApi
+ */
+function ɵɵi18n(index, message, subTemplateIndex) {
+    ɵɵi18nStart(index, message, subTemplateIndex);
+    ɵɵi18nEnd();
+}
+/**
+ * Marks a list of attributes as translatable.
+ *
+ * @param index A unique index in the static block
+ * @param values
+ *
+ * @codeGenApi
+ */
+function ɵɵi18nAttributes(index, values) {
+    const lView = getLView();
+    const tView = getTView();
+    ngDevMode && assertDefined(tView, `tView should be defined`);
+    i18nAttributesFirstPass(lView, tView, index, values);
+}
+/**
+ * Stores the values of the bindings during each update cycle in order to determine if we need to
+ * update the translated nodes.
+ *
+ * @param value The binding's value
+ * @returns This function returns itself so that it may be chained
+ * (e.g. `i18nExp(ctx.name)(ctx.title)`)
+ *
+ * @codeGenApi
+ */
+function ɵɵi18nExp(value) {
+    const lView = getLView();
+    setMaskBit(bindingUpdated(lView, nextBindingIndex(), value));
+    return ɵɵi18nExp;
+}
+/**
+ * Updates a translation block or an i18n attribute when the bindings have changed.
+ *
+ * @param index Index of either {@link i18nStart} (translation block) or {@link i18nAttributes}
+ * (i18n attribute) on which it should update the content.
+ *
+ * @codeGenApi
+ */
+function ɵɵi18nApply(index) {
+    applyI18n(getTView(), getLView(), index);
+}
+/**
+ * Handles message string post-processing for internationalization.
+ *
+ * Handles message string post-processing by transforming it from intermediate
+ * format (that might contain some markers that we need to replace) to the final
+ * form, consumable by i18nStart instruction. Post processing steps include:
+ *
+ * 1. Resolve all multi-value cases (like [�*1:1��#2:1�|�#4:1�|�5�])
+ * 2. Replace all ICU vars (like "VAR_PLURAL")
+ * 3. Replace all placeholders used inside ICUs in a form of {PLACEHOLDER}
+ * 4. Replace all ICU references with corresponding values (like �ICU_EXP_ICU_1�)
+ *    in case multiple ICUs have the same placeholder name
+ *
+ * @param message Raw translation string for post processing
+ * @param replacements Set of replacements that should be applied
+ *
+ * @returns Transformed string that can be consumed by i18nStart instruction
+ *
+ * @codeGenApi
+ */
+function ɵɵi18nPostprocess(message, replacements = {}) {
+    return i18nPostprocess(message, replacements);
 }
 
 /**
@@ -36192,7 +36458,7 @@ function ɵɵpureFunctionV(slotOffset, pureFn, exps, thisArg) {
  * it to `undefined`.
  */
 function getPureFunctionReturnValue(lView, returnValueIndex) {
-    ngDevMode && assertDataInRange(lView, returnValueIndex);
+    ngDevMode && assertIndexInRange(lView, returnValueIndex);
     const lastReturnValue = lView[returnValueIndex];
     return lastReturnValue === NO_CHANGE ? undefined : lastReturnValue;
 }
@@ -36813,7 +37079,7 @@ class TQueries_ {
         }
     }
     getByIndex(index) {
-        ngDevMode && assertDataInRange(this.queries, index);
+        ngDevMode && assertIndexInRange(this.queries, index);
         return this.queries[index];
     }
     get length() {
@@ -36883,21 +37149,23 @@ class TQuery_ {
         return this._appliesToNextNode;
     }
     matchTNode(tView, tNode) {
-        if (Array.isArray(this.metadata.predicate)) {
-            const localNames = this.metadata.predicate;
-            for (let i = 0; i < localNames.length; i++) {
-                this.matchTNodeWithReadOption(tView, tNode, getIdxOfMatchingSelector(tNode, localNames[i]));
+        const predicate = this.metadata.predicate;
+        if (Array.isArray(predicate)) {
+            for (let i = 0; i < predicate.length; i++) {
+                const name = predicate[i];
+                this.matchTNodeWithReadOption(tView, tNode, getIdxOfMatchingSelector(tNode, name));
+                // Also try matching the name to a provider since strings can be used as DI tokens too.
+                this.matchTNodeWithReadOption(tView, tNode, locateDirectiveOrProvider(tNode, tView, name, false, false));
             }
         }
         else {
-            const typePredicate = this.metadata.predicate;
-            if (typePredicate === TemplateRef) {
+            if (predicate === TemplateRef) {
                 if (tNode.type === 0 /* Container */) {
                     this.matchTNodeWithReadOption(tView, tNode, -1);
                 }
             }
             else {
-                this.matchTNodeWithReadOption(tView, tNode, locateDirectiveOrProvider(tNode, tView, typePredicate, false, false));
+                this.matchTNodeWithReadOption(tView, tNode, locateDirectiveOrProvider(tNode, tView, predicate, false, false));
             }
         }
     }
@@ -37009,7 +37277,7 @@ function materializeViewResults(tView, lView, tQuery, queryIndex) {
                 result.push(null);
             }
             else {
-                ngDevMode && assertDataInRange(tViewData, matchedNodeIdx);
+                ngDevMode && assertIndexInRange(tViewData, matchedNodeIdx);
                 const tNode = tViewData[matchedNodeIdx];
                 result.push(createResultForNode(lView, tNode, tQueryMatches[i + 1], tQuery.metadata.read));
             }
@@ -37171,7 +37439,7 @@ function ɵɵloadQuery() {
 function loadQueryInternal(lView, queryIndex) {
     ngDevMode &&
         assertDefined(lView[QUERIES], 'LQueries should be defined when trying to load a query');
-    ngDevMode && assertDataInRange(lView[QUERIES].queries, queryIndex);
+    ngDevMode && assertIndexInRange(lView[QUERIES].queries, queryIndex);
     return lView[QUERIES].queries[queryIndex].queryList;
 }
 function createLQuery(tView, lView) {
@@ -37876,6 +38144,20 @@ function isNgModule(value) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
+ * Keep track of the compilation depth to avoid reentrancy issues during JIT compilation. This
+ * matters in the following scenario:
+ *
+ * Consider a component 'A' that extends component 'B', both declared in module 'M'. During
+ * the compilation of 'A' the definition of 'B' is requested to capture the inheritance chain,
+ * potentially triggering compilation of 'B'. If this nested compilation were to trigger
+ * `flushModuleScopingQueueAsMuchAsPossible` it may happen that module 'M' is still pending in the
+ * queue, resulting in 'A' and 'B' to be patched with the NgModule scope. As the compilation of
+ * 'A' is still in progress, this would introduce a circular dependency on its compilation. To avoid
+ * this issue, the module scope queue is only flushed for compilations at the depth 0, to ensure
+ * all compilations have finished.
+ */
+let compilationDepth = 0;
+/**
  * Compile an Angular component according to its decorator metadata, and patch the resulting
  * component def (ɵcmp) onto the component type.
  *
@@ -37935,16 +38217,25 @@ function compileComponent(type, metadata) {
                 }
                 const templateUrl = metadata.templateUrl || `ng:///${type.name}/template.html`;
                 const meta = Object.assign(Object.assign({}, directiveMetadata(type, metadata)), { typeSourceSpan: compiler.createParseSourceSpan('Component', type.name, templateUrl), template: metadata.template || '', preserveWhitespaces, styles: metadata.styles || EMPTY_ARRAY, animations: metadata.animations, directives: [], changeDetection: metadata.changeDetection, pipes: new Map(), encapsulation, interpolation: metadata.interpolation, viewProviders: metadata.viewProviders || null });
-                if (meta.usesInheritance) {
-                    addDirectiveDefToUndecoratedParents(type);
+                compilationDepth++;
+                try {
+                    if (meta.usesInheritance) {
+                        addDirectiveDefToUndecoratedParents(type);
+                    }
+                    ngComponentDef = compiler.compileComponent(angularCoreEnv, templateUrl, meta);
                 }
-                ngComponentDef = compiler.compileComponent(angularCoreEnv, templateUrl, meta);
-                // When NgModule decorator executed, we enqueued the module definition such that
-                // it would only dequeue and add itself as module scope to all of its declarations,
-                // but only if  if all of its declarations had resolved. This call runs the check
-                // to see if any modules that are in the queue can be dequeued and add scope to
-                // their declarations.
-                flushModuleScopingQueueAsMuchAsPossible();
+                finally {
+                    // Ensure that the compilation depth is decremented even when the compilation failed.
+                    compilationDepth--;
+                }
+                if (compilationDepth === 0) {
+                    // When NgModule decorator executed, we enqueued the module definition such that
+                    // it would only dequeue and add itself as module scope to all of its declarations,
+                    // but only if  if all of its declarations had resolved. This call runs the check
+                    // to see if any modules that are in the queue can be dequeued and add scope to
+                    // their declarations.
+                    flushModuleScopingQueueAsMuchAsPossible();
+                }
                 // If component compilation is async, then the @NgModule annotation which declares the
                 // component may execute and set an ngSelectorScope property on the component type. This
                 // allows the component to patch itself with directiveDefs from the module after it
@@ -43481,7 +43772,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_animations_browser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/animations/browser */ "./node_modules/@angular/animations/__ivy_ngcc__/fesm2015/browser.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 /**
- * @license Angular v10.0.8
+ * @license Angular v10.0.14
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -44063,7 +44354,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ɵgetDOM", function() { return _angular_common__WEBPACK_IMPORTED_MODULE_0__["ɵgetDOM"]; });
 
 /**
- * @license Angular v10.0.8
+ * @license Angular v10.0.14
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -45303,6 +45594,9 @@ class KeyEventsPlugin extends EventManagerPlugin {
             // returning null instead of throwing to let another plugin process the event
             return null;
         }
+        // NOTE: Please don't rewrite this as so, as it will break JSCompiler property renaming.
+        //       The code must remain in the `result['domEventName']` form.
+        // return {domEventName, fullKey};
         const result = {};
         result['domEventName'] = domEventName;
         result['fullKey'] = fullKey;
@@ -46191,7 +46485,7 @@ function elementMatches(n, selector) {
 /**
  * @publicApi
  */
-const VERSION = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["Version"]('10.0.8');
+const VERSION = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["Version"]('10.0.14');
 
 /**
  * @license
@@ -46307,7 +46601,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
 /**
- * @license Angular v10.0.8
+ * @license Angular v10.0.14
  * (c) 2010-2020 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -50376,7 +50670,7 @@ class Router {
         this.navigated = false;
         this.lastSuccessfulId = -1;
     }
-    /** @docsNotRequired */
+    /** @nodoc */
     ngOnDestroy() {
         this.dispose();
     }
@@ -50786,9 +51080,17 @@ class RouterLink {
         this.router = router;
         this.route = route;
         this.commands = [];
+        /** @internal */
+        this.onChanges = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
         if (tabIndex == null) {
             renderer.setAttribute(el.nativeElement, 'tabindex', '0');
         }
+    }
+    /** @nodoc */
+    ngOnChanges(changes) {
+        // This is subscribed to by `RouterLinkActive` so that it knows to update when there are changes
+        // to the RouterLinks it's tracking.
+        this.onChanges.next(this);
     }
     /**
      * Commands to pass to {@link Router#createUrlTree Router#createUrlTree}.
@@ -50814,6 +51116,7 @@ class RouterLink {
         }
         this.preserve = value;
     }
+    /** @nodoc */
     onClick() {
         const extras = {
             skipLocationChange: attrBoolValue(this.skipLocationChange),
@@ -50837,7 +51140,7 @@ class RouterLink {
 RouterLink.ɵfac = function RouterLink_Factory(t) { return new (t || RouterLink)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](Router), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](ActivatedRoute), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinjectAttribute"]('tabindex'), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_1__["Renderer2"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])); };
 RouterLink.ɵdir = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineDirective"]({ type: RouterLink, selectors: [["", "routerLink", "", 5, "a", 5, "area"]], hostBindings: function RouterLink_HostBindings(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function RouterLink_click_HostBindingHandler() { return ctx.onClick(); });
-    } }, inputs: { routerLink: "routerLink", preserveQueryParams: "preserveQueryParams", queryParams: "queryParams", fragment: "fragment", queryParamsHandling: "queryParamsHandling", preserveFragment: "preserveFragment", skipLocationChange: "skipLocationChange", replaceUrl: "replaceUrl", state: "state" } });
+    } }, inputs: { routerLink: "routerLink", preserveQueryParams: "preserveQueryParams", queryParams: "queryParams", fragment: "fragment", queryParamsHandling: "queryParamsHandling", preserveFragment: "preserveFragment", skipLocationChange: "skipLocationChange", replaceUrl: "replaceUrl", state: "state" }, features: [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵNgOnChangesFeature"]] });
 RouterLink.ctorParameters = () => [
     { type: Router },
     { type: ActivatedRoute },
@@ -50867,7 +51170,9 @@ RouterLink.propDecorators = {
             type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
         }], preserveQueryParams: [{
             type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
-        }], onClick: [{
+        }], 
+    /** @nodoc */
+    onClick: [{
             type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"],
             args: ['click']
         }], queryParams: [{
@@ -50902,6 +51207,8 @@ class RouterLinkWithHref {
         this.route = route;
         this.locationStrategy = locationStrategy;
         this.commands = [];
+        /** @internal */
+        this.onChanges = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
         this.subscription = router.events.subscribe((s) => {
             if (s instanceof NavigationEnd) {
                 this.updateTargetUrlAndHref();
@@ -50932,12 +51239,16 @@ class RouterLinkWithHref {
         }
         this.preserve = value;
     }
+    /** @nodoc */
     ngOnChanges(changes) {
         this.updateTargetUrlAndHref();
+        this.onChanges.next(this);
     }
+    /** @nodoc */
     ngOnDestroy() {
         this.subscription.unsubscribe();
     }
+    /** @nodoc */
     onClick(button, ctrlKey, metaKey, shiftKey) {
         if (button !== 0 || ctrlKey || metaKey || shiftKey) {
             return true;
@@ -51000,7 +51311,9 @@ RouterLinkWithHref.propDecorators = {
             type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
         }], preserveQueryParams: [{
             type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
-        }], onClick: [{
+        }], 
+    /** @nodoc */
+    onClick: [{
             type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"],
             args: ['click', ['$event.button', '$event.ctrlKey', '$event.metaKey', '$event.shiftKey']]
         }], href: [{
@@ -51106,26 +51419,47 @@ class RouterLinkActive {
         this.classes = [];
         this.isActive = false;
         this.routerLinkActiveOptions = { exact: false };
-        this.subscription = router.events.subscribe((s) => {
+        this.routerEventsSubscription = router.events.subscribe((s) => {
             if (s instanceof NavigationEnd) {
                 this.update();
             }
         });
     }
+    /** @nodoc */
     ngAfterContentInit() {
-        this.links.changes.subscribe(_ => this.update());
-        this.linksWithHrefs.changes.subscribe(_ => this.update());
-        this.update();
+        // `of(null)` is used to force subscribe body to execute once immediately (like `startWith`).
+        Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])([this.links.changes, this.linksWithHrefs.changes, Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(null)])
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["mergeAll"])())
+            .subscribe(_ => {
+            this.update();
+            this.subscribeToEachLinkOnChanges();
+        });
+    }
+    subscribeToEachLinkOnChanges() {
+        var _a;
+        (_a = this.linkInputChangesSubscription) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+        const allLinkChanges = [...this.links.toArray(), ...this.linksWithHrefs.toArray(), this.link, this.linkWithHref]
+            .filter((link) => !!link)
+            .map(link => link.onChanges);
+        this.linkInputChangesSubscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(allLinkChanges).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["mergeAll"])()).subscribe(link => {
+            if (this.isActive !== this.isLinkActive(this.router)(link)) {
+                this.update();
+            }
+        });
     }
     set routerLinkActive(data) {
         const classes = Array.isArray(data) ? data : data.split(' ');
         this.classes = classes.filter(c => !!c);
     }
+    /** @nodoc */
     ngOnChanges(changes) {
         this.update();
     }
+    /** @nodoc */
     ngOnDestroy() {
-        this.subscription.unsubscribe();
+        var _a;
+        this.routerEventsSubscription.unsubscribe();
+        (_a = this.linkInputChangesSubscription) === null || _a === void 0 ? void 0 : _a.unsubscribe();
     }
     update() {
         if (!this.links || !this.linksWithHrefs || !this.router.navigated)
@@ -51267,9 +51601,11 @@ class RouterOutlet {
         this.name = name || PRIMARY_OUTLET;
         parentContexts.onChildOutletCreated(this.name, this);
     }
+    /** @nodoc */
     ngOnDestroy() {
         this.parentContexts.onChildOutletDestroyed(this.name);
     }
+    /** @nodoc */
     ngOnInit() {
         if (!this.activated) {
             // If the outlet was not instantiated at the time the route got activated we need to populate
@@ -51473,11 +51809,11 @@ class RouterPreloader {
         const ngModule = this.injector.get(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModuleRef"]);
         return this.processRoutes(ngModule, this.router.config);
     }
-    // TODO(jasonaden): This class relies on code external to the class to call setUpPreloading. If
-    // this hasn't been done, ngOnDestroy will fail as this.subscription will be undefined. This
-    // should be refactored.
+    /** @nodoc */
     ngOnDestroy() {
-        this.subscription.unsubscribe();
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     }
     processRoutes(ngModule, routes) {
         const res = [];
@@ -51593,6 +51929,7 @@ class RouterScroller {
     scheduleScrollEvent(routerEvent, anchor) {
         this.router.triggerEvent(new Scroll(routerEvent, this.lastSource === 'popstate' ? this.store[this.restoredId] : null, anchor));
     }
+    /** @nodoc */
     ngOnDestroy() {
         if (this.routerEventsSubscription) {
             this.routerEventsSubscription.unsubscribe();
@@ -51978,7 +52315,7 @@ function provideRouterInitializer() {
 /**
  * @publicApi
  */
-const VERSION = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["Version"]('10.0.8');
+const VERSION = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["Version"]('10.0.14');
 
 /**
  * @license

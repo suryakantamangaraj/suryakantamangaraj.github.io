@@ -440,7 +440,7 @@ module.exports = content.locals || {};
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/travis/build/suryakantamangaraj/suryakantamangaraj.github.io/src/styles.scss */"./src/styles.scss");
+module.exports = __webpack_require__(/*! /home/runner/work/suryakantamangaraj.github.io/suryakantamangaraj.github.io/src/styles.scss */"./src/styles.scss");
 
 
 /***/ })
