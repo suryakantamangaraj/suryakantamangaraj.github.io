@@ -1,30 +1,30 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: Node.js CI
+language: node_js
 
-on:
-  push:
-    branches: [ "develop" ]
-  pull_request:
-    branches: [ "master" ]
+node_js:
+   "14.5.0"
 
-jobs:
-  build:
+cache:
+  directories:
+    - node_modules
+  yarn: true
 
-    runs-on: ubuntu-latest
+install:
+  - yarn install
 
-    strategy:
-      matrix:
-        node-version: [14.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+script:
+  - yarn build
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: yarn install
-    - run: yarn build
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $github_token
+  local_dir: dist
+  email: surya.socialnetworking@gmail.com
+  name: Surya Raj
+  target-branch: master
+  on:
+    branch: develop
+
