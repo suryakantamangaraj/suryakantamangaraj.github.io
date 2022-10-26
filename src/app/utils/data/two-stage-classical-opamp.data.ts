@@ -5,7 +5,7 @@ export const TwoStageClassicalOpAmpData: IProject = {
   name: 'Two Stage Classical Model Op-amp',
   description:
     'Design of Two Stage Classical Model Operational Amplifier for LDO Application',
-  projectLink: https://scholar.google.com/citations?view_op=view_citation&hl=en&user=mUm3SwkAAAAJ&authuser=1&citation_for_view=mUm3SwkAAAAJ:u5HHmVD_uO8C,
+  projectLink: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=mUm3SwkAAAAJ&authuser=1&citation_for_view=mUm3SwkAAAAJ:u5HHmVD_uO8C',
   liveUrl: null,
   isFeatured: true,
   features: [

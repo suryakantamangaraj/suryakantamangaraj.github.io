@@ -5,7 +5,7 @@ export const LDODesignSmartPowerSaveData: IProject = {
   name: 'LDO Regulator with Smart Power Save Operation',
   description:
     'Design of Low Power and High PSRR Low Drop-Out Regulator with Smart Power Save Operation',
-  projectLink: https://scholar.google.com/citations?view_op=view_citation&hl=en&user=mUm3SwkAAAAJ&authuser=1&citation_for_view=mUm3SwkAAAAJ:u5HHmVD_uO8C,
+  projectLink: null,
   liveUrl: null,
   isFeatured: true,
   features: [
