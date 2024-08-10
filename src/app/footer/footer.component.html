@@ -1,4 +1,7 @@
 <div class="footer">
-  <p>&copy; 2020-22 Surya Raj &bull; Made with 🤍 by Surya</p>
+  <p>© 2020-<span id="current-year"></span> Surya Raj • Crafted with 🤍 by Surya</p>
 </div>
 
+<script>
+  document.getElementById("current-year").textContent = new Date().getFullYear();
+</script>
