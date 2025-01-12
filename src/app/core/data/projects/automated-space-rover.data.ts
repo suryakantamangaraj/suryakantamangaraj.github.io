@@ -13,7 +13,7 @@ export const AutomatedSpaceRoverData: IProject = {
     'Hardware implementation using FPGA',
     'Real-time data processing capabilities'
   ],
-  tags: ['semiconductor', 'hardware', 'automation'],
+  tags: ['semiconductor'],
   techStuff: [
     'Xilinx ISE Design Suite',
     'FPGA Development Board',

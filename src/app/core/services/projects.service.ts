@@ -17,4 +17,11 @@ export class ProjectsService {
   getProjectById(id: string): IProject | undefined {
     return ALL_PROJECT_DATA.find(p => p.id === id);
   }
+
+  getProjectsByTags(tags: string[]): IProject[] {
+    if (!tags.length) return ALL_PROJECT_DATA;
+    return ALL_PROJECT_DATA.filter(project => 
+      project.tags?.some(tag => tags.includes(tag))
+    );
+  }
 }

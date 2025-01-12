@@ -11,7 +11,7 @@ export const ConnectedAgricultureData: IProject = {
   features: [
     'Ongoing Project'
   ],
-  tags: ['semiconductor', 'ai', 'iot', 'web apps'],
+  tags: ['ai'],
   techStuff: [],
   additionalData: []
 };

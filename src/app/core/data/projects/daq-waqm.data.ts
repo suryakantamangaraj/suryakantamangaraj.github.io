@@ -13,7 +13,7 @@ export const DAQWAQMData: IProject = {
     'Automated System',
     'Low power consumption'
   ],
-  tags: ['semiconductor', 'iot','automation'],
+  tags: ['automation'],
   techStuff: ['Cadence OrCAD', 'MATLAB', 'LabVIEW', 'T&M Instruments', 'FPGA', 'TSMC 65nm'],
   additionalData: [
     {
