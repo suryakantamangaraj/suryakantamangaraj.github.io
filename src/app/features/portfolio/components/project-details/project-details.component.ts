@@ -26,6 +26,12 @@ import { ProjectsService } from '@core/services/projects.service';
         }
       });
     }
+
+    openLink(url: string | undefined): void {
+      if (url) {
+        window.open(url, '_blank');
+      }
+    }
   
     onBackClick() {
       this.router.navigate(['/portfolio']);

@@ -1,33 +1,78 @@
-<div class="project-details-container" *ngIf="project">
-  <div class="back-button" (click)="onBackClick()">
-    <i class="fas fa-arrow-left"></i> Back
+<div class="project-details-container">
+  <div (click)="onBackClick()" class="back-icon">
+    <app-back-icon></app-back-icon>
   </div>
-  
+
+  <div class="project-heading">
+    <h1>{{project?.name}}</h1>
+    <div class="heading-lines"></div>
+  </div>
+
   <div class="project-content">
-    <h1>{{project.name}}</h1>
-    <p class="description">{{project.description}}</p>
-    
-    <div class="links">
-      <a *ngIf="project.projectLink" [href]="project.projectLink" target="_blank">
-        View Source
-      </a>
-      <a *ngIf="project.liveUrl" [href]="project.liveUrl" target="_blank">
-        Live Demo
-      </a>
+    <!-- Description Section -->
+    <div class="content-section description">
+      <h2>Description</h2>
+      <p>{{project?.description}}</p>
     </div>
 
-    <div class="tech-stack">
-      <h2>Technologies</h2>
-      <div class="tech-tags">
-        <span *ngFor="let tech of project.techStuff">{{tech}}</span>
+    <!-- Two Column Layout -->
+    <div class="two-column-layout">
+      <!-- Left Column -->
+      <div class="main-content">
+        <!-- Features Section -->
+        <div class="content-section features">
+          <h2>Features</h2>
+          <ul class="features-list">
+            <li *ngFor="let feature of project?.features">{{feature}}</li>
+          </ul>
+        </div>
+
+        <!-- Additional Data Section (Optional) -->
+        <div *ngFor="let additional of project?.additionalData" class="content-section additional">
+          <h2>{{additional.title}}</h2>
+          <ul class="additional-list">
+            <li *ngFor="let item of additional.data">{{item}}</li>
+          </ul>
+        </div>
       </div>
-    </div>
 
-    <div class="features">
-      <h2>Features</h2>
-      <ul>
-        <li *ngFor="let feature of project.features">{{feature}}</li>
-      </ul>
+      <!-- Right Column -->
+      <div class="sidebar-content">
+        <!-- Project Links -->
+        <div class="project-links">
+          <button class="link-button"
+                  [class.disabled]="!project?.projectLink"
+                  [title]="project?.projectLink ? 'View project details' : 'Project documentation available in description'"
+                  [attr.disabled]="!project?.projectLink"
+                  (click)="openLink(project?.projectLink)">
+            View Project
+          </button>
+
+          <button class="link-button"
+                  [class.disabled]="!project?.liveUrl"
+                  [title]="project?.liveUrl ? 'View live demo' : 'Live demo not available'"
+                  [attr.disabled]="!project?.liveUrl"
+                  (click)="openLink(project?.liveUrl)">
+            Live Demo
+          </button>
+        </div>
+
+        <!-- Tags Section -->
+        <div class="content-section tags">
+          <h2>Tags</h2>
+          <div class="tags-list">
+            <span class="tag" *ngFor="let tag of project?.tags">{{tag}}</span>
+          </div>
+        </div>
+
+        <!-- Technologies Section -->
+        <div class="content-section technologies">
+          <h2>Technologies</h2>
+          <ul class="tech-list">
+            <li *ngFor="let tech of project?.techStuff">{{tech}}</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>

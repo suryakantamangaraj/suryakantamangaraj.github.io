@@ -10,6 +10,6 @@ export interface IProject {
   techStuff: string[];
   additionalData?: { 
     title: string; 
-    data: string[]; 
+    data: string[];
   }[];
 }
