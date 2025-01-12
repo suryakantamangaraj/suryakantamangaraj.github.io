@@ -1,0 +1,22 @@
+<div class="navbar">
+    <div class="nav-items">
+      <ng-container *ngFor="let item of navItems">
+        <a *ngIf="!item.external" 
+           [routerLink]="[item.path]" 
+           class="nav-item"
+           routerLinkActive="active">{{item.name}}</a>
+        <a *ngIf="item.external" 
+           [href]="item.path" 
+           target="_blank" 
+           class="nav-item">{{item.name}}</a>
+      </ng-container>
+      <div class="dropdown">
+        <a class="nav-item dropbtn">Misc</a>
+        <div class="dropdown-content">
+          <a *ngFor="let item of miscItems" 
+             [href]="item.path" 
+             target="_blank">{{item.name}}</a>
+        </div>
+      </div>
+    </div>
+  </div>

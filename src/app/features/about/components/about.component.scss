@@ -1,0 +1,241 @@
+@import '../../../../app/variables';
+
+$row-column-brk-point: 'max-width: 1040px';
+
+.overlay {
+  display: inline-block;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: -100%;
+  position: fixed;
+  background: $color2;
+  transform-origin: center;
+  z-index: -1;
+  animation: overlayAnimation 1.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  
+  @media ($row-column-brk-point) {
+    transform: scale(2) skew(-55deg);
+  }
+}
+
+.container {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $off-white;
+  padding: 5rem 2rem;
+
+  .heading-section {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 6rem;
+
+    h1 {
+      color: $white;
+      font-size: 4.5rem;
+      font-weight: bold;
+      letter-spacing: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .heading-lines {
+      width: 250px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      
+      &::before,
+      &::after {
+        content: '';
+        height: 3px;
+        background: $color1;
+        animation: subtleStripMove 3s ease-in-out infinite;
+        box-shadow: 0 0 10px rgba($color1, 0.5);
+      }
+
+      &::before {
+        animation-delay: -1.5s;
+      }
+    }
+  }
+
+  .content-section {
+    width: 90%;
+    max-width: 1400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5rem;
+    
+    @media ($row-column-brk-point) {
+      flex-direction: column;
+      width: 95%;
+      gap: 8rem;
+    }
+
+    .side1 {
+      width: 45%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      .dp-logo {
+        position: absolute;
+        top: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+      }
+
+      .text-container {
+        width: 100%;
+        background: $color1;
+        padding: 7rem 3.5rem 3rem;
+        border-radius: 2rem;
+        margin-top: 60px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        
+        p {
+          color: $white;
+          font-size: 1.6rem;
+          line-height: 1.8;
+          margin-bottom: 2rem;
+          text-align: justify;
+        }
+
+        .button-container {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: -1rem -1rem;  // Reduced margin
+
+          a {
+            text-decoration: none;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.2rem 3rem;
+            background: rgba($white, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba($white, 0.2);
+            border-radius: 3rem;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+            span {
+              color: $white;
+              font-size: 1.5rem;
+              font-weight: 500;
+              letter-spacing: 1px;
+              z-index: 1;
+              transition: color 0.3s ease;
+            }
+
+            &::before {
+              content: '';
+              position: absolute;
+              inset: 0;
+              background: linear-gradient(90deg, 
+                rgba($color1, 0.8),
+                rgba($color2, 0.8),
+                rgba($color1, 0.8));
+              background-size: 200% 100%;
+              transform: translateX(-100%);
+              transition: transform 0.3s ease;
+            }
+
+            &:hover {
+              border-color: rgba($white, 0.5);
+              transform: translateY(-2px);
+              box-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.2),
+                0 0 20px rgba($color1, 0.3);
+
+              &::before {
+                transform: translateX(0);
+              }
+            }
+
+            &:active {
+              transform: translateY(-1px);
+            }
+          }
+        }
+      }
+
+      @media ($row-column-brk-point) {
+        width: 100%;
+      }
+    }
+
+    .side2 {
+      width: 45%;
+      
+      .skill-container {
+        padding: 2rem;
+        
+        .skill-header {
+          font-size: 3rem;
+          margin-bottom: 4rem;
+          letter-spacing: 2px;
+          position: relative;
+          
+          &:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            bottom: -1rem;
+            left: 0;
+            background: $off-white;
+          }
+        }
+
+        .skill-type {
+          font-size: 1.8rem;
+          margin: 2.5rem 0 1.5rem;
+          position: relative;
+          
+          &:after {
+            content: '';
+            position: absolute;
+            width: 70%;
+            height: 2px;
+            bottom: -0.5rem;
+            left: 0;
+            background: $off-white;
+          }
+        }
+
+        .skill-names {
+          margin: 1rem 0 2rem 2rem;
+          font-size: 1.6rem;
+          line-height: 1.6;
+        }
+      }
+
+      @media ($row-column-brk-point) {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@keyframes overlayAnimation {
+  0% { transform: scale(2) translate(0, 100%) rotate(180deg) skew(10deg); }
+  50% { transform: scale(2) translate(0, -10%) rotate(90deg) skew(-10deg); }
+  100% { transform: scale(2) translate(0, 0) rotate(0) skew(-10deg); }
+}
+
+@keyframes subtleStripMove {
+  0% { transform: translateX(-5%); }
+  50% { transform: translateX(5%); }
+  100% { transform: translateX(-5%); }
+}

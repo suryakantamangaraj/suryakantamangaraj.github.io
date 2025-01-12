@@ -1,0 +1,113 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond|Open+Sans:300i,300|Lato');
+@import './app/variables';
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 10px;
+  font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: $bg-color;
+  position: relative;
+  
+  &.isSideDrawerOpen {
+    overflow: hidden;
+  }
+}
+
+// Global utility classes
+.button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+  
+  &:focus-visible {
+    outline: 2px solid $color1;
+    outline-offset: 2px;
+  }
+}
+
+// Container defaults
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+// Back icon styling
+.back-icon {
+  width: 3.5rem;
+  display: inline-block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 3.2rem 5rem;
+  cursor: pointer;
+  z-index: 11;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+// Responsive breakpoints
+@media (max-width: $mobile-lg) {
+  html { 
+    font-size: 9px; 
+  }
+  .back-icon { 
+    margin: 2rem; 
+  }
+}
+
+@media (max-width: $mobile-md) {
+  html { 
+    font-size: 8px; 
+  }
+}
+
+@media (max-width: $mobile-sm) {
+  html { 
+    font-size: 7px; 
+  }
+}
+
+// Modern scrollbar styling
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba($white, 0.4) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 0.5rem;
+  
+  &-track {
+    background: transparent;
+  }
+  
+  &-thumb {
+    background-color: rgba($white, 0.4);
+    border-radius: 1rem;
+    
+    &:hover {
+      background-color: rgba($white, 0.6);
+    }
+  }
+}

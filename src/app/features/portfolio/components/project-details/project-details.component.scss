@@ -1,0 +1,111 @@
+// src/app/features/portfolio/components/project-details/project-details.component.scss
+@import '../../../../../app/variables';
+
+.project-details-container {
+  min-height: 100vh;
+  padding: 2rem;
+  background: $bg-color;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .back-button {
+    cursor: pointer;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    display: inline-block;
+    
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .project-content {
+    padding: 2rem;
+
+    h1 {
+      color: $white;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-info {
+      background: rgba($color1, 0.1);
+      border: 1px solid rgba($color1, 0.3);
+      border-radius: 2rem;
+      padding: 3rem;
+      
+      .description {
+        color: $white;
+        font-size: 1.8rem;
+        line-height: 1.6;
+        text-align: justify;
+        margin-bottom: 2rem;
+      }
+
+      .links {
+        display: flex;
+        gap: 2rem;
+        margin: 2rem 0;
+
+        .project-link {
+          padding: 1rem 2rem;
+          background: $color1;
+          color: $white;
+          text-decoration: none;
+          border-radius: 0.5rem;
+          transition: all 0.3s ease;
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba($color1, 0.3);
+          }
+        }
+
+        a {
+          margin-right: 1rem;
+          padding: 0.5rem 1rem;
+          border-radius: 4px;
+          text-decoration: none;
+        }
+      }
+
+      h2 {
+        color: $white;
+        font-size: 1.5rem;
+        margin: 2rem 0;
+        margin-bottom: 1rem;
+      }
+
+      .tech-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+
+        .tech-tag {
+          padding: 0.8rem 1.6rem;
+          background: rgba($color1, 0.2);
+          border: 1px solid rgba($color1, 0.4);
+          border-radius: 2rem;
+          color: $white;
+          font-size: 1.4rem;
+        }
+
+        span {
+          padding: 0.5rem 1rem;
+          border-radius: 20px;
+        }
+      }
+    }
+
+    .tech-stack, .features {
+      margin: 2rem 0;
+      
+      h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}

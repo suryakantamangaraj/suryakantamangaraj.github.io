@@ -1,0 +1,33 @@
+<div class="project-details-container" *ngIf="project">
+  <div class="back-button" (click)="onBackClick()">
+    <i class="fas fa-arrow-left"></i> Back
+  </div>
+  
+  <div class="project-content">
+    <h1>{{project.name}}</h1>
+    <p class="description">{{project.description}}</p>
+    
+    <div class="links">
+      <a *ngIf="project.projectLink" [href]="project.projectLink" target="_blank">
+        View Source
+      </a>
+      <a *ngIf="project.liveUrl" [href]="project.liveUrl" target="_blank">
+        Live Demo
+      </a>
+    </div>
+
+    <div class="tech-stack">
+      <h2>Technologies</h2>
+      <div class="tech-tags">
+        <span *ngFor="let tech of project.techStuff">{{tech}}</span>
+      </div>
+    </div>
+
+    <div class="features">
+      <h2>Features</h2>
+      <ul>
+        <li *ngFor="let feature of project.features">{{feature}}</li>
+      </ul>
+    </div>
+  </div>
+</div>

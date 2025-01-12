@@ -1,0 +1,212 @@
+@import '../../../../app/variables';
+
+.overlay {
+  display: inline-block;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  position: fixed;
+  background: transparent;
+  z-index: -1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70%;
+    height: 70%;
+    background: $color2;
+    border-radius: 61% 39% 52% 48% / 44% 59% 41% 56%;
+    transform: translate(-50%, -50%) scale(0.95);
+    animation: morphShape 20s ease-in-out infinite;
+  }
+}
+
+.contact-container {
+  min-height: 100vh;
+  padding: 5rem 2rem;
+  position: relative;
+
+  .back-icon {
+    position: fixed;
+    top: 3.2rem;
+    left: 5rem;
+    width: 3.5rem;
+    cursor: pointer;
+    z-index: 10;
+    filter: drop-shadow(0 0 8px rgba($color1, 0.5));
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 12px rgba($color1, 0.7));
+    }
+
+    @media (max-width: 768px) {
+      top: 2rem;
+      left: 2rem;
+      width: 3rem;
+    }
+  }
+
+  .heading-section {
+    text-align: center;
+    margin-bottom: 6rem;
+
+    h1 {
+      color: $white;
+      font-size: 4.5rem;
+      font-weight: bold;
+      letter-spacing: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .heading-lines {
+      width: 250px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      
+      &::before,
+      &::after {
+        content: '';
+        height: 3px;
+        background: $color1;
+      }
+    }
+  }
+
+  .primary-actions {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 6rem;
+
+    .action-button {
+      display: flex;
+      align-items: center;
+      width: 300px;
+      padding: 2.5rem;
+      background: rgba($color1, 0.3);
+      border: 2px solid rgba($color1, 0.5);
+      border-radius: 2rem;
+      text-decoration: none;
+      color: $white;
+      transition: all 0.3s ease;
+      box-shadow: 
+        0 0 20px rgba($color1, 0.2),
+        0 0 40px rgba($color1, 0.1),
+        inset 0 0 20px rgba($color1, 0.2);
+
+      &:hover {
+        transform: translateY(-8px);
+        background: rgba($color1, 0.4);
+        border-color: rgba($color1, 0.8);
+        box-shadow: 
+          0 0 30px rgba($color1, 0.3),
+          0 0 50px rgba($color1, 0.2),
+          inset 0 0 25px rgba($color1, 0.3);
+      }
+
+      img {
+        width: 4rem;
+        height: 4rem;
+        margin-right: 2rem;
+        filter: drop-shadow(0 0 10px rgba($color1, 0.7));
+      }
+
+      span {
+        font-size: 2.2rem;
+        letter-spacing: 1px;
+        font-weight: 500;
+        text-shadow: 0 0 15px rgba($color1, 0.5);
+      }
+    }
+  }
+
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+
+    .section {
+      margin-bottom: 6rem;
+      
+      h2 {
+        color: $white;
+        font-size: 2.8rem;
+        margin-bottom: 3rem;
+        position: relative;
+        padding-left: 2rem;
+        
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 50%;
+          width: 4px;
+          height: 70%;
+          background: $color1;
+          transform: translateY(-50%);
+        }
+      }
+
+      .links {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2.5rem;
+
+        a {
+          display: flex;
+          align-items: center;
+          padding: 2rem;
+          background: rgba($color1, 0.25);
+          border: 1px solid rgba($color1, 0.4);
+          border-radius: 1.5rem;
+          text-decoration: none;
+          color: $white;
+          transition: all 0.3s ease;
+          box-shadow: 
+            0 0 15px rgba($color1, 0.2),
+            0 0 30px rgba($color1, 0.1),
+            inset 0 0 15px rgba($color1, 0.2);
+
+          &:hover {
+            transform: translateY(-5px);
+            background: rgba($color1, 0.35);
+            border-color: rgba($color1, 0.7);
+            box-shadow: 
+              0 0 25px rgba($color1, 0.3),
+              0 0 40px rgba($color1, 0.2),
+              inset 0 0 20px rgba($color1, 0.3);
+          }
+
+          img {
+            width: 3rem;
+            height: 3rem;
+            margin-right: 1.5rem;
+            filter: drop-shadow(0 0 8px rgba($color1, 0.6));
+          }
+
+          span {
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            text-shadow: 0 0 12px rgba($color1, 0.4);
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes morphShape {
+  0%, 100% {
+    border-radius: 61% 39% 52% 48% / 44% 59% 41% 56%;
+  }
+  50% {
+    border-radius: 48% 52% 30% 70% / 27% 37% 63% 73%;
+  }
+}

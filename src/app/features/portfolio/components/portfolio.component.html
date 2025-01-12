@@ -1,0 +1,38 @@
+<div class="portfolio-container">
+  <div (click)="onBackClick()" class="back-icon">
+    <app-back-icon></app-back-icon>
+  </div>
+
+  <div class="intro-section">
+    <div class="intro-wrapper">
+      <app-dp-logo height="10rem" width="10rem"></app-dp-logo>
+      <div class="text-container">
+        <p class="typing-text line1">👋 Welcome to my portfolio!</p>
+        <p class="typing-text line2">🔍 Browse my projects using filters of interest.</p>
+        <p class="typing-text line3">🌟 Check out my featured project, highlighted with a star.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="portfolio-heading">
+    <h1>PORTFOLIO</h1>
+    <div class="heading-lines"></div>
+  </div>
+
+  <div class="filter-section">
+    <button *ngFor="let tag of tags" 
+            [class.active]="tag.isSelected"
+            (click)="toggleFilter(tag)"
+            class="filter-btn">
+      {{tag.displayName}}
+    </button>
+  </div>
+
+  <div class="project-grid">
+    <app-project-card
+      *ngFor="let project of filteredProjects"
+      [project]="project"
+      (cardClick)="onProjectClick($event)">
+    </app-project-card>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+@import '../../../app/variables';
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  font-size: 1.6rem;
+  padding: 2rem 1rem;
+  text-align: center;
+  z-index: 1000;
+  color: rgba($white, 0.9);
+  letter-spacing: 0.5px;
+  font-weight: 300;
+  text-shadow: 0 0 10px rgba($color1, 0.3);
+  background: 
+    radial-gradient(
+      circle at center bottom,
+      rgba($color1, 0.3),
+      transparent 70%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba($color3, 0.05) 15%,
+      rgba($color3, 0.1) 30%,
+      rgba($color3, 0.3) 50%,
+      rgba($color3, 0.5) 80%,
+      rgba($color3, 0.7) 100%
+    );
+  backdrop-filter: blur(5px);
+  background-blend-mode: overlay;
+}

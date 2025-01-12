@@ -1,0 +1,40 @@
+<div (click)="onBackClick()" class="back-icon">
+  <app-back-icon></app-back-icon>
+</div>
+<span class="overlay"></span>
+<div class="container">
+  <div class="heading-section">
+    <h1>ABOUT</h1>
+    <div class="heading-lines"></div>
+  </div>
+  
+  <div class="content-section">
+    <div class="side1">
+      <app-dp-logo height="13rem" width="13rem" class="dp-logo"></app-dp-logo>
+      <div class="text-container">
+        <p>
+          I'm Surya Raj, a creator of wonders, designing products, developing solutions, and architecting systems with a flair for the extraordinary. My life is a thrilling expedition fueled by a quest for knowledge, a love for challenges, and a passion for transforming ideas into art. Whether diving into new skills or juggling diverse roles, I relish every moment of this adventure.
+        </p>
+        <br>
+        <p>
+          Above all, I believe in the power of community and the magic of collaboration. I delight in guiding fellow designers on their creative journeys. Let's connect, create, and craft stories that matter—one design at a time.
+        </p>
+        <br>
+        <div class="button-container">
+          <a [routerLink]="['/about/aboutmore']">  <!-- Updated routerLink to match new path -->
+            <span class="button">Read more</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="side2">
+      <div class="skill-container">
+        <h1 class="skill-header">SKILLS</h1>
+        <div *ngFor="let skill of skills">
+          <h4 class="skill-type">{{skill.type}}</h4>
+          <h4 class="skill-names">{{skill.names.join(', ')}}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

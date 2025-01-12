@@ -1,0 +1,172 @@
+@import '../../../../../app/variables';
+
+$row-column-break-point: 'max-width: 1040px';
+
+.overlay {
+  display: inline-block;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  position: fixed;
+  background: transparent;  // Changed from $color2 to remove base rectangle
+  transform-origin: center;
+  z-index: -1;
+  transform: scale(0.8);
+  
+  &::before {
+    // Top-right oval
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -20%;
+    width: 80%;
+    height: 80%;
+    background: $color2;
+    border-radius: 0 0 0 100%;
+    animation: topRightOval 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  }
+
+  &::after {
+    // Bottom-left triangle
+    content: '';
+    position: absolute;
+    bottom: -20%;   // Extend below
+    left: -20%;     // Extend left
+    width: 80%;     // Match top oval width
+    height: 80%;    // Match top oval height
+    background: $color2;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 60%);  // Angled triangle
+    animation: bottomLeftTriangle 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s forwards;
+  }
+}
+
+.about-more-container {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $off-white;
+  padding: 5rem 2rem;
+
+  .back-icon {
+    position: fixed;
+    top: 3.2rem;
+    left: 5rem;
+    width: 3.5rem;
+    cursor: pointer;
+    z-index: 10;
+
+    @media (max-width: 768px) {
+      top: 2rem;
+      left: 2rem;
+      width: 3rem;
+    }
+  }
+
+  .heading-section {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 8rem;
+
+    h1 {
+      color: $white;
+      font-size: 4.5rem;
+      font-weight: bold;
+      letter-spacing: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .heading-lines {
+      width: 250px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      
+      &::before,
+      &::after {
+        content: '';
+        height: 3px;
+        background: $color1;
+        animation: subtleStripMove 3s ease-in-out infinite;
+        box-shadow: 0 0 10px rgba($color1, 0.5);
+      }
+
+      &::before {
+        animation-delay: -1.5s;
+      }
+    }
+  }
+
+  .content-section {
+    width: 90%;
+    max-width: 1400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .profile-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+
+      .dp-logo {
+        margin-bottom: -60px;
+        z-index: 2;
+      }
+
+      .text-container {
+        width: 100%;
+        max-width: 1200px;
+        text-align: justify;
+        padding: 7rem 3rem 3rem;
+        background: $color1;
+        border-radius: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+        p {
+          font-size: 1.8rem;
+          line-height: 1.8;
+          color: $white;
+          margin-bottom: 2.5rem;
+          
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes subtleStripMove {
+  0% { transform: translateX(-5%); }
+  50% { transform: translateX(5%); }
+  100% { transform: translateX(-5%); }
+}
+
+@keyframes topRightOval {
+  0% {
+    transform: translate(100%, -100%) rotate(180deg) scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0) rotate(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bottomLeftTriangle {
+  0% {
+    transform: translate(-100%, 100%) rotate(-180deg) scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0) rotate(0) scale(1);
+    opacity: 1;
+  }
+}

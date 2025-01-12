@@ -1,0 +1,11 @@
+<div class="nav-container" (click)="onBgClick()">
+  <div class="nav-content" (click)="$event.stopPropagation()">
+    <ul [@slideIn]="true">
+      <li *ngFor="let link of navLinks" 
+          (click)="onNavItemClick($event, link.url)"
+          class="nav-item">
+        {{ link.displayName }}
+      </li>
+    </ul>
+  </div>
+</div>

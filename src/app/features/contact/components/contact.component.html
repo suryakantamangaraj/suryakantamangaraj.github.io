@@ -1,0 +1,51 @@
+<div class="overlay"></div>
+
+<div class="contact-container">
+  <div (click)="onBackClick()" class="back-icon">
+    <app-back-icon></app-back-icon>
+  </div>
+
+  <div class="heading-section">
+    <h1>CONTACT</h1>
+    <div class="heading-lines"></div>
+  </div>
+
+  <div class="primary-actions">
+    <a [href]="email.url" class="action-button">
+      <img [src]="email.iconUrl" [alt]="email.name">
+      <span>{{email.name}}</span>
+    </a>
+    <a [href]="github.url" target="_blank" class="action-button">
+      <img [src]="github.iconUrl" [alt]="github.name">
+      <span>{{github.name}}</span>
+    </a>
+  </div>
+
+  <div class="content">
+    <div class="section social">
+      <h2>Social Profiles</h2>
+      <div class="links">
+        <a *ngFor="let profile of contactProfile.profile" 
+           [href]="profile.url" 
+           target="_blank"
+           class="link-card">
+          <img [src]="profile.iconUrl" [alt]="profile.name">
+          <span>{{profile.name}}</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="section work">
+      <h2>Work Profiles</h2>
+      <div class="links">
+        <a *ngFor="let profile of contactProfile.work" 
+           [href]="profile.url" 
+           target="_blank"
+           class="link-card">
+          <img [src]="profile.iconUrl" [alt]="profile.name">
+          <span>{{profile.name}}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
