@@ -123,6 +123,7 @@ $row-column-brk-point: 'max-width: 1040px';
             justify-content: center;
             padding: 1.2rem 3rem;
             background: rgba($white, 0.1);
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             border: 1px solid rgba($white, 0.2);
             border-radius: 3rem;

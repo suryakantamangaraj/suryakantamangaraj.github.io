@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +10,7 @@ export class HeaderComponent {
     { path: '/about', name: 'About', external: false },
     { path: '/portfolio', name: 'Portfolio', external: false },
     { path: '/contact', name: 'Contact', external: false },
-    { path: '/archive', name: 'Archive', external: false }
+    { path: 'https://suryaraj.me/Archive', name: 'Archive', external: true }
   ];
 
   scribeItems = [

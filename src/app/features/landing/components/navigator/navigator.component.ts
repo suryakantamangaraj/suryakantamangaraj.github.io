@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavigationService } from '@core/services/navigation/navigation.service';
+import { NavigationService } from '@core/services/navigation.service';
 import { trigger, transition, style, animate, stagger, query } from '@angular/animations';
 
 @Component({
