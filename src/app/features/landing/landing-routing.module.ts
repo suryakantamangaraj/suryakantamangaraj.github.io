@@ -6,25 +6,11 @@ const routes: Routes = [
   {
     path: '',
     component: LandingPageComponent,
-    children: [
-      {
-        path: 'about',
-        loadChildren: () => import('../about/about.module').then(m => m.AboutModule)
-      },
-      {
-        path: 'portfolio',
-        loadChildren: () => import('../portfolio/portfolio.module').then(m => m.PortfolioModule)
-      },
-      {
-        path: 'contact',
-        loadChildren: () => import('../contact/contact.module').then(m => m.ContactModule)
-      }
-    ]
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class LandingRoutingModule { }
+export class LandingRoutingModule {}

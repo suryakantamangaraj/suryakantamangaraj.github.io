@@ -1,4 +1,4 @@
-import { ErrorHandler, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -6,14 +6,9 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { LandingModule } from './features/landing/landing.module';
-import { AboutModule } from './features/about/about.module';
-import { PortfolioModule } from './features/portfolio/portfolio.module';
-import { ContactModule } from './features/contact/contact.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
@@ -21,11 +16,7 @@ import { ContactModule } from './features/contact/contact.module';
     CoreModule,
     SharedModule,
     LandingModule,
-    AboutModule,
-    PortfolioModule,
-    ContactModule
   ],
-  
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
