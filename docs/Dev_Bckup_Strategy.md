@@ -139,3 +139,59 @@ portfolio-v2/
     └── backup/* (tagged backups)
 ```
 
+---
+
+## Example
+```bash
+# 1. From prod-develop, create feature branch
+git checkout prod-develop
+git pull origin prod-develop
+git checkout -b feature/add-strategy-docs
+
+# 2. Add new documentation
+git add docs/Dev_Bckup_Strategy.md
+
+# 3. Commit changes
+git commit -m "docs: add development and backup strategy guide
+- Add clone and setup instructions
+- Add feature branch workflow
+- Add backup procedures"
+
+# 4. Push to remote
+git push -u origin feature/add-strategy-docs
+
+# 5. Create PR in GitHub UI
+# From: feature/add-strategy-docs
+# To: prod-develop
+```
+- After PR approval:
+```bash
+git checkout prod-develop
+git pull origin prod-develop
+git branch -d feature/add-strategy-docs
+```
+- If getting error while pull
+```bash
+# 1. Stash untracked file
+git stash push --include-untracked
+
+# 2. Pull latest changes
+git pull origin prod-develop
+
+# 3. Create feature branch
+git checkout -b feature/add-strategy-docs
+
+# 4. Apply stashed changes
+git stash pop
+
+# 5. Add and commit
+git add docs/Dev_Bckup_Strategy.md
+git commit -m "docs: add development and backup strategy guide
+- Add clone and setup instructions
+- Add feature branch workflow
+- Add backup procedures"
+
+# 6. Push to remote
+git push -u origin feature/add-strategy-docs
+```
+---
