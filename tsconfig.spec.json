@@ -5,8 +5,10 @@
     "outDir": "./out-tsc/spec",
     "types": [
       "jest",
-      "node"
-    ]
+      "node",
+      "@types/jest"
+    ],
+    "esModuleInterop": true
   },
   "include": [
     "src/**/*.spec.ts",

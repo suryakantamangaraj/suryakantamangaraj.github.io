@@ -21,8 +21,13 @@ const routes: Routes = [
     loadChildren: () => import('./features/contact/contact.module').then((m) => m.ContactModule),
   },
   {
+    path: '404',
+    loadChildren: () =>
+      import('./features/not-found/not-found.module').then((m) => m.NotFoundModule),
+  },
+  {
     path: '**',
-    redirectTo: '',
+    redirectTo: '404',
   },
 ];
 
