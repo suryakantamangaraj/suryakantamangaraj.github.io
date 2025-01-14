@@ -1,11 +1,25 @@
 @import '../../../../app/variables';
+@import '../../../../app/mixins';
 
 .card-outer {
   position: relative;
-  width: 300px;
-  height: 200px;
   cursor: pointer;
   perspective: 1000px;
+
+  @include mobile {
+    width: 280px;
+    height: 180px;
+  }
+
+  @include tablet {
+    width: 300px;
+    height: 200px;
+  }
+
+  @include desktop {
+    width: 320px;
+    height: 220px;
+  }
 
   .card-inner {
     position: relative;

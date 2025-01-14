@@ -1,0 +1,86 @@
+@import './variables';
+@import './mixins';
+
+// Main container
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+
+  @include mobile {
+    padding: $spacing-small;
+  }
+
+  @include tablet {
+    padding: $spacing-medium;
+  }
+
+  @include desktop {
+    padding: $spacing-large;
+  }
+}
+
+// Main content
+.main-content {
+  flex: 1;
+  width: 100%;
+  @include container;
+
+  @include mobile {
+    margin-top: 60px;
+  }
+
+  @include tablet {
+    margin-top: 70px;
+  }
+
+  @include desktop {
+    margin-top: 80px;
+  }
+}
+
+// Loading overlay
+.loading {
+  @include flex-center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba($dark, 0.8);
+  z-index: $z-modal;
+}
+
+// Back button
+.back-btn {
+  position: fixed;
+  z-index: $z-header;
+  background: rgba($dark, 0.7);
+  border-radius: 50%;
+  @include transition;
+
+  @include mobile {
+    bottom: $spacing-small;
+    right: $spacing-small;
+    padding: $spacing-small;
+  }
+
+  @include tablet {
+    bottom: $spacing-medium;
+    right: $spacing-medium;
+    padding: $spacing-medium;
+  }
+
+  @include desktop {
+    bottom: $spacing-large;
+    right: $spacing-large;
+    padding: $spacing-medium;
+  }
+
+  &:hover {
+    background: rgba($dark, 0.9);
+    transform: translateY(-3px);
+  }
+}

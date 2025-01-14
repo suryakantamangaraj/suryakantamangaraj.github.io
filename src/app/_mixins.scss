@@ -1,0 +1,79 @@
+@import './_variables';
+
+// Breakpoint Mixins (3-tier)
+@mixin mobile {
+  @media (max-width: #{$tablet - 1}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$tablet}) and (max-width: #{$desktop - 1}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop}) {
+    @content;
+  }
+}
+
+// Layout Mixins
+@mixin container {
+  width: 100%;
+  margin: 0 auto;
+
+  @include mobile {
+    width: $container-mobile;
+    padding: 0 $spacing-small;
+  }
+
+  @include tablet {
+    width: $container-tablet;
+    padding: 0 $spacing-medium;
+  }
+
+  @include desktop {
+    width: $container-desktop;
+    padding: 0 $spacing-large;
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// Typography Mixins
+@mixin font-size {
+  @include mobile {
+    font-size: $font-size-small;
+  }
+
+  @include tablet {
+    font-size: $font-size-medium;
+  }
+
+  @include desktop {
+    font-size: $font-size-large;
+  }
+}
+
+// Animation Mixins
+@mixin transition {
+  transition: $transition-base;
+}
+
+@mixin hover-effect {
+  @include transition;
+  &:hover {
+    transform: translateY(-2px);
+  }
+}

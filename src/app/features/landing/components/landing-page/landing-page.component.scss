@@ -1,4 +1,5 @@
 @import '../../../../variables';
+@import '../../../../mixins';
 
 .landing-container {
   min-height: 100vh;
@@ -6,6 +7,18 @@
   overflow: hidden;
   background: $bg-color;
   z-index: 0;
+
+  @include mobile {
+    padding: $spacing-small;
+  }
+
+  @include tablet {
+    padding: $spacing-medium;
+  }
+
+  @include desktop {
+    padding: $spacing-large;
+  }
 }
 
 .overlay {
@@ -23,6 +36,21 @@
   transform: scale(2) translate(27vw, -18vh) rotate(335deg);
   animation: 1s ease-in-out 0.2s both leftToRight;
   mix-blend-mode: darken; // Added to blend with background
+
+  @include mobile {
+    clip-path: ellipse(40vw 30vh at 50% 50%);
+    transform: scale(1.8) translate(20vw, -15vh) rotate(335deg);
+  }
+
+  @include tablet {
+    clip-path: ellipse(45vw 35vh at 50% 50%);
+    transform: scale(1.9) translate(25vw, -16vh) rotate(335deg);
+  }
+
+  @include desktop {
+    clip-path: ellipse(50vw 40vh at 50% 50%);
+    transform: scale(2) translate(27vw, -18vh) rotate(335deg);
+  }
 }
 
 .content {
@@ -69,7 +97,7 @@
   margin-bottom: 4rem;
   animation: fadeInUp 1s ease-out 0.9s both;
   position: relative;
-  
+
   p {
     color: $white;
     font-size: 4rem; // Back to original size
@@ -82,7 +110,7 @@
       transform: scale(1.05);
     }
   }
-  
+
   .strip {
     position: relative;
     width: 100%; // Match name width
@@ -90,7 +118,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    
+
     &::before,
     &::after {
       content: '';
@@ -118,7 +146,7 @@
   overflow: hidden;
   transition: all 0.3s ease;
   box-shadow: 0 0 10px rgba($color1, 0.5);
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -126,20 +154,15 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.2),
-      transparent
-    );
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     transition: 0.5s;
   }
-  
+
   &:hover {
     background: linear-gradient(45deg, $color2, $color1);
     transform: translateY(-3px);
     box-shadow: 0 0 20px rgba($color1, 0.8);
-    
+
     &::before {
       left: 100%;
     }
@@ -155,7 +178,6 @@
 .tada-animation {
   animation: tada 1s ease-in-out;
 }
-
 
 @keyframes fadeInDown {
   from {
@@ -180,11 +202,27 @@
 }
 
 @keyframes tada {
-  0% { transform: scale3d(1, 1, 1); }
-  10%, 20% { transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg); }
-  30%, 50%, 70%, 90% { transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg); }
-  40%, 60%, 80% { transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg); }
-  100% { transform: scale3d(1, 1, 1); }
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  10%,
+  20% {
+    transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
+  }
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+  }
+  40%,
+  60%,
+  80% {
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
 }
 
 @keyframes stripMove {

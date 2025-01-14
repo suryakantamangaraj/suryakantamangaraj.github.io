@@ -1,15 +1,40 @@
+// Breakpoints (Simple 3-tier)
+$mobile: 480px; // Mobile devices
+$tablet: 768px; // Tablets
+$desktop: 1024px; // Desktops & larger
+
+// Container Widths
+$container-mobile: 100%;
+$container-tablet: 720px;
+$container-desktop: 960px;
+
+// Typography Scale
+$font-size-base: 10px; // Base size
+$font-size-small: 9px; // Mobile
+$font-size-medium: 10px; // Tablet
+$font-size-large: 12px; // Desktop
+
+// Spacing Scale
+$spacing-small: 0.4rem; // 4px
+$spacing-medium: 0.8rem; // 8px
+$spacing-large: 1.2rem; // 12px
+
+// Colors (Basic)
 $bg-color: #405ca1;
 $color1: #8b0000;
 $color2: #000;
 $color3: #800000;
 $color4: #8b0000;
 $text-color: #ffffff;
-$black: #555;
-$off-white: #f8f8f8;
 $white: #fff;
+$black: #555;
 $dark: #000;
+$off-white: #f8f8f8;
 
-// Breakpoints
-$mobile-sm: 270px;
-$mobile-md: 360px;
-$mobile-lg: 460px;
+// Z-index
+$z-base: 1;
+$z-header: 100;
+$z-modal: 1000;
+
+// Transitions
+$transition-base: all 0.3s ease-in-out;

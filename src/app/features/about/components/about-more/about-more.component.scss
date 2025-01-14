@@ -1,4 +1,5 @@
 @import '../../../../../app/variables';
+@import '../../../../../app/mixins';
 
 $row-column-break-point: 'max-width: 1040px';
 
@@ -9,11 +10,11 @@ $row-column-break-point: 'max-width: 1040px';
   top: 0;
   left: 0;
   position: fixed;
-  background: transparent;  // Changed from $color2 to remove base rectangle
+  background: transparent; // Changed from $color2 to remove base rectangle
   transform-origin: center;
   z-index: -1;
   transform: scale(0.8);
-  
+
   &::before {
     // Top-right oval
     content: '';
@@ -31,13 +32,25 @@ $row-column-break-point: 'max-width: 1040px';
     // Bottom-left triangle
     content: '';
     position: absolute;
-    bottom: -20%;   // Extend below
-    left: -20%;     // Extend left
-    width: 80%;     // Match top oval width
-    height: 80%;    // Match top oval height
+    bottom: -20%; // Extend below
+    left: -20%; // Extend left
+    width: 80%; // Match top oval width
+    height: 80%; // Match top oval height
     background: $color2;
-    clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 60%);  // Angled triangle
+    clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 60%); // Angled triangle
     animation: bottomLeftTriangle 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s forwards;
+  }
+
+  @include mobile {
+    transform: scale(0.6);
+  }
+
+  @include tablet {
+    transform: scale(0.7);
+  }
+
+  @include desktop {
+    transform: scale(0.8);
   }
 }
 
@@ -48,7 +61,17 @@ $row-column-break-point: 'max-width: 1040px';
   flex-direction: column;
   align-items: center;
   color: $off-white;
-  padding: 5rem 2rem;
+  @include mobile {
+    padding: 3rem 1rem;
+  }
+
+  @include tablet {
+    padding: 4rem 1.5rem;
+  }
+
+  @include desktop {
+    padding: 5rem 2rem;
+  }
 
   .back-icon {
     position: fixed;
@@ -58,7 +81,7 @@ $row-column-break-point: 'max-width: 1040px';
     cursor: pointer;
     z-index: 10;
 
-    @media (max-width: 768px) {
+    @include mobile {
       top: 2rem;
       left: 2rem;
       width: 3rem;
@@ -72,10 +95,20 @@ $row-column-break-point: 'max-width: 1040px';
 
     h1 {
       color: $white;
-      font-size: 4.5rem;
       font-weight: bold;
       letter-spacing: 0.5rem;
       margin-bottom: 1.5rem;
+      @include mobile {
+        font-size: 3rem;
+      }
+
+      @include tablet {
+        font-size: 4rem;
+      }
+
+      @include desktop {
+        font-size: 4.5rem;
+      }
     }
 
     .heading-lines {
@@ -84,7 +117,7 @@ $row-column-break-point: 'max-width: 1040px';
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
-      
+
       &::before,
       &::after {
         content: '';
@@ -133,7 +166,7 @@ $row-column-break-point: 'max-width: 1040px';
           line-height: 1.8;
           color: $white;
           margin-bottom: 2.5rem;
-          
+
           &:last-child {
             margin-bottom: 0;
           }
@@ -144,9 +177,15 @@ $row-column-break-point: 'max-width: 1040px';
 }
 
 @keyframes subtleStripMove {
-  0% { transform: translateX(-5%); }
-  50% { transform: translateX(5%); }
-  100% { transform: translateX(-5%); }
+  0% {
+    transform: translateX(-5%);
+  }
+  50% {
+    transform: translateX(5%);
+  }
+  100% {
+    transform: translateX(-5%);
+  }
 }
 
 @keyframes topRightOval {

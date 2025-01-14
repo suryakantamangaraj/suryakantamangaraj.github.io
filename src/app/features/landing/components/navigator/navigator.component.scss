@@ -1,5 +1,6 @@
-
 @import '../../../../../app/variables';
+@import '../../../../../app/mixins';
+
 .navigator-container {
   position: fixed;
   top: 0;
@@ -21,7 +22,25 @@
   overflow-y: auto;
   padding: 0 8px;
   position: relative;
-  
+
+  @include mobile {
+    max-width: 100%;
+    height: 90vh;
+    padding: $spacing-small;
+  }
+
+  @include tablet {
+    max-width: 720px;
+    height: 85vh;
+    padding: $spacing-medium;
+  }
+
+  @include desktop {
+    max-width: 1000px;
+    height: 80vh;
+    padding: $spacing-large;
+  }
+
   &::-webkit-scrollbar {
     width: 6px;
   }
@@ -34,6 +53,26 @@
     border-radius: 3px;
   }
 }
+
+.grid-container {
+  display: grid;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  @include desktop {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+}
+
 .nav-links {
   display: flex;
   flex-direction: column;
@@ -69,6 +108,17 @@
         transform: translateY(-5px);
         border-color: rgba($color1, 0.6);
       }
+    }
+    @include mobile {
+      margin-bottom: 1rem;
+    }
+
+    @include tablet {
+      margin-bottom: 1.5rem;
+    }
+
+    @include desktop {
+      margin-bottom: 2rem;
     }
   }
 }
