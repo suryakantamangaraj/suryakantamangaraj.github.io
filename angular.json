@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "portfolio-v2": {
+    "SuryaRaj": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/portfolio-v2",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -77,10 +77,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "portfolio-v2:build:production"
+              "browserTarget": "suryakantamangaraj.github.io:build:production"
             },
             "development": {
-              "browserTarget": "portfolio-v2:build:development"
+              "browserTarget": "suryakantamangaraj.github.io:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -88,7 +88,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "portfolio-v2:build"
+            "browserTarget": "suryakantamangaraj.github.io:build"
           }
         },
         "test": {
@@ -113,11 +113,11 @@
         "cypress-run": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "portfolio-v2:serve"
+            "devServerTarget": "suryakantamangaraj.github.io:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "portfolio-v2:serve:production"
+              "devServerTarget": "suryakantamangaraj.github.io:serve:production"
             }
           }
         },
@@ -131,27 +131,27 @@
         "ct": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "portfolio-v2:serve",
+            "devServerTarget": "suryakantamangaraj.github.io:serve",
             "watch": true,
             "headless": false,
             "testingType": "component"
           },
           "configurations": {
             "development": {
-              "devServerTarget": "portfolio-v2:serve:development"
+              "devServerTarget": "suryakantamangaraj.github.io:serve:development"
             }
           }
         },
         "e2e": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "portfolio-v2:serve",
+            "devServerTarget": "suryakantamangaraj.github.io:serve",
             "watch": true,
             "headless": false
           },
           "configurations": {
             "production": {
-              "devServerTarget": "portfolio-v2:serve:production"
+              "devServerTarget": "suryakantamangaraj.github.io:serve:production"
             }
           }
         }
