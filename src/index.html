@@ -6,6 +6,16 @@
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <script>
+      // 3. Check if we came from 404.html
+      const redirect = sessionStorage.getItem('redirect');
+      if (redirect) {
+        // 4. Clear saved URL
+        sessionStorage.removeItem('redirect');
+        // 5. Restore original URL (/xyz)
+        window.history.replaceState(null, null, redirect);
+      }
+    </script>
   </head>
   <body>
     <app-root></app-root>
