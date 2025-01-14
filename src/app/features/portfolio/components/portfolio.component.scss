@@ -1,14 +1,27 @@
 @import '../../../../app/variables';
+@import '../../../../app/mixins';
 
 .portfolio-container {
   min-height: 100vh;
-  padding: 2rem;
+  //padding: 2rem;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: $bg-color;
   overflow: hidden;
+
+  @include mobile {
+    padding: $spacing-small;
+  }
+
+  @include tablet {
+    padding: $spacing-medium;
+  }
+
+  @include desktop {
+    padding: $spacing-large;
+  }
 
   &::before {
     content: '';
@@ -50,7 +63,7 @@
     position: relative;
     width: 500px;
     overflow: hidden; // Contains scrolling text
-    
+
     .typing-text {
       color: $white;
       font-size: 2.2rem;
@@ -60,11 +73,11 @@
       transform: translateY(-50%);
       white-space: nowrap;
       opacity: 0;
-      
+
       &.line1 {
         animation: textScroll 30s linear infinite; // Increased from 21s
       }
-      
+
       &.line2 {
         animation: textScroll 30s linear infinite 10s; // Increased from 7s
       }
@@ -80,14 +93,25 @@
   text-align: center;
   margin: 2rem 0;
   z-index: 1;
-  
+
   h1 {
     color: $white;
-    font-size: 4rem;
     font-weight: bold;
     letter-spacing: 0.5rem;
+
+    @include mobile {
+      font-size: 3rem;
+    }
+
+    @include tablet {
+      font-size: 4rem;
+    }
+
+    @include desktop {
+      font-size: 4.5rem;
+    }
   }
-  
+
   .heading-lines {
     width: auto;
     margin: 1rem auto;
@@ -95,7 +119,7 @@
     flex-direction: column;
     gap: 0.5rem;
     max-width: 300px;
-    
+
     &::before,
     &::after {
       content: '';
@@ -161,6 +185,28 @@
   }
 }
 
+.back-icon {
+  position: fixed;
+  top: 3.2rem;
+  left: 5rem;
+  width: 3.5rem;
+  cursor: pointer;
+  z-index: 10;
+  filter: drop-shadow(0 0 8px rgba($color1, 0.5));
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 12px rgba($color1, 0.7));
+  }
+
+  @include mobile {
+    top: 2rem;
+    left: 2rem;
+    width: 3rem;
+  }
+}
+
 @keyframes slideInOverlay {
   0% {
     transform: translate(100%, -100%) rotate(-180deg) scale(0.5);
@@ -173,25 +219,35 @@
 }
 
 @keyframes subtleStripMove {
-  0% { transform: translateX(-5%); }
-  50% { transform: translateX(5%); }
-  100% { transform: translateX(-5%); }
+  0% {
+    transform: translateX(-5%);
+  }
+  50% {
+    transform: translateX(5%);
+  }
+  100% {
+    transform: translateX(-5%);
+  }
 }
 
 @keyframes textScroll {
-  0%, 2% {
+  0%,
+  2% {
     transform: translateX(0) translateY(-50%);
     opacity: 0;
   }
-  4%, 25% {
+  4%,
+  25% {
     transform: translateX(0) translateY(-50%);
     opacity: 1;
   }
-  30%, 42% {
+  30%,
+  42% {
     transform: translateX(-100%) translateY(-50%);
     opacity: 1;
   }
-  34%, 100% {
+  34%,
+  100% {
     transform: translateX(-100%) translateY(-50%);
     opacity: 0;
   }

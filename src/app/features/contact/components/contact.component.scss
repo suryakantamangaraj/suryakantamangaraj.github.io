@@ -1,4 +1,5 @@
 @import '../../../../app/variables';
+@import '../../../../app/mixins';
 
 .overlay {
   display: inline-block;
@@ -44,7 +45,7 @@
       filter: drop-shadow(0 0 12px rgba($color1, 0.7));
     }
 
-    @media (max-width: 768px) {
+    @include mobile {
       top: 2rem;
       left: 2rem;
       width: 3rem;
@@ -57,10 +58,21 @@
 
     h1 {
       color: $white;
-      font-size: 4.5rem;
       font-weight: bold;
       letter-spacing: 0.5rem;
       margin-bottom: 1.5rem;
+
+      @include mobile {
+        font-size: 3rem;
+      }
+
+      @include tablet {
+        font-size: 4rem;
+      }
+
+      @include desktop {
+        font-size: 4.5rem;
+      }
     }
 
     .heading-lines {
@@ -69,7 +81,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
-      
+
       &::before,
       &::after {
         content: '';
@@ -96,7 +108,7 @@
       text-decoration: none;
       color: $white;
       transition: all 0.3s ease;
-      box-shadow: 
+      box-shadow:
         0 0 20px rgba($color1, 0.2),
         0 0 40px rgba($color1, 0.1),
         inset 0 0 20px rgba($color1, 0.2);
@@ -105,7 +117,7 @@
         transform: translateY(-8px);
         background: rgba($color1, 0.4);
         border-color: rgba($color1, 0.8);
-        box-shadow: 
+        box-shadow:
           0 0 30px rgba($color1, 0.3),
           0 0 50px rgba($color1, 0.2),
           inset 0 0 25px rgba($color1, 0.3);
@@ -134,14 +146,14 @@
 
     .section {
       margin-bottom: 6rem;
-      
+
       h2 {
         color: $white;
         font-size: 2.8rem;
         margin-bottom: 3rem;
         position: relative;
         padding-left: 2rem;
-        
+
         &::before {
           content: '';
           position: absolute;
@@ -169,7 +181,7 @@
           text-decoration: none;
           color: $white;
           transition: all 0.3s ease;
-          box-shadow: 
+          box-shadow:
             0 0 15px rgba($color1, 0.2),
             0 0 30px rgba($color1, 0.1),
             inset 0 0 15px rgba($color1, 0.2);
@@ -178,7 +190,7 @@
             transform: translateY(-5px);
             background: rgba($color1, 0.35);
             border-color: rgba($color1, 0.7);
-            box-shadow: 
+            box-shadow:
               0 0 25px rgba($color1, 0.3),
               0 0 40px rgba($color1, 0.2),
               inset 0 0 20px rgba($color1, 0.3);
@@ -203,7 +215,8 @@
 }
 
 @keyframes morphShape {
-  0%, 100% {
+  0%,
+  100% {
     border-radius: 61% 39% 52% 48% / 44% 59% 41% 56%;
   }
   50% {

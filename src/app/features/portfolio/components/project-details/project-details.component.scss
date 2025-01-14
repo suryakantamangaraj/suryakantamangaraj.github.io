@@ -1,14 +1,25 @@
 @import '../../../../../app/variables';
+@import '../../../../../app/mixins';
 
 .project-details-container {
   min-height: 100vh;
-  padding: 2rem;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: $bg-color;
   overflow: hidden;
+  @include mobile {
+    padding: $spacing-small;
+  }
+
+  @include tablet {
+    padding: $spacing-medium;
+  }
+
+  @include desktop {
+    padding: $spacing-large;
+  }
 
   &::before {
     content: '';
@@ -17,8 +28,7 @@
     left: 0;
     width: 150%;
     height: 150%;
-    background: 
-      radial-gradient(circle at 0% 0%, rgba($color2, 0.4) 0%, transparent 50%),
+    background: radial-gradient(circle at 0% 0%, rgba($color2, 0.4) 0%, transparent 50%),
       radial-gradient(circle at 100% 0%, rgba($color1, 0.3) 0%, transparent 50%),
       radial-gradient(circle at 100% 100%, rgba($color2, 0.4) 0%, transparent 50%),
       radial-gradient(circle at 0% 100%, rgba($color1, 0.3) 0%, transparent 50%);
@@ -29,25 +39,50 @@
   }
 
   .back-icon {
-    position: absolute;
-    top: 2rem;
-    left: 2rem;
+    position: fixed;
+    top: 3.2rem;
+    left: 5rem;
+    width: 3.5rem;
     cursor: pointer;
-    z-index: 2;
+    z-index: 10;
+    filter: drop-shadow(0 0 8px rgba($color1, 0.5));
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 12px rgba($color1, 0.7));
+    }
+
+    @include mobile {
+      top: 2rem;
+      left: 2rem;
+      width: 3rem;
+    }
   }
 
   .project-heading {
     text-align: center;
     margin: 4rem 0;
     z-index: 1;
-    
+
     h1 {
       color: $white;
-      font-size: 4rem;
       font-weight: bold;
       letter-spacing: 0.5rem;
+
+      @include mobile {
+        font-size: 3rem;
+      }
+
+      @include tablet {
+        font-size: 4rem;
+      }
+
+      @include desktop {
+        font-size: 4.5rem;
+      }
     }
-    
+
     .heading-lines {
       width: auto;
       margin: 1rem auto;
@@ -55,7 +90,7 @@
       flex-direction: column;
       gap: 0.5rem;
       max-width: 300px;
-      
+
       &::before,
       &::after {
         content: '';
@@ -108,14 +143,14 @@
         .features-list {
           list-style: none;
           padding: 0;
-          
+
           li {
             color: $white;
             font-size: 1.6rem;
             padding: 1rem 0;
             position: relative;
             padding-left: 2.5rem;
-            
+
             &::before {
               content: '•';
               color: $color1;
@@ -130,7 +165,7 @@
           .additional-list {
             list-style: none;
             padding: 0;
-            
+
             li {
               color: $white;
               font-size: 1.6rem;
@@ -138,7 +173,7 @@
               position: relative;
               padding-left: 2.5rem;
               transition: all 0.3s ease;
-              
+
               &::before {
                 content: '•';
                 color: $color1;
@@ -266,7 +301,13 @@
 }
 
 @keyframes subtleStripMove {
-  0% { transform: translateX(-5%); }
-  50% { transform: translateX(5%); }
-  100% { transform: translateX(-5%); }
+  0% {
+    transform: translateX(-5%);
+  }
+  50% {
+    transform: translateX(5%);
+  }
+  100% {
+    transform: translateX(-5%);
+  }
 }
