@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found</title>
+  <script>
+    // When user hits /xyz
+    // 1. Save /xyz to sessionStorage
+    sessionStorage.setItem('redirect', window.location.pathname);
+    // 2. Redirect to homepage
+    window.location.href = '/';
+  </script>
+</head>
+</html>
