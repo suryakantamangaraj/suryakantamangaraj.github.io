@@ -1,5 +1,6 @@
 <div class="navbar">
   <div class="nav-items">
+    <!-- Regular Nav Items -->
     <ng-container *ngFor="let item of navItems">
       <a
         *ngIf="!item.external"
@@ -7,26 +8,45 @@
         class="nav-item"
         [attr.data-test]="item.dataTest"
         routerLinkActive="active"
-        >{{ item.name }}</a
       >
-      <a *ngIf="item.external" [href]="item.path" target="_blank" class="nav-item">{{
-        item.name
-      }}</a>
+        {{ item.name }}
+      </a>
+      <a *ngIf="item.external" [href]="item.path" target="_blank" class="nav-item">
+        {{ item.name }}
+      </a>
     </ng-container>
 
     <!-- Scribe Dropdown -->
     <div class="dropdown">
-      <a class="nav-item dropbtn">Scribe</a>
-      <div class="dropdown-content">
-        <a *ngFor="let item of scribeItems" [href]="item.path" target="_blank">{{ item.name }}</a>
+      <a
+        class="nav-item dropbtn"
+        data-dropdown="scribe"
+        (click)="toggleDropdown($event)"
+        (touchend)="toggleDropdown($event)"
+      >
+        Scribe
+      </a>
+      <div class="dropdown-content" [class.show]="activeDropdown === 'scribe'">
+        <a *ngFor="let item of scribeItems" [href]="item.path" target="_blank">
+          {{ item.name }}
+        </a>
       </div>
     </div>
 
     <!-- Misc Dropdown -->
     <div class="dropdown">
-      <a class="nav-item dropbtn">Misc</a>
-      <div class="dropdown-content">
-        <a *ngFor="let item of miscItems" [href]="item.path" target="_blank">{{ item.name }}</a>
+      <a
+        class="nav-item dropbtn"
+        data-dropdown="misc"
+        (click)="toggleDropdown($event)"
+        (touchend)="toggleDropdown($event)"
+      >
+        Misc
+      </a>
+      <div class="dropdown-content" [class.show]="activeDropdown === 'misc'">
+        <a *ngFor="let item of miscItems" [href]="item.path" target="_blank">
+          {{ item.name }}
+        </a>
       </div>
     </div>
   </div>
