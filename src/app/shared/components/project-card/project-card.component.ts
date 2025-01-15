@@ -10,27 +10,29 @@ import { IProject } from '@core/models/project.interface';
 export class ProjectCardComponent {
   @Input() project!: IProject;
   @Output() cardClick = new EventEmitter<IProject>();
+  isFlipped = false;
 
   constructor(private router: Router) {}
 
-  onMoreInfoClick(project: IProject, event: MouseEvent): void {
+  toggleFlip(event: MouseEvent | TouchEvent): void {
+    event.preventDefault();
     event.stopPropagation();
-    this.cardClick.emit(project);
+    this.isFlipped = !this.isFlipped;
   }
 
-  @HostListener('touchstart', ['$event'])
-  onTouchStart(event: TouchEvent) {
+  onMoreInfoClick(event: MouseEvent | TouchEvent): void {
     event.preventDefault();
-    const card = event.currentTarget as HTMLElement;
-    const inner = card.querySelector('.card-inner') as HTMLElement;
-    inner.style.transform = 'rotateY(180deg)';
+    event.stopPropagation();
+    this.router.navigate(['/portfolio/project', this.project.id]);
   }
 
+  @HostListener('click', ['$event'])
   @HostListener('touchend', ['$event'])
-  onTouchEnd(event: TouchEvent) {
-    event.preventDefault();
-    const card = event.currentTarget as HTMLElement;
-    const inner = card.querySelector('.card-inner') as HTMLElement;
-    inner.style.transform = 'rotateY(0)';
+  onInteraction(event: MouseEvent | TouchEvent): void {
+    if (event.target instanceof HTMLElement && event.target.classList.contains('more-info-btn')) {
+      this.onMoreInfoClick(event);
+    } else {
+      this.toggleFlip(event);
+    }
   }
 }

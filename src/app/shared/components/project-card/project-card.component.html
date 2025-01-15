@@ -1,12 +1,12 @@
-<div class="card-outer">
+<div class="card-outer" [class.is-flipped]="isFlipped">
   <div class="card-inner">
     <div class="card-front">
-      <h3 class="project-name">{{project.name}}</h3>
+      <h3 class="project-name">{{ project.name }}</h3>
       <span class="star-badge" *ngIf="project.isFeatured">⭐</span>
     </div>
     <div class="card-back">
-      <p class="project-description">{{project.description}}</p>
-      <button class="more-info-btn" (click)="onMoreInfoClick(project, $event)">More Info</button>
+      <p class="project-description">{{ project.description }}</p>
+      <button class="more-info-btn" (click)="onMoreInfoClick($event)">More Info</button>
     </div>
   </div>
 </div>
