@@ -9,11 +9,19 @@
   @include mobile {
     width: 280px;
     height: 180px;
+
+    &:active .card-inner {
+      transform: rotateY(180deg);
+    }
   }
 
   @include tablet {
     width: 300px;
     height: 200px;
+
+    &:active .card-inner {
+      transform: rotateY(180deg);
+    }
   }
 
   @include desktop {
