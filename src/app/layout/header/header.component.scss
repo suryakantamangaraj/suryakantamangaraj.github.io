@@ -6,13 +6,35 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 2.5rem; // Increased from 2rem
   z-index: 100;
+
+  @include mobile {
+    padding: 1.5rem; // Reduced from 2.5rem
+  }
+
+  @include tablet {
+    padding: 2rem;
+  }
+
+  @include desktop {
+    padding: 2.5rem;
+  }
 
   .nav-items {
     display: flex;
     justify-content: center;
-    gap: 3rem; // Increased from 2rem
+
+    @include mobile {
+      gap: 1.5rem; // Reduced from 3rem
+    }
+
+    @include tablet {
+      gap: 2rem;
+    }
+
+    @include desktop {
+      gap: 3rem;
+    }
   }
   .nav-item {
     color: $white;
@@ -29,7 +51,7 @@
     }
 
     @include mobile {
-      font-size: 1.6rem; // Reduced from 2rem for better mobile view
+      font-size: 1.4rem; // Reduced from 1.6rem
     }
 
     @include tablet {
