@@ -121,9 +121,15 @@
         padding: 12px 16px;
       }
     }
+
+    &.show {
+      display: block;
+    }
   }
 
-  &:hover .dropdown-content {
-    display: block;
+  @media (hover: hover) {
+    &:hover .dropdown-content {
+      display: block;
+    }
   }
 }
