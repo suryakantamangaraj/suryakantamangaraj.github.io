@@ -104,10 +104,19 @@
         animation-delay: -1.5s;
       }
     }
+
+    @include mobile {
+      margin: 2rem 0;
+
+      h1 {
+        font-size: 2.5rem;
+        letter-spacing: 0.3rem;
+      }
+    }
   }
 
   .project-content {
-    width: 80%;
+    width: 90%;
     max-width: 1200px;
     margin: 0 auto;
     z-index: 1;
@@ -130,12 +139,50 @@
         font-size: 1.8rem;
         line-height: 1.6;
       }
+
+      @include mobile {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+
+        h2 {
+          font-size: 2rem;
+          margin-bottom: 1.5rem;
+        }
+
+        p {
+          font-size: 1.6rem;
+        }
+      }
     }
 
     .two-column-layout {
       display: flex;
       gap: 3rem;
       margin-top: 3rem;
+
+      @include mobile {
+        flex-direction: column;
+        gap: 2rem;
+
+        .main-content,
+        .sidebar-content {
+          flex: 0 0 100%;
+          width: 100%;
+        }
+
+        .project-links {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1rem;
+          margin: 2rem 0;
+
+          .link-button {
+            width: 100%;
+            padding: 1.5rem;
+            font-size: 1.4rem;
+          }
+        }
+      }
 
       .main-content {
         flex: 0 0 70%;

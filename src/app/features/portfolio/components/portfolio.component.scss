@@ -170,13 +170,29 @@
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 3rem;
   padding: 2rem;
   width: 80%;
   max-width: 1200px;
   margin: 2rem auto;
   z-index: 1;
+
+  // Update grid layouts for different screen sizes
+  @include mobile {
+    grid-template-columns: 1fr;
+    width: 90%;
+  }
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr); // Force 2 columns
+    width: 90%;
+    gap: 2rem;
+  }
+
+  @include desktop {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    width: 80%;
+  }
 
   app-project-card {
     width: 100%;
