@@ -19,7 +19,7 @@ export class HeaderComponent {
     { path: '/about', name: 'About', dataTest: 'about-link' },
     { path: '/portfolio', name: 'Portfolio', dataTest: 'portfolio-link' },
     { path: '/contact', name: 'Contact', dataTest: 'contact-link' },
-    { path: 'https://suryaraj.me/Archive', name: 'Archive', external: true },
+    { path: 'https://archive.suryaraj.me', name: 'Archive', external: true },
   ];
 
   scribeItems: NavItem[] = [
@@ -29,14 +29,29 @@ export class HeaderComponent {
 
   miscItems: NavItem[] = [
     { path: 'https://toolbox.suryaraj.me', name: 'Toolbox' },
+    { path: 'https://utilities.suryaraj.me/', name: 'Utilities' },
     { path: 'https://suryaraj.me/Mathematics', name: 'MathNotes' },
   ];
 
+  // Common handler for both click and touch
+  handleExternalNavigation(event: MouseEvent | TouchEvent, path: string): void {
+    event.preventDefault();
+    event.stopPropagation();
+    window.open(path, '_blank');
+  }
+
+  // Update toggleDropdown
   toggleDropdown(event: MouseEvent | TouchEvent): void {
     event.preventDefault();
     event.stopPropagation();
     const target = event.currentTarget as HTMLElement;
     const dropdownType = target.getAttribute('data-dropdown');
+
+    // Close other dropdowns first
+    if (this.activeDropdown && this.activeDropdown !== dropdownType) {
+      this.activeDropdown = null;
+    }
+
     this.activeDropdown = this.activeDropdown === dropdownType ? null : dropdownType;
   }
 
