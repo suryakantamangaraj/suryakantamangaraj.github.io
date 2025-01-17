@@ -11,7 +11,13 @@
       >
         {{ item.name }}
       </a>
-      <a *ngIf="item.external" [href]="item.path" target="_blank" class="nav-item">
+      <a
+        *ngIf="item.external"
+        [href]="item.path"
+        class="nav-item"
+        (click)="handleExternalNavigation($event, item.path)"
+        (touchend)="handleExternalNavigation($event, item.path)"
+      >
         {{ item.name }}
       </a>
     </ng-container>
@@ -27,7 +33,12 @@
         Scribe
       </a>
       <div class="dropdown-content" [class.show]="activeDropdown === 'scribe'">
-        <a *ngFor="let item of scribeItems" [href]="item.path" target="_blank">
+        <a
+          *ngFor="let item of scribeItems"
+          [href]="item.path"
+          (click)="handleExternalNavigation($event, item.path)"
+          (touchend)="handleExternalNavigation($event, item.path)"
+        >
           {{ item.name }}
         </a>
       </div>
@@ -44,7 +55,12 @@
         Misc
       </a>
       <div class="dropdown-content" [class.show]="activeDropdown === 'misc'">
-        <a *ngFor="let item of miscItems" [href]="item.path" target="_blank">
+        <a
+          *ngFor="let item of miscItems"
+          [href]="item.path"
+          (click)="handleExternalNavigation($event, item.path)"
+          (touchend)="handleExternalNavigation($event, item.path)"
+        >
           {{ item.name }}
         </a>
       </div>
