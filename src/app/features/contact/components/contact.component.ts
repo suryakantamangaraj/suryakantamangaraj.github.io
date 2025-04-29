@@ -43,6 +43,11 @@ export class ContactComponent {
     ],
     work: [
       {
+        name: 'GitHub',
+        url: 'https://github.com/suryakantamangaraj',
+        iconUrl: './assets/icons/contact/github.svg'
+      },
+      {
         name: 'Tumblr',
         url: 'https://suryaraj.tumblr.com/',
         iconUrl: './assets/icons/contact/tumblr.svg'
@@ -66,9 +71,9 @@ export class ContactComponent {
     iconUrl: './assets/icons/contact/email.svg'
   };
 
-  github: ProfileItem = {
-    name: 'GitHub',
-    url: 'https://github.com/suryakantamangaraj',
+  linktree: ProfileItem = {
+    name: 'LinkTree',
+    url: 'https://linktr.ee/suryaraj',
     iconUrl: './assets/icons/contact/github.svg'
   };
 
