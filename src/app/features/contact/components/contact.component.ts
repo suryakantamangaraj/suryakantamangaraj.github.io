@@ -74,7 +74,7 @@ export class ContactComponent {
   linktree: ProfileItem = {
     name: 'LinkTree',
     url: 'https://linktr.ee/suryaraj',
-    iconUrl: './assets/icons/contact/github.svg'
+    iconUrl: './assets/icons/contact/linktree.svg'
   };
 
   constructor(private router: Router) {}
