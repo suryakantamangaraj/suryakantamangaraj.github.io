@@ -65,16 +65,16 @@ export class ContactComponent {
     ]
   };
 
-  email: ProfileItem = {
-    name: 'Email',
-    url: 'mailto:surya.socialnetworking@gmail.com',
-    iconUrl: './assets/icons/contact/email.svg'
-  };
-
   linktree: ProfileItem = {
     name: 'LinkTree',
     url: 'https://linktr.ee/suryaraj',
     iconUrl: './assets/icons/contact/linktree.svg'
+  };
+
+  bio: ProfileItem = {
+    name: 'BioSite',
+    url: 'https://bio.site/suryaraj',
+    iconUrl: './assets/icons/contact/bio.svg'
   };
 
   constructor(private router: Router) {}
