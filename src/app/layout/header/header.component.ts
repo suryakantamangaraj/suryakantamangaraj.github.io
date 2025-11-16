@@ -19,18 +19,18 @@ export class HeaderComponent {
     { path: '/about', name: 'About', dataTest: 'about-link' },
     { path: '/portfolio', name: 'Portfolio', dataTest: 'portfolio-link' },
     { path: '/contact', name: 'Contact', dataTest: 'contact-link' },
-    { path: 'https://archive.suryaraj.me', name: 'Archive', external: true },
+    { path: 'https://archive.suryaraj.com', name: 'Archive', external: true },
   ];
 
   scribeItems: NavItem[] = [
-    { path: 'https://blog.suryaraj.me', name: 'Blog' },
-    { path: 'https://wiki.suryaraj.me', name: 'Wiki' },
+    { path: 'https://blog.suryaraj.com', name: 'Blog' },
+    { path: 'https://wiki.suryaraj.com', name: 'Wiki' },
   ];
 
   miscItems: NavItem[] = [
-    { path: 'https://toolbox.suryaraj.me', name: 'Toolbox' },
-    { path: 'https://utilities.suryaraj.me/', name: 'Utilities' },
-    { path: 'https://suryaraj.me/Mathematics', name: 'MathNotes' },
+    { path: 'https://toolbox.suryaraj.com', name: 'Toolbox' },
+    { path: 'https://utilities.suryaraj.com/', name: 'Utilities' },
+    { path: 'https://suryaraj.com/Mathematics', name: 'MathNotes' },
   ];
 
   // Common handler for both click and touch

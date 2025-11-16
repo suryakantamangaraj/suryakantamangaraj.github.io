@@ -34,12 +34,12 @@ export class NavigatorComponent {
     { displayName: 'Portfolio', url: '/portfolio' },
     { displayName: 'About', url: '/about' },
     { displayName: 'Contact', url: '/contact' },
-    { displayName: 'Blog', url: 'https://blog.suryaraj.me', external: true },
-    { displayName: 'Wiki', url: 'https://wiki.suryaraj.me', external: true },
-    { displayName: 'Archive', url: 'https://archive.suryaraj.me', external: true },
-    { displayName: 'Tools', url: 'https://tools.suryaraj.me', external: true }, 
-    { displayName: 'Math Notes', url: 'https://math.suryaraj.me', external: true },
-    { displayName: 'Utilities', url: 'https://utils.suryaraj.me', external: true }
+    { displayName: 'Blog', url: 'https://blog.suryaraj.com', external: true },
+    { displayName: 'Wiki', url: 'https://wiki.suryaraj.com', external: true },
+    { displayName: 'Archive', url: 'https://archive.suryaraj.com', external: true },
+    { displayName: 'Tools', url: 'https://tools.suryaraj.com', external: true }, 
+    { displayName: 'Math Notes', url: 'https://math.suryaraj.com', external: true },
+    { displayName: 'Utilities', url: 'https://utils.suryaraj.com', external: true }
   ];
 
   constructor(

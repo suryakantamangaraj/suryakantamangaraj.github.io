@@ -5,7 +5,7 @@ export const ConnectedAgricultureData: IProject = {
   name: 'Smart Farming with Edge AI and Cloud Intelligence',
   description: 'Advanced agricultural monitoring system leveraging Edge AI and cloud computing for real-time crop analysis and yield prediction. Implements IoT sensors network for environmental monitoring, machine learning for predictive analytics, and cloud-based dashboard for comprehensive farm management.',
   projectLink: '',
-  liveUrl: 'https://suryaraj.me/SmartFarming/',
+  liveUrl: 'https://suryaraj.com/SmartFarming/',
   isFeatured: true,
   features: [
     'Real-time environmental monitoring with distributed IoT sensors',

@@ -5,7 +5,7 @@ export const PersonalWebData: IProject = {
   name: 'Portfolio Website - Angular SPA',
   description: 'Modern single-page application built with Angular, featuring custom animations, responsive design, and optimized performance. Implemented with TypeScript and custom CSS architecture, following best practices for web development.',
   projectLink: 'https://github.com/suryakantamangaraj/suryakantamangaraj.github.io',
-  liveUrl: 'https://suryaraj.me/',
+  liveUrl: 'https://suryaraj.com/',
   isFeatured: true,
   features: [
     'Custom CSS architecture with BEM methodology',
