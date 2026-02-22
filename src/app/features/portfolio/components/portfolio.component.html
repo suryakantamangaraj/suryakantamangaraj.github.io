@@ -15,17 +15,16 @@
   </div>
 
   <div class="portfolio-heading">
-    <h1>PORTFOLIO</h1>
+    <h1 title="Surya Raj Portfolio - AI & RF Systems Engineering Projects">
+      <span class="sr-only">Surya Raj Portfolio - AI & RF Systems Engineering Projects</span>
+      <span aria-hidden="true">PORTFOLIO</span>
+    </h1>
     <div class="heading-lines"></div>
   </div>
 
   <div class="filter-section">
     @for (tag of tags; track tag) {
-      <button
-        [class.active]="tag.isSelected"
-        (click)="toggleFilter(tag)"
-        class="filter-btn"
-        >
+      <button [class.active]="tag.isSelected" (click)="toggleFilter(tag)" class="filter-btn">
         {{ tag.displayName }}
       </button>
     }
@@ -33,10 +32,7 @@
 
   <div class="project-grid">
     @for (project of filteredProjects; track project) {
-      <app-project-card
-        [project]="project"
-        (cardClick)="onProjectClick($event)"
-        >
+      <app-project-card [project]="project" (cardClick)="onProjectClick($event)">
       </app-project-card>
     }
   </div>
