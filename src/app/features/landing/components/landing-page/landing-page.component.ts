@@ -4,9 +4,10 @@ import { Subscription } from 'rxjs';
 import { NavigationService } from '../../../../core/services/navigation.service';
 
 @Component({
-  selector: 'app-landing-page',
-  templateUrl: './landing-page.component.html',
-  styleUrls: ['./landing-page.component.scss']
+    selector: 'app-landing-page',
+    templateUrl: './landing-page.component.html',
+    styleUrls: ['./landing-page.component.scss'],
+    standalone: false
 })
 export class LandingPageComponent implements OnInit, OnDestroy {
   startTadaAnimation = false;

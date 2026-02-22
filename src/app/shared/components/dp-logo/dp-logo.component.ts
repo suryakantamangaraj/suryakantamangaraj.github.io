@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
-  selector: 'app-dp-logo',
-  templateUrl: './dp-logo.component.html',
-  styleUrls: ['./dp-logo.component.scss']
+    selector: 'app-dp-logo',
+    templateUrl: './dp-logo.component.html',
+    styleUrls: ['./dp-logo.component.scss'],
+    standalone: false
 })
 export class DpLogoComponent implements OnInit, OnChanges {
   imgStyle: {} = {};
