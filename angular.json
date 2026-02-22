@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist",
+            "outputPath": "dist/SuryaRaj/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -27,7 +27,12 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "robots.txt",
+                "input": "src/assets",
+                "output": "/"
+              }
             ],
             "styles": [
               "src/styles.scss"
@@ -105,7 +110,12 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "robots.txt",
+                "input": "src/assets",
+                "output": "/"
+              }
             ],
             "styles": [
               "src/styles.scss"
@@ -157,6 +167,75 @@
               "devServerTarget": "SuryaRaj:serve:production"
             }
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/SuryaRaj/server",
+            "main": "src/server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "buildOptimizer": true,
+            "optimization": true,
+            "sourceMap": false,
+            "extractLicenses": false,
+            "inlineStyleLanguage": "scss",
+            "vendorChunk": true
+          },
+          "configurations": {
+            "production": {
+              "buildOptimizer": true,
+              "outputHashing": "media",
+              "optimization": true,
+              "sourceMap": false,
+              "extractLicenses": true,
+              "vendorChunk": false
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "SuryaRaj:build:development",
+              "serverTarget": "SuryaRaj:server:development"
+            },
+            "production": {
+              "browserTarget": "SuryaRaj:build:production",
+              "serverTarget": "SuryaRaj:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@angular-devkit/build-angular:prerender",
+          "options": {
+            "routes": [
+              "/",
+              "/about",
+              "/portfolio",
+              "/contact",
+              "/404"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "SuryaRaj:build:production",
+              "serverTarget": "SuryaRaj:server:production"
+            },
+            "development": {
+              "browserTarget": "SuryaRaj:build:development",
+              "serverTarget": "SuryaRaj:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

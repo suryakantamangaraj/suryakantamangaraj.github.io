@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng run SuryaRaj:prerender && node scripts/generate-sitemap.js",
     "watch": "ng build --watch --configuration development",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -16,7 +16,11 @@
     "analyze": "ng build --stats-json && webpack-bundle-analyzer dist/portfolio-v2/browser/stats.json",
     "e2e": "ng e2e",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "dev:ssr": "ng run SuryaRaj:serve-ssr",
+    "serve:ssr": "node dist/SuryaRaj/server/main.js",
+    "build:ssr": "ng build && ng run SuryaRaj:server",
+    "prerender": "ng run SuryaRaj:prerender"
   },
   "private": true,
   "dependencies": {
@@ -27,7 +31,10 @@
     "@angular/forms": "^21.1.5",
     "@angular/platform-browser": "^21.1.5",
     "@angular/platform-browser-dynamic": "^21.1.5",
+    "@angular/platform-server": "^21.1.5",
     "@angular/router": "^21.1.5",
+    "@angular/ssr": "^21.1.4",
+    "express": "^5.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.1"
@@ -42,10 +49,14 @@
     "@angular/compiler-cli": "^21.1.5",
     "@angular/localize": "^21.1.5",
     "@cypress/schematic": "^3.0.0",
+    "@types/express": "^5.0.1",
     "@types/jasmine": "~4.3.0",
     "@types/jest": "^29.5.14",
+    "@types/node": "^20.17.19",
     "@typescript-eslint/eslint-plugin": "6.0.0",
     "@typescript-eslint/parser": "6.0.0",
+    "browser-sync": "^3.0.0",
+    "browserslist": "^4.28.1",
     "cypress": "^13.17.0",
     "eslint": "8.56.0",
     "eslint-plugin-prettier": "^5.2.1",
@@ -74,7 +85,8 @@
     ]
   },
   "resolutions": {
-    "@typescript-eslint/eslint-plugin": "^6.0.0"
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@babel/compat-data": "^7.26.0"
   },
   "engines": {
     "node": ">=18.19.1"
