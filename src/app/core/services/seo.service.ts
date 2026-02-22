@@ -1,14 +1,22 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, Renderer2, RendererFactory2 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SeoService {
+  private renderer: Renderer2;
+  private jsonLdScript: HTMLScriptElement | null = null;
+
   constructor(
     private titleService: Title,
-    private metaService: Meta
-  ) {}
+    private metaService: Meta,
+    @Inject(DOCUMENT) private document: Document,
+    rendererFactory: RendererFactory2
+  ) {
+    this.renderer = rendererFactory.createRenderer(null, null);
+  }
 
   updateSeoTags(config: {
     title: string;
@@ -48,5 +56,15 @@ export class SeoService {
 
   private updateProperty(property: string, content: string) {
     this.metaService.updateTag({ property, content });
+  }
+
+  setJsonLd(schema: any) {
+    if (this.jsonLdScript) {
+      this.renderer.removeChild(this.document.head, this.jsonLdScript);
+    }
+    this.jsonLdScript = this.renderer.createElement('script');
+    this.renderer.setAttribute(this.jsonLdScript, 'type', 'application/ld+json');
+    this.renderer.setProperty(this.jsonLdScript, 'text', JSON.stringify(schema));
+    this.renderer.appendChild(this.document.head, this.jsonLdScript);
   }
 }

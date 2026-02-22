@@ -40,6 +40,31 @@ export class LandingPageComponent implements OnInit, OnDestroy {
       ogImage: 'https://suryaraj.com/assets/images/dp.png', // Fallback to your main DP or any other preview image
       ogUrl: 'https://suryaraj.com/',
     });
+
+    // Inject Schema.org JSON-LD Entity
+    this.seoService.setJsonLd({
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Person',
+          name: 'Surya Raj',
+          jobTitle: 'AI-Driven RF System Designer & Test Automation Engineer',
+          description:
+            'Bridging the gap between complex hardware and intelligent software. Specializing in RF system design, wireless communications, and AI/ML test automation.',
+          url: 'https://suryaraj.com/',
+          image: 'https://suryaraj.com/assets/images/dp.png',
+          sameAs: [
+            'https://www.linkedin.com/in/suryakanta-mangaraj',
+            'https://github.com/suryakantamangaraj',
+          ],
+        },
+        {
+          '@type': 'WebSite',
+          name: 'Surya Raj',
+          url: 'https://suryaraj.com/',
+        },
+      ],
+    });
   }
 
   onExploreMeClick() {
