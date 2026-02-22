@@ -2,15 +2,15 @@
 My personal portfolio website built with Angular. Visit [suryaraj.me](https://suryaraj.me).
 ---
 ## Tech Stack
-- **Angular 16**
+- **Angular 21**
 - **SCSS**
 - **Angular Material**
 - **Firebase Hosting**
 ---
 ## Local Development
 ### Prerequisites
-- **Node.js**: 18.19.1
-- **Yarn**: 1.22.19
+- **Node.js**: 24.13.1 (LTS via `.nvmrc`)
+- **Yarn**: 1.22.22
 ### Setup
 1. Clone the repository:
    ```bash
