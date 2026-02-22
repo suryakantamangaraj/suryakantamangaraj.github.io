@@ -4,28 +4,29 @@ import { NavigationService } from '@core/services/navigation.service';
 import { trigger, transition, style, animate, stagger, query } from '@angular/animations';
 
 @Component({
-  selector: 'app-navigator',
-  templateUrl: './navigator.component.html',
-  styleUrls: ['./navigator.component.scss'],
-  animations: [
-    trigger('slideAnimation', [
-      transition(':enter', [
-        query('.nav-item', [
-          style({ opacity: 0, transform: 'translateX(-100%)' }),
-          stagger(80, [
-            animate('0.4s ease', style({ opacity: 1, transform: 'translateX(0)' }))
-          ])
+    selector: 'app-navigator',
+    templateUrl: './navigator.component.html',
+    styleUrls: ['./navigator.component.scss'],
+    animations: [
+        trigger('slideAnimation', [
+            transition(':enter', [
+                query('.nav-item', [
+                    style({ opacity: 0, transform: 'translateX(-100%)' }),
+                    stagger(80, [
+                        animate('0.4s ease', style({ opacity: 1, transform: 'translateX(0)' }))
+                    ])
+                ])
+            ]),
+            transition(':leave', [
+                query('.nav-item', [
+                    stagger(80, [
+                        animate('0.4s ease', style({ opacity: 0, transform: 'translateX(100%)' }))
+                    ])
+                ])
+            ])
         ])
-      ]),
-      transition(':leave', [
-        query('.nav-item', [
-          stagger(80, [
-            animate('0.4s ease', style({ opacity: 0, transform: 'translateX(100%)' }))
-          ])
-        ])
-      ])
-    ])
-  ]
+    ],
+    standalone: false
 })
 export class NavigatorComponent {
   isVisible$ = this.navigationService.isNavigatorVisible$;

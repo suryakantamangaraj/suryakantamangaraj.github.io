@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { IProject } from '@core/models/project.interface';
 
 @Component({
-  selector: 'app-project-card',
-  templateUrl: './project-card.component.html',
-  styleUrls: ['./project-card.component.scss'],
+    selector: 'app-project-card',
+    templateUrl: './project-card.component.html',
+    styleUrls: ['./project-card.component.scss'],
+    standalone: false
 })
 export class ProjectCardComponent {
   @Input() project!: IProject;

@@ -25,26 +25,30 @@
     <div class="section social">
       <h2>Social Profiles</h2>
       <div class="links">
-        <a *ngFor="let profile of contactProfile.profile" 
-           [href]="profile.url" 
-           target="_blank"
-           class="link-card">
-          <img [src]="profile.iconUrl" [alt]="profile.name">
-          <span>{{profile.name}}</span>
-        </a>
+        @for (profile of contactProfile.profile; track profile) {
+          <a
+            [href]="profile.url"
+            target="_blank"
+            class="link-card">
+            <img [src]="profile.iconUrl" [alt]="profile.name">
+            <span>{{profile.name}}</span>
+          </a>
+        }
       </div>
     </div>
 
     <div class="section work">
       <h2>Work Profiles</h2>
       <div class="links">
-        <a *ngFor="let profile of contactProfile.work" 
-           [href]="profile.url" 
-           target="_blank"
-           class="link-card">
-          <img [src]="profile.iconUrl" [alt]="profile.name">
-          <span>{{profile.name}}</span>
-        </a>
+        @for (profile of contactProfile.work; track profile) {
+          <a
+            [href]="profile.url"
+            target="_blank"
+            class="link-card">
+            <img [src]="profile.iconUrl" [alt]="profile.name">
+            <span>{{profile.name}}</span>
+          </a>
+        }
       </div>
     </div>
   </div>

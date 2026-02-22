@@ -1,26 +1,28 @@
 <div class="navbar">
   <div class="nav-items">
     <!-- Regular Nav Items -->
-    <ng-container *ngFor="let item of navItems">
-      <a
-        *ngIf="!item.external"
-        [routerLink]="[item.path]"
-        class="nav-item"
-        [attr.data-test]="item.dataTest"
-        routerLinkActive="active"
-      >
-        {{ item.name }}
-      </a>
-      <a
-        *ngIf="item.external"
-        [href]="item.path"
-        class="nav-item"
-        (click)="handleExternalNavigation($event, item.path)"
-        (touchend)="handleExternalNavigation($event, item.path)"
-      >
-        {{ item.name }}
-      </a>
-    </ng-container>
+    @for (item of navItems; track item) {
+      @if (!item.external) {
+        <a
+          [routerLink]="[item.path]"
+          class="nav-item"
+          [attr.data-test]="item.dataTest"
+          routerLinkActive="active"
+          >
+          {{ item.name }}
+        </a>
+      }
+      @if (item.external) {
+        <a
+          [href]="item.path"
+          class="nav-item"
+          (click)="handleExternalNavigation($event, item.path)"
+          (touchend)="handleExternalNavigation($event, item.path)"
+          >
+          {{ item.name }}
+        </a>
+      }
+    }
 
     <!-- Scribe Dropdown -->
     <div class="dropdown">
@@ -29,18 +31,19 @@
         data-dropdown="scribe"
         (click)="toggleDropdown($event)"
         (touchend)="toggleDropdown($event)"
-      >
+        >
         Scribe
       </a>
       <div class="dropdown-content" [class.show]="activeDropdown === 'scribe'">
-        <a
-          *ngFor="let item of scribeItems"
-          [href]="item.path"
-          (click)="handleExternalNavigation($event, item.path)"
-          (touchend)="handleExternalNavigation($event, item.path)"
-        >
-          {{ item.name }}
-        </a>
+        @for (item of scribeItems; track item) {
+          <a
+            [href]="item.path"
+            (click)="handleExternalNavigation($event, item.path)"
+            (touchend)="handleExternalNavigation($event, item.path)"
+            >
+            {{ item.name }}
+          </a>
+        }
       </div>
     </div>
 
@@ -51,18 +54,19 @@
         data-dropdown="misc"
         (click)="toggleDropdown($event)"
         (touchend)="toggleDropdown($event)"
-      >
+        >
         Misc
       </a>
       <div class="dropdown-content" [class.show]="activeDropdown === 'misc'">
-        <a
-          *ngFor="let item of miscItems"
-          [href]="item.path"
-          (click)="handleExternalNavigation($event, item.path)"
-          (touchend)="handleExternalNavigation($event, item.path)"
-        >
-          {{ item.name }}
-        </a>
+        @for (item of miscItems; track item) {
+          <a
+            [href]="item.path"
+            (click)="handleExternalNavigation($event, item.path)"
+            (touchend)="handleExternalNavigation($event, item.path)"
+            >
+            {{ item.name }}
+          </a>
+        }
       </div>
     </div>
   </div>

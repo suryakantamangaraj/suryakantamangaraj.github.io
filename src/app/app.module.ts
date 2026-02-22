@@ -10,13 +10,13 @@ import { LandingModule } from './features/landing/landing.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule,
     SharedModule,
     LandingModule,
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

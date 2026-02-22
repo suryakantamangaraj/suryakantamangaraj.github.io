@@ -6,9 +6,10 @@ import { TAGS_DATA } from '@core/data/tags.data';
 import { ITag } from '@core/models/tag.interface';
 
 @Component({
-  selector: 'app-portfolio',
-  templateUrl: './portfolio.component.html',
-  styleUrls: ['./portfolio.component.scss']
+    selector: 'app-portfolio',
+    templateUrl: './portfolio.component.html',
+    styleUrls: ['./portfolio.component.scss'],
+    standalone: false
 })
 export class PortfolioComponent implements OnInit {
   projects: IProject[] = [];
