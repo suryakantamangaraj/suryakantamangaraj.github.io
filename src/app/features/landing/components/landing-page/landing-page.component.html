@@ -1,32 +1,55 @@
-<app-homepage-layout data-test="landing-page">
-  <!-- Header Projection -->
-  <app-header slot="header"></app-header>
+<main class="b-homepage-layout" data-test="landing-page">
+  <!-- Semantic Header -->
+  <header class="b-homepage-layout__header">
+    <app-header></app-header>
+  </header>
 
-  <!-- Hero Background Overlay -->
-  <div slot="hero-bg" class="overlay"></div>
+  <!-- Semantic Section for Hero -->
+  <section class="b-homepage-layout__hero b-hero">
+    <div class="b-hero__background">
+      <div class="overlay"></div>
+    </div>
 
-  <!-- Hero Logo Projection -->
-  <app-dp-logo slot="hero-logo" class="dp-logo" height="15rem" width="15rem"></app-dp-logo>
+    <div class="b-hero__content">
+      <div class="b-hero__logo">
+        <app-dp-logo class="dp-logo" height="15rem" width="15rem"></app-dp-logo>
+      </div>
 
-  <!-- Semantic Typographies injected into Hero content -->
-  <ng-container slot="hero-bio">Designer | Developer | Mentor</ng-container>
-  <ng-container slot="hero-quote">Solving problems through Logic and Code.</ng-container>
-  <ng-container slot="hero-title">SURYA RAJ</ng-container>
+      <!-- Semantic typography mapped to Material classes -->
+      <h2 class="b-hero__bio mat-headline-2">Designer | Developer | Mentor</h2>
 
-  <!-- Hero Actions -->
-  <span
-    slot="hero-action"
-    (click)="onExploreMeClick()"
-    (mouseover)="startTadaAnimation = false"
-    [ngClass]="{ 'tada-animation': startTadaAnimation }"
-  >
-    <button class="special-btn">
-      <span>Explore Me</span>
-    </button>
-  </span>
+      <q class="b-hero__quote">Solving problems through Logic and Code.</q>
 
-  <!-- Optional Navigator Overlay -->
-  @if (showNavigator) {
-    <app-navigator slot="hero-overlay"></app-navigator>
-  }
-</app-homepage-layout>
+      <div class="b-hero__name-container">
+        <!-- Single h1 tag for SEO as requested -->
+        <h1 class="b-hero__title mat-headline-1">
+          <span title="Surya Raj (Suryakanta Mangaraj) | AI-Driven RF System Designer">
+            <span class="sr-only"
+              >Surya Raj (Suryakanta Mangaraj) | AI-Driven RF System Designer & Test Automation
+              Engineer</span
+            >
+            <span aria-hidden="true">SURYA RAJ</span>
+          </span>
+        </h1>
+        <div class="b-hero__strip"></div>
+      </div>
+
+      <div class="b-hero__action">
+        <span
+          (click)="onExploreMeClick()"
+          (mouseover)="startTadaAnimation = false"
+          [ngClass]="{ 'tada-animation': startTadaAnimation }"
+        >
+          <button class="special-btn">
+            <span>Explore Me</span>
+          </button>
+        </span>
+      </div>
+    </div>
+
+    <!-- Optional fixed overlays / navigators -->
+    @if (showNavigator) {
+      <app-navigator></app-navigator>
+    }
+  </section>
+</main>
