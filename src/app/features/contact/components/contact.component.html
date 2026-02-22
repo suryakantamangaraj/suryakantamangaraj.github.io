@@ -6,18 +6,21 @@
   </div>
 
   <div class="heading-section">
-    <h1>CONTACTS</h1>
+    <h1 title="Contact Surya Raj - AI & RF Systems Engineer">
+      <span class="sr-only">Contact Surya Raj - AI & RF Systems Engineer</span>
+      <span aria-hidden="true">CONTACTS</span>
+    </h1>
     <div class="heading-lines"></div>
   </div>
 
   <div class="primary-actions">
     <a [href]="linktree.url" target="_blank" class="action-button">
-      <img [src]="linktree.iconUrl" [alt]="linktree.name">
-      <span>{{linktree.name}}</span>
+      <img [src]="linktree.iconUrl" [alt]="linktree.name" />
+      <span>{{ linktree.name }}</span>
     </a>
     <a [href]="bio.url" class="action-button">
-      <img [src]="bio.iconUrl" [alt]="bio.name">
-      <span>{{bio.name}}</span>
+      <img [src]="bio.iconUrl" [alt]="bio.name" />
+      <span>{{ bio.name }}</span>
     </a>
   </div>
 
@@ -26,12 +29,9 @@
       <h2>Social Profiles</h2>
       <div class="links">
         @for (profile of contactProfile.profile; track profile) {
-          <a
-            [href]="profile.url"
-            target="_blank"
-            class="link-card">
-            <img [src]="profile.iconUrl" [alt]="profile.name">
-            <span>{{profile.name}}</span>
+          <a [href]="profile.url" target="_blank" class="link-card">
+            <img [src]="profile.iconUrl" [alt]="profile.name" />
+            <span>{{ profile.name }}</span>
           </a>
         }
       </div>
@@ -41,12 +41,9 @@
       <h2>Work Profiles</h2>
       <div class="links">
         @for (profile of contactProfile.work; track profile) {
-          <a
-            [href]="profile.url"
-            target="_blank"
-            class="link-card">
-            <img [src]="profile.iconUrl" [alt]="profile.name">
-            <span>{{profile.name}}</span>
+          <a [href]="profile.url" target="_blank" class="link-card">
+            <img [src]="profile.iconUrl" [alt]="profile.name" />
+            <span>{{ profile.name }}</span>
           </a>
         }
       </div>
