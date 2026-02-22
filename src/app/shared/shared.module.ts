@@ -7,6 +7,7 @@ import { DpLogoComponent } from './components/dp-logo/dp-logo.component';
 import { FooterComponent } from '../layout/footer/footer.component';
 import { HeaderComponent } from '../layout/header/header.component';
 import { ProjectCardComponent } from './components/project-card/project-card.component';
+import { HomepageLayoutComponent } from '../layout/homepage-layout/homepage-layout.component';
 
 @NgModule({
   declarations: [
@@ -14,21 +15,20 @@ import { ProjectCardComponent } from './components/project-card/project-card.com
     DpLogoComponent,
     FooterComponent,
     HeaderComponent,
-    ProjectCardComponent
+    ProjectCardComponent,
+    HomepageLayoutComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
+  imports: [CommonModule, RouterModule],
   exports: [
     BackIconComponent,
     DpLogoComponent,
     FooterComponent,
     HeaderComponent,
     ProjectCardComponent,
+    HomepageLayoutComponent,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
-    ]
+    ReactiveFormsModule,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

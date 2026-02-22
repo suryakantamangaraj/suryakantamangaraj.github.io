@@ -1,139 +1,6 @@
 @import '../../../../variables';
-@import '../../../../mixins';
 
-.landing-container {
-  min-height: 100vh;
-  position: relative;
-  overflow: hidden;
-  background: $bg-color;
-  z-index: 0;
-
-  @include mobile {
-    padding: $spacing-small;
-  }
-
-  @include tablet {
-    padding: $spacing-medium;
-  }
-
-  @include desktop {
-    padding: $spacing-large;
-  }
-}
-
-.overlay {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  z-index: 1; // Changed from -1 to 1
-  display: block;
-  background: $color2;
-  position: fixed;
-  right: 0;
-  top: 0;
-  pointer-events: none;
-  clip-path: ellipse(50vw 40vh at 50% 50%);
-  transform: scale(2) translate(27vw, -18vh) rotate(335deg);
-  animation: 1s ease-in-out 0.2s both leftToRight;
-  mix-blend-mode: darken; // Added to blend with background
-
-  @include mobile {
-    clip-path: ellipse(40vw 30vh at 50% 50%);
-    transform: scale(1.8) translate(20vw, -15vh) rotate(335deg);
-  }
-
-  @include tablet {
-    clip-path: ellipse(45vw 35vh at 50% 50%);
-    transform: scale(1.9) translate(25vw, -16vh) rotate(335deg);
-  }
-
-  @include desktop {
-    clip-path: ellipse(50vw 40vh at 50% 50%);
-    transform: scale(2) translate(27vw, -18vh) rotate(335deg);
-  }
-}
-
-.content {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-  z-index: 2; // Ensure content stays on top
-}
-
-@keyframes leftToRight {
-  from {
-    transform: scale(2) translate(-27vw, -18vh) rotate(335deg);
-  }
-  to {
-    transform: scale(2) translate(27vw, -18vh) rotate(335deg);
-  }
-}
-
-.dp-logo {
-  margin-bottom: 2rem;
-  animation: fadeInDown 1s ease-out;
-}
-
-.short-bio {
-  color: $white;
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-  animation: fadeInUp 1s ease-out 0.3s both;
-}
-
-.quote {
-  color: $off-white;
-  font-size: 1.6rem;
-  font-style: italic;
-  margin-bottom: 2rem;
-  animation: fadeInUp 1s ease-out 0.6s both;
-}
-
-.name {
-  margin-bottom: 4rem;
-  animation: fadeInUp 1s ease-out 0.9s both;
-  position: relative;
-
-  p {
-    color: $white;
-    font-size: 4rem; // Back to original size
-    font-weight: bold;
-    letter-spacing: 0.5rem;
-    text-align: center;
-    transition: transform 0.3s ease;
-
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
-
-  .strip {
-    position: relative;
-    width: 100%; // Match name width
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
-    &::before,
-    &::after {
-      content: '';
-      height: 3px;
-      background: $color1;
-      animation: subtleStripMove 3s ease-in-out infinite;
-      box-shadow: 0 0 10px rgba($color1, 0.5);
-    }
-
-    &::before {
-      animation-delay: -1.5s;
-    }
-  }
-}
-
+// Project specific button configurations inserted correctly to layout slots
 .special-btn {
   padding: 1.2rem 3.5rem;
   font-size: 1.8rem;
@@ -179,78 +46,30 @@
   animation: tada 1s ease-in-out;
 }
 
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translate3d(0, -100%, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 100%, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
 @keyframes tada {
   0% {
     transform: scale3d(1, 1, 1);
   }
+
   10%,
   20% {
     transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
   }
+
   30%,
   50%,
   70%,
   90% {
     transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
   }
+
   40%,
   60%,
   80% {
     transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
   }
+
   100% {
     transform: scale3d(1, 1, 1);
-  }
-}
-
-@keyframes stripMove {
-  0% {
-    transform: translateX(-10%);
-    width: 80%;
-  }
-  50% {
-    transform: translateX(30%);
-    width: 60%;
-  }
-  100% {
-    transform: translateX(-10%);
-    width: 80%;
-  }
-}
-
-@keyframes subtleStripMove {
-  0% {
-    transform: translateX(-5%);
-    width: 90%;
-  }
-  50% {
-    transform: translateX(5%);
-    width: 90%;
-  }
-  100% {
-    transform: translateX(-5%);
-    width: 90%;
   }
 }
