@@ -1,32 +1,32 @@
-<div class="landing-page" data-test="landing-page">
-  <div class="landing-section" data-test="landing-section">
-    <div class="landing-container">
-      <div class="overlay"></div>
-      <app-header></app-header>
+<app-homepage-layout data-test="landing-page">
+  <!-- Header Projection -->
+  <app-header slot="header"></app-header>
 
-      <div class="content">
-        <app-dp-logo class="dp-logo" height="15rem" width="15rem"></app-dp-logo>
-        <h4 class="short-bio">Designer | Developer | Mentor</h4>
-        <q class="quote">Solving problems through Logic and Code.</q>
-        <div class="name">
-          <p>SURYA RAJ</p>
-          <div class="strip"></div>
-        </div>
+  <!-- Hero Background Overlay -->
+  <div slot="hero-bg" class="overlay"></div>
 
-        <span
-          (click)="onExploreMeClick()"
-          (mouseover)="startTadaAnimation = false"
-          [ngClass]="{ 'tada-animation': startTadaAnimation }"
-          >
-          <button class="special-btn">
-            <span>Explore Me</span>
-          </button>
-        </span>
-      </div>
+  <!-- Hero Logo Projection -->
+  <app-dp-logo slot="hero-logo" class="dp-logo" height="15rem" width="15rem"></app-dp-logo>
 
-      @if (showNavigator) {
-        <app-navigator></app-navigator>
-      }
-    </div>
-  </div>
-</div>
+  <!-- Semantic Typographies injected into Hero content -->
+  <ng-container slot="hero-bio">Designer | Developer | Mentor</ng-container>
+  <ng-container slot="hero-quote">Solving problems through Logic and Code.</ng-container>
+  <ng-container slot="hero-title">SURYA RAJ</ng-container>
+
+  <!-- Hero Actions -->
+  <span
+    slot="hero-action"
+    (click)="onExploreMeClick()"
+    (mouseover)="startTadaAnimation = false"
+    [ngClass]="{ 'tada-animation': startTadaAnimation }"
+  >
+    <button class="special-btn">
+      <span>Explore Me</span>
+    </button>
+  </span>
+
+  <!-- Optional Navigator Overlay -->
+  @if (showNavigator) {
+    <app-navigator slot="hero-overlay"></app-navigator>
+  }
+</app-homepage-layout>
