@@ -2,7 +2,9 @@
   <div class="card-inner">
     <div class="card-front">
       <h3 class="project-name">{{ project.name }}</h3>
-      <span class="star-badge" *ngIf="project.isFeatured">⭐</span>
+      @if (project.isFeatured) {
+        <span class="star-badge">⭐</span>
+      }
     </div>
     <div class="card-back">
       <p class="project-description">{{ project.description }}</p>

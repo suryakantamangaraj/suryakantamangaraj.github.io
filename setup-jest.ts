@@ -1,4 +1,6 @@
-import 'jest-preset-angular/setup-jest';
+import { setupZoneTestEnv } from 'jest-preset-angular/setup-env/zone';
+
+setupZoneTestEnv();
 
 // Global mocks for Jest
 Object.defineProperty(window, 'CSS', { value: null });
@@ -16,6 +18,6 @@ Object.defineProperty(window, 'getComputedStyle', {
 Object.defineProperty(Element.prototype, 'animate', {
   value: () => ({
     finished: Promise.resolve(),
-    cancel: () => {}
+    cancel: () => { }
   })
 });

@@ -1,16 +1,20 @@
-<div class="navigator-container" (click)="onNavigatorClick($event)" *ngIf="isVisible$ | async">
-  <div class="nav-content">
-    <div class="nav-links grid-container" [@slideAnimation]>
-      <div class="nav-item" *ngFor="let link of navLinks">
-        <a
-          class="nav-link"
-          [routerLink]="!link.external ? link.url : null"
-          [href]="link.external ? link.url : null"
-          [target]="link.external ? '_blank' : '_self'"
-        >
-          {{ link.displayName }}
-        </a>
+@if (isVisible$ | async) {
+  <div class="navigator-container" (click)="onNavigatorClick($event)">
+    <div class="nav-content">
+      <div class="nav-links grid-container" [@slideAnimation]>
+        @for (link of navLinks; track link) {
+          <div class="nav-item">
+            <a
+              class="nav-link"
+              [routerLink]="!link.external ? link.url : null"
+              [href]="link.external ? link.url : null"
+              [target]="link.external ? '_blank' : '_self'"
+              >
+              {{ link.displayName }}
+            </a>
+          </div>
+        }
       </div>
     </div>
   </div>
-</div>
+}

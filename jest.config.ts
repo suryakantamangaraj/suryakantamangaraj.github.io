@@ -9,6 +9,7 @@ const config: Config.InitialOptions = {
       {
         tsconfig: '<rootDir>/tsconfig.spec.json',
         stringifyContentPathRegex: '\\.(html|svg)$',
+        isolatedModules: true
       },
     ],
     '^.+\\.scss$': 'jest-transform-stub'

@@ -23,17 +23,23 @@
         <div class="content-section features">
           <h2>Features</h2>
           <ul class="features-list">
-            <li *ngFor="let feature of project?.features">{{feature}}</li>
+            @for (feature of project?.features; track feature) {
+              <li>{{feature}}</li>
+            }
           </ul>
         </div>
 
         <!-- Additional Data Section (Optional) -->
-        <div *ngFor="let additional of project?.additionalData" class="content-section additional">
-          <h2>{{additional.title}}</h2>
-          <ul class="additional-list">
-            <li *ngFor="let item of additional.data">{{item}}</li>
-          </ul>
-        </div>
+        @for (additional of project?.additionalData; track additional) {
+          <div class="content-section additional">
+            <h2>{{additional.title}}</h2>
+            <ul class="additional-list">
+              @for (item of additional.data; track item) {
+                <li>{{item}}</li>
+              }
+            </ul>
+          </div>
+        }
       </div>
 
       <!-- Right Column -->
@@ -41,18 +47,18 @@
         <!-- Project Links -->
         <div class="project-links">
           <button class="link-button"
-                  [class.disabled]="!project?.projectLink"
-                  [title]="project?.projectLink ? 'View project details' : 'Project documentation available in description'"
-                  [attr.disabled]="!project?.projectLink"
-                  (click)="openLink(project?.projectLink)">
+            [class.disabled]="!project?.projectLink"
+            [title]="project?.projectLink ? 'View project details' : 'Project documentation available in description'"
+            [attr.disabled]="!project?.projectLink"
+            (click)="openLink(project?.projectLink)">
             View Project
           </button>
 
           <button class="link-button"
-                  [class.disabled]="!project?.liveUrl"
-                  [title]="project?.liveUrl ? 'View live demo' : 'Live demo not available'"
-                  [attr.disabled]="!project?.liveUrl"
-                  (click)="openLink(project?.liveUrl)">
+            [class.disabled]="!project?.liveUrl"
+            [title]="project?.liveUrl ? 'View live demo' : 'Live demo not available'"
+            [attr.disabled]="!project?.liveUrl"
+            (click)="openLink(project?.liveUrl)">
             Live Demo
           </button>
         </div>
@@ -61,7 +67,9 @@
         <div class="content-section tags">
           <h2>Tags</h2>
           <div class="tags-list">
-            <span class="tag" *ngFor="let tag of project?.tags">{{tag}}</span>
+            @for (tag of project?.tags; track tag) {
+              <span class="tag">{{tag}}</span>
+            }
           </div>
         </div>
 
@@ -69,7 +77,9 @@
         <div class="content-section technologies">
           <h2>Technologies</h2>
           <ul class="tech-list">
-            <li *ngFor="let tech of project?.techStuff">{{tech}}</li>
+            @for (tech of project?.techStuff; track tech) {
+              <li>{{tech}}</li>
+            }
           </ul>
         </div>
       </div>

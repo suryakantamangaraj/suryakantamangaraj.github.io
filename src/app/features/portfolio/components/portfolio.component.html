@@ -20,22 +20,24 @@
   </div>
 
   <div class="filter-section">
-    <button
-      *ngFor="let tag of tags"
-      [class.active]="tag.isSelected"
-      (click)="toggleFilter(tag)"
-      class="filter-btn"
-    >
-      {{ tag.displayName }}
-    </button>
+    @for (tag of tags; track tag) {
+      <button
+        [class.active]="tag.isSelected"
+        (click)="toggleFilter(tag)"
+        class="filter-btn"
+        >
+        {{ tag.displayName }}
+      </button>
+    }
   </div>
 
   <div class="project-grid">
-    <app-project-card
-      *ngFor="let project of filteredProjects"
-      [project]="project"
-      (cardClick)="onProjectClick($event)"
-    >
-    </app-project-card>
+    @for (project of filteredProjects; track project) {
+      <app-project-card
+        [project]="project"
+        (cardClick)="onProjectClick($event)"
+        >
+      </app-project-card>
+    }
   </div>
 </div>

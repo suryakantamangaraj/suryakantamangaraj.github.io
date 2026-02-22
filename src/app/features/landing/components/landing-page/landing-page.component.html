@@ -17,14 +17,16 @@
           (click)="onExploreMeClick()"
           (mouseover)="startTadaAnimation = false"
           [ngClass]="{ 'tada-animation': startTadaAnimation }"
-        >
+          >
           <button class="special-btn">
             <span>Explore Me</span>
           </button>
         </span>
       </div>
 
-      <app-navigator *ngIf="showNavigator"></app-navigator>
+      @if (showNavigator) {
+        <app-navigator></app-navigator>
+      }
     </div>
   </div>
 </div>

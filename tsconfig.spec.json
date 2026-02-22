@@ -5,10 +5,12 @@
     "outDir": "./out-tsc/spec",
     "types": [
       "jest",
-      "node",
-      "@types/jest"
+      "node"
     ],
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "moduleResolution": "bundler",
+    "module": "es2022",
+    "target": "es2022"
   },
   "include": [
     "src/**/*.spec.ts",
