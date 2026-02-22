@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en" data-beasties-container>
+  <head>
+    <meta charset="utf-8">
+    <title>Surya Raj</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <script>
+      // 3. Check if we came from 404.html
+      const redirect = sessionStorage.getItem('redirect');
+      if (redirect) {
+        // 4. Clear saved URL
+        sessionStorage.removeItem('redirect');
+        // 5. Restore original URL (/xyz)
+        window.history.replaceState(null, null, redirect);
+      }
+    </script>
+  <style>@media(max-width:767px){:root{font-size:9px}}@media(min-width:768px)and (max-width:1023px){:root{font-size:10px}}@media(min-width:1024px){:root{font-size:12px}}*,*:before,*:after{box-sizing:border-box;margin:0;padding:0}html,body{height:100%;font-family:Open Sans,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body{background-color:#405ca1;color:#fff;overflow-x:hidden}</style><link rel="stylesheet" href="styles.0f3026d991b157c8.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.0f3026d991b157c8.css"></noscript></head>
+  <body>
+    <app-root></app-root>
+  <script src="runtime.1fc23cb72891a944.js" type="module"></script><script src="polyfills.cbc39c94cf5d179e.js" type="module"></script><script src="main.ec311d028a4b1e63.js" type="module"></script></body>
+</html>
