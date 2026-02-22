@@ -76,14 +76,14 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "SuryaRaj:build"
+            "buildTarget": "SuryaRaj:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "SuryaRaj:build:production"
+              "buildTarget": "SuryaRaj:build:production"
             },
             "development": {
-              "browserTarget": "SuryaRaj:build:development"
+              "buildTarget": "SuryaRaj:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -91,7 +91,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "SuryaRaj:build"
+            "buildTarget": "SuryaRaj:build"
           }
         },
         "test": {
