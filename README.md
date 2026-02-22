@@ -5,7 +5,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Jest](https://img.shields.io/badge/Jest-Tested-C21325?style=for-the-badge&logo=jest&logoColor=white)](https://jestjs.io/)
 
-My personal portfolio website built with modern web technologies. Visit the live site at [suryaraj.me](https://suryaraj.me).
+My personal portfolio website built with modern web technologies. Visit the live site at [suryaraj.com](https://suryaraj.com).
 
 ---
 
