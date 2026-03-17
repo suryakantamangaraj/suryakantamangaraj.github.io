@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: center;
   background: linear-gradient(to bottom, rgba($color2, 0.8), #203a43, $bg-color);
-  color: var(--text-color);
+  color: $white;
   position: relative;
   overflow: hidden;
   // Stars background
@@ -18,7 +18,8 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: radial-gradient(2px 2px at 20px 30px, #eee, rgba(0, 0, 0, 0)),
+    background-image:
+      radial-gradient(2px 2px at 20px 30px, #eee, rgba(0, 0, 0, 0)),
       radial-gradient(2px 2px at 40px 70px, $white, rgba(0, 0, 0, 0)),
       radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0, 0, 0, 0)),
       radial-gradient(2px 2px at 90px 40px, $white, rgba(0, 0, 0, 0));
