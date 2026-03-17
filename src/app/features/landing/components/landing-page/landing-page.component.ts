@@ -34,9 +34,9 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     );
 
     this.seoService.updateSeoTags({
-      title: 'Surya Raj | AI-Driven RF System Design & Test Automation',
+      title: 'Surya Raj (Suryakanta Mangaraj) | AI & RF System Designer',
       description:
-        'Bridging the gap between complex hardware and intelligent software. Specializing in RF system design, wireless communications, and AI/ML test automation.',
+        'Suryakanta Mangaraj (Surya Raj) professional portfolio. Bridging the gap between complex hardware and intelligent software. Specializing in RF system design, wireless communications, and AI/ML test automation.',
       ogImage: 'https://suryaraj.com/assets/images/dp.png', // Fallback to your main DP or any other preview image
       ogUrl: 'https://suryaraj.com/',
     });
@@ -48,6 +48,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
         {
           '@type': 'Person',
           name: 'Surya Raj',
+          alternateName: 'Suryakanta Mangaraj',
           jobTitle: 'AI-Driven RF System Designer & Test Automation Engineer',
           description:
             'Bridging the gap between complex hardware and intelligent software. Specializing in RF system design, wireless communications, and AI/ML test automation.',
