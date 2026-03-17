@@ -8,7 +8,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: $bg-color;
+  background: transparent;
+  position: relative;
+  z-index: 2;
   overflow: hidden;
 
   @include mobile {
@@ -21,21 +23,6 @@
 
   @include desktop {
     padding: $spacing-large;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: -15%;
-    left: -20%;
-    width: 100%;
-    height: 100%;
-    background: $color2;
-    border-radius: 0 0 50% 50%;
-    transform-origin: center;
-    animation: slideInOverlay 1.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-    opacity: 0.8;
-    z-index: 0;
   }
 }
 
@@ -124,9 +111,9 @@
     &::after {
       content: '';
       height: 3px;
-      background: $color1;
+      background: $white;
       animation: subtleStripMove 3s ease-in-out infinite;
-      box-shadow: 0 0 10px rgba($color1, 0.5);
+      box-shadow: 0 0 10px rgba($white, 0.5);
     }
 
     &::before {
@@ -220,17 +207,6 @@
     top: 2rem;
     left: 2rem;
     width: 3rem;
-  }
-}
-
-@keyframes slideInOverlay {
-  0% {
-    transform: translate(100%, -100%) rotate(-180deg) scale(0.5);
-    opacity: 0;
-  }
-  100% {
-    transform: translate(0, 0) rotate(0) scale(1);
-    opacity: 0.8;
   }
 }
 

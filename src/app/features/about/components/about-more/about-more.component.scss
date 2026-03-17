@@ -3,64 +3,16 @@
 
 $row-column-break-point: 'max-width: 1040px';
 
-.overlay {
-  display: inline-block;
-  height: 100vh;
-  width: 100vw;
-  top: 0;
-  left: 0;
-  position: fixed;
-  background: transparent; // Changed from $color2 to remove base rectangle
-  transform-origin: center;
-  z-index: -1;
-  transform: scale(0.8);
-
-  &::before {
-    // Top-right oval
-    content: '';
-    position: absolute;
-    top: -20%;
-    right: -20%;
-    width: 80%;
-    height: 80%;
-    background: $color2;
-    border-radius: 0 0 0 100%;
-    animation: topRightOval 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-  }
-
-  &::after {
-    // Bottom-left triangle
-    content: '';
-    position: absolute;
-    bottom: -20%; // Extend below
-    left: -20%; // Extend left
-    width: 80%; // Match top oval width
-    height: 80%; // Match top oval height
-    background: $color2;
-    clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 60%); // Angled triangle
-    animation: bottomLeftTriangle 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s forwards;
-  }
-
-  @include mobile {
-    transform: scale(0.6);
-  }
-
-  @include tablet {
-    transform: scale(0.7);
-  }
-
-  @include desktop {
-    transform: scale(0.8);
-  }
-}
-
 .about-more-container {
   min-height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: $off-white;
+  color: $white;
+  background: transparent;
+  position: relative;
+  z-index: 2;
   @include mobile {
     padding: 3rem 1rem;
   }
@@ -122,9 +74,9 @@ $row-column-break-point: 'max-width: 1040px';
       &::after {
         content: '';
         height: 3px;
-        background: $color1;
+        background: $white;
         animation: subtleStripMove 3s ease-in-out infinite;
-        box-shadow: 0 0 10px rgba($color1, 0.5);
+        box-shadow: 0 0 10px rgba($white, 0.5);
       }
 
       &::before {
@@ -185,27 +137,5 @@ $row-column-break-point: 'max-width: 1040px';
   }
   100% {
     transform: translateX(-5%);
-  }
-}
-
-@keyframes topRightOval {
-  0% {
-    transform: translate(100%, -100%) rotate(180deg) scale(0);
-    opacity: 0;
-  }
-  100% {
-    transform: translate(0, 0) rotate(0) scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes bottomLeftTriangle {
-  0% {
-    transform: translate(-100%, 100%) rotate(-180deg) scale(0);
-    opacity: 0;
-  }
-  100% {
-    transform: translate(0, 0) rotate(0) scale(1);
-    opacity: 1;
   }
 }

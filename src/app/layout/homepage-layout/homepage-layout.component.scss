@@ -47,30 +47,13 @@
     overflow: hidden;
     z-index: 1;
     display: block;
-    background: $color2;
     position: fixed;
     right: 0;
     top: 0;
     pointer-events: none;
-    clip-path: ellipse(50vw 40vh at 50% 50%);
-    transform: scale(2) translate(27vw, -18vh) rotate(335deg);
-    animation: 1s ease-in-out 0.2s both leftToRight;
-    mix-blend-mode: darken;
 
-    @include mobile {
-      clip-path: ellipse(40vw 30vh at 50% 50%);
-      transform: scale(1.8) translate(20vw, -15vh) rotate(335deg);
-    }
-
-    @include tablet {
-      clip-path: ellipse(45vw 35vh at 50% 50%);
-      transform: scale(1.9) translate(25vw, -16vh) rotate(335deg);
-    }
-
-    @include desktop {
-      clip-path: ellipse(50vw 40vh at 50% 50%);
-      transform: scale(2) translate(27vw, -18vh) rotate(335deg);
-    }
+    // Transparent so the global ribbons show through
+    background-color: transparent;
   }
 
   &__content {
@@ -159,17 +142,6 @@
 
   &__action {
     display: inline-block;
-  }
-}
-
-// Keyframes defined historically
-@keyframes leftToRight {
-  from {
-    transform: scale(2) translate(-27vw, -18vh) rotate(335deg);
-  }
-
-  to {
-    transform: scale(2) translate(27vw, -18vh) rotate(335deg);
   }
 }
 

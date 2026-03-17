@@ -8,6 +8,7 @@ import { FooterComponent } from '../layout/footer/footer.component';
 import { HeaderComponent } from '../layout/header/header.component';
 import { ProjectCardComponent } from './components/project-card/project-card.component';
 import { HomepageLayoutComponent } from '../layout/homepage-layout/homepage-layout.component';
+import { HeroRibbonsComponent } from './components/hero-ribbons/hero-ribbons.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { HomepageLayoutComponent } from '../layout/homepage-layout/homepage-layo
     HeaderComponent,
     ProjectCardComponent,
     HomepageLayoutComponent,
+    HeroRibbonsComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -26,6 +28,7 @@ import { HomepageLayoutComponent } from '../layout/homepage-layout/homepage-layo
     HeaderComponent,
     ProjectCardComponent,
     HomepageLayoutComponent,
+    HeroRibbonsComponent,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,

@@ -84,3 +84,14 @@
     transform: translateY(-3px);
   }
 }
+
+// Global fixed ribbon background behind all pages
+.global-ribbons {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}

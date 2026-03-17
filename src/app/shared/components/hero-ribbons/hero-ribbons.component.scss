@@ -1,0 +1,100 @@
+// Hero SVG Ribbon Animation Styles
+.b-hero-ribbons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // A subtle dark gradient base inside the slot
+  background: radial-gradient(circle at center, #0d1526 0%, #080c16 100%);
+}
+
+.b-ribbon {
+  position: absolute;
+  width: 200%;
+  height: 60vh;
+  left: 0;
+  transform-origin: left center;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 15px rgba(64, 92, 161, 0.6));
+  pointer-events: none;
+}
+
+.b-r1 {
+  animation: flow 15s linear infinite;
+  transform: translateY(-5vh) rotate(-15deg);
+  opacity: 0.9;
+}
+
+.b-r2 {
+  animation: flowReverse 20s linear infinite;
+  transform: translateY(5vh) rotate(-10deg);
+  filter: drop-shadow(0 0 20px rgba(139, 0, 0, 0.7));
+  opacity: 0.8;
+}
+
+.b-r3 {
+  animation: flow 12s linear infinite;
+  transform: translateY(15vh) rotate(-22deg);
+  opacity: 0.85;
+}
+
+@keyframes flow {
+  0% {
+    transform: translateY(-5vh) rotate(-15deg) translateX(0);
+  }
+  100% {
+    transform: translateY(-5vh) rotate(-15deg) translateX(-50%);
+  }
+}
+
+@keyframes flowReverse {
+  0% {
+    transform: translateY(5vh) rotate(-10deg) translateX(-50%);
+  }
+  100% {
+    transform: translateY(5vh) rotate(-10deg) translateX(0);
+  }
+}
+
+// Override flow keys for individual transforms
+.b-r1 {
+  animation-name: flowR1;
+}
+.b-r2 {
+  animation-name: flowR2;
+}
+.b-r3 {
+  animation-name: flowR3;
+}
+
+@keyframes flowR1 {
+  0% {
+    transform: translateY(-5vh) rotate(-15deg) translateX(0);
+  }
+  100% {
+    transform: translateY(-5vh) rotate(-15deg) translateX(-50%);
+  }
+}
+
+@keyframes flowR2 {
+  0% {
+    transform: translateY(5vh) rotate(-10deg) translateX(-50%);
+  }
+  100% {
+    transform: translateY(5vh) rotate(-10deg) translateX(0);
+  }
+}
+
+@keyframes flowR3 {
+  0% {
+    transform: translateY(10vh) rotate(-22deg) translateX(0);
+  }
+  100% {
+    transform: translateY(10vh) rotate(-22deg) translateX(-50%);
+  }
+}
