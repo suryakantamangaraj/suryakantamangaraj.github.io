@@ -38,7 +38,7 @@ body {
 
 body {
   background-color: $bg-color;
-  color: $text-color;
+  color: $white;
   overflow-x: hidden;
 }
 
@@ -54,7 +54,7 @@ h6 {
 }
 
 a {
-  color: $text-color;
+  color: $white;
   text-decoration: none;
   @include transition;
 
